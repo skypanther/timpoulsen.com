@@ -1,0 +1,73 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*- #
+from __future__ import unicode_literals
+
+AUTHOR = 'Tim Poulsen'
+SITENAME = 'Tim Poulsen'
+SITEURL = 'http://www.timpoulsen.com'
+SITETITLE = 'Tim Poulsen'
+SITESUBTITLE = 'Developer, maker, explorer'
+SITEDESCRIPTION = "Tim Poulsen's blog of software, hardware, and life"
+SITELOGO = SITEURL + '/images/tim_poulsen.jpg'
+
+STATIC_PATHS = ["static"]
+PLUGIN_PATHS = ["plugins", "/Users/timpoulsen/repos/other/pelican-plugins"]
+PLUGINS = ['pelicanfly', 'tag_cloud']
+
+BROWSER_COLOR = '#143742'
+ROBOTS = 'index, follow'
+
+CC_LICENSE = {
+    'name': 'Creative Commons Attribution-ShareAlike',
+    'version': '4.0',
+    'slug': 'by-sa'
+}
+
+COPYRIGHT_YEAR = 2018
+
+EXTRA_PATH_METADATA = {
+    'css/custom.css': {'path': 'css/custom.css'},
+}
+CUSTOM_CSS = 'css/custom.css'
+
+MAIN_MENU = True
+
+
+THEME = 'themes/Flex'
+PATH = 'content'
+
+TIMEZONE = 'America/New_York'
+
+DEFAULT_LANG = 'en'
+
+# Feed generation is usually not desired when developing
+FEED_ALL_ATOM = None
+CATEGORY_FEED_ATOM = None
+TRANSLATION_FEED_ATOM = None
+AUTHOR_FEED_ATOM = None
+AUTHOR_FEED_RSS = None
+
+# Blogroll
+LINKS = (('Topics', '/categories.html'),
+       ('Skypanther Studios', 'http://skypanther.com'),
+       )
+
+# Social widget
+SOCIAL = (('twitter', 'https://twitter.com/skypanther'),
+            ('github', 'https://github.com/skypanther'),
+            ('linkedin', 'https://www.linkedin.com/in/timpoulsen'),
+            ('rss', 'feeds/all.atom.xml'),
+            )
+
+MENUITEMS = (('Topics', '/categories.html'),
+             ('About', '/pages/about.html'),
+             ('Tags', '/tags.html'),
+             )
+
+DEFAULT_PAGINATION = False
+
+TAG_CLOUD_SORTING = 'size'
+TAG_CLOUD_BADGE = False
+
+# Uncomment following line if you want document-relative URLs when developing
+RELATIVE_URLS = True

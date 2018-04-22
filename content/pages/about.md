@@ -1,0 +1,9 @@
+Title: About
+
+Hi, I’m Tim Poulsen and yep, that's me to the left. I'm a software engineer currently working for ACV Auctions, a startup that is bringing the wholesale auto market into the 21st century. I am happily married with three beautiful children who keep me grounded in what really matters in life.
+
+I’ve been “working the web” for more years than I care to admit. I’ve worked in all aspects of computing, including network and sys admin, training, writing, web dev, and mobile app dev. Previously I worked for Appcelerator, publisher of the Titanium cross-platform mobile development framework. I was their Training and Certification Lead and “Master Trainer” for 3 years before moving to the Engineering team where I was the primary software engineer for their Alloy MVC framework. I'm the author of dozens of training course manuals, articles, and books with extensive experience as a classroom and online trainer and presenter. 
+
+I have more hobbies than I have time. I'm a mentor for a FIRST Robotics team, where I help the students with the programming, mechanical, and electrical aspects of building a robot. I build my own Christmas light displays using Arduinos and RGB LED pixels and Raspberry Pis and more. I’m restoring our 1890s-vintage Victorian home. I brew beer, some of which is actually drinkable. I'm an amateur astronomer and hope to one day take an astrophoto good enough to show to someone other than my wife. I'm a master at "Dad jokes" and bad puns, a skill my kids wish I didn't have.
+
+Like so many folks, I regularly start blogging with the best intentions. This is my latest foray. As always, my plans are to keep it going for a while...
