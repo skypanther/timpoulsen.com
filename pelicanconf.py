@@ -6,11 +6,11 @@ AUTHOR = 'Tim Poulsen'
 SITENAME = 'Tim Poulsen'
 SITEURL = 'http://www.timpoulsen.com'
 SITETITLE = 'Tim Poulsen'
-SITESUBTITLE = 'Developer, maker, explorer'
+SITESUBTITLE = 'Explorations of software and hardware'
 SITEDESCRIPTION = "Tim Poulsen's blog of software, hardware, and life"
-SITELOGO = SITEURL + '/images/tim_poulsen.jpg'
+SITELOGO = '/images/tim_poulsen.jpg'
 
-STATIC_PATHS = ["static", 'extra/main.css']
+STATIC_PATHS = ["static", 'images', 'extra/main.css', 'extra/custom.css']
 PLUGIN_PATHS = ["plugins", "/Users/timpoulsen/repos/other/pelican-plugins"]
 PLUGINS = ['pelicanfly', 'tag_cloud']
 
@@ -27,9 +27,9 @@ COPYRIGHT_YEAR = 2018
 
 EXTRA_PATH_METADATA = {
     'extra/main.css': {'path': 'theme/css/main.css'},
-    'css/custom.css': {'path': 'css/custom.css'},
+    'extra/custom.css': {'path': 'theme/css/custom.css'},
 }
-CUSTOM_CSS = 'css/custom.css'
+CUSTOM_CSS = 'theme/css/main.css'
 
 MAIN_MENU = True
 
@@ -72,3 +72,5 @@ TAG_CLOUD_BADGE = False
 
 # Uncomment following line if you want document-relative URLs when developing
 RELATIVE_URLS = True
+
+LOAD_CONTENT_CACHE = False

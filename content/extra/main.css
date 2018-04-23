@@ -1,0 +1,50 @@
+// Colors
+aside.leftbar, div.leftbar {
+    background-color: #030E36 !important;
+}
+a {
+    color: #030E36;
+}
+a:hover {
+    color: #033626;
+}
+a.btn {
+    background-color: #030E36;
+}
+a.btn:hover {
+    background-color: #033626;
+    color: #fff;
+}
+.highlight {
+    background-color: #eee;
+}
+.err {
+    background-color: transparent;
+}
+
+main nav {
+    text-align: left;
+    padding-left: 2.0em;
+}
+
+.tagcloud {
+    background-color: #030E36CC;
+}
+.tagcloud li {
+    list-style: none;
+    display: inline-block;
+    padding-left: 0.2em;
+    padding-right: 0.2em;
+}
+.tagcloud li:first {
+    padding-left: 0;
+}
+
+// Social icons in left bar
+ul.social a {
+    display: inline-grid;
+    height: 14px;
+    width: 14px;
+    vertical-align: middle;
+    font-size: 72%
+}
