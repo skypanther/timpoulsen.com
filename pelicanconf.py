@@ -10,7 +10,7 @@ SITESUBTITLE = 'Developer, maker, explorer'
 SITEDESCRIPTION = "Tim Poulsen's blog of software, hardware, and life"
 SITELOGO = SITEURL + '/images/tim_poulsen.jpg'
 
-STATIC_PATHS = ["static"]
+STATIC_PATHS = ["static", 'extra/main.css']
 PLUGIN_PATHS = ["plugins", "/Users/timpoulsen/repos/other/pelican-plugins"]
 PLUGINS = ['pelicanfly', 'tag_cloud']
 
@@ -26,6 +26,7 @@ CC_LICENSE = {
 COPYRIGHT_YEAR = 2018
 
 EXTRA_PATH_METADATA = {
+    'extra/main.css': {'path': 'theme/css/main.css'},
     'css/custom.css': {'path': 'css/custom.css'},
 }
 CUSTOM_CSS = 'css/custom.css'
