@@ -3,7 +3,6 @@ Date: April 16, 2018
 Category: OpenCV
 Tags: opencv, python
 Slug: acquiring-images
-Summary: Acquiring images from files and video cameras with OpenCV
 
 To manipulate an image, the first thing you must do is open it. OpenCV lets you open images and videos from files and cameras, both locally attached and on the network. Let's check it out.
 
