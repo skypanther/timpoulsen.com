@@ -15,11 +15,9 @@ a.btn:hover {
     background-color: #033626;
     color: #fff;
 }
-.highlight {
-    background-color: #eee;
-}
-.err {
-    background-color: transparent;
+aside a {
+    text-transform: none;
+    font-size: 80%;
 }
 
 main nav {
@@ -28,7 +26,10 @@ main nav {
 }
 
 .tagcloud {
-    background-color: #030E36CC;
+    background-color: #ffffff11;
+    padding: 15px 0 15px 0;
+    border-radius: 5px;
+    margin-top: 0;
 }
 .tagcloud li {
     list-style: none;
@@ -39,12 +40,57 @@ main nav {
 .tagcloud li:first {
     padding-left: 0;
 }
+.tagcloud li a {
+    padding-left: 0.2em;
+    padding-right: 0.2em;
+}
+.tagcloud li:first a {
+    padding-left: 0;
+}
+.tagcloud li a:hover {
+    background-color: white;
+    color: #030E36;
+}
 
 // Social icons in left bar
 ul.social a {
     display: inline-grid;
-    height: 14px;
-    width: 14px;
+    height: 28px;
+    width: 28px;
+    line-height: 28px;
     vertical-align: middle;
     font-size: 72%
+}
+ul.social a i {
+    height: 28px;
+    width: 28px;
+    line-height: 28px;
+    font-size: 72%
+}
+ul.social a.sc-github {
+    background-color: #333;
+}
+/* code formatting */
+main article table td, main article table th {
+    border: none;
+}
+.highlight {
+    background-color: #eee;
+}
+.err {
+    background-color: transparent;
+}
+.highlighttable {
+    width: 100%;
+    border-spacing: 0;
+}
+.linenos {
+    width: 2.0em;
+    padding: 8px 0 8px 0;
+}
+.linenodiv, .highlight {
+    padding: 0;
+}
+.highlight pre {
+    border: none;
 }
