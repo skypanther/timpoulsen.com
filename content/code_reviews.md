@@ -1,7 +1,8 @@
 Title: Code reviews from the reviewer's perspective
-Date: 
+Date: April 29, 2018
 Category: Engineering
 Tags: engineering
+Slug: code-reviews-for-reviewers
 Status: draft
 
 Most professional programmers have gone through a code review. Before you can add or change code, your co-workers look it over to make sure it meets specified criteria.

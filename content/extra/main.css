@@ -10,11 +10,44 @@ a:hover {
 }
 a.btn {
     background-color: #030E36;
+    text-decoration: none;
 }
 a.btn:hover {
     background-color: #033626;
     color: #fff;
 }
+
+article a {
+    color: #2c5894;
+    text-decoration: underline;
+}
+article .tag-cloud a {
+    text-decoration: none;
+    background-color: #ff4500;
+}
+article .tag-cloud a:hover {
+    color: black;
+    background-color: #ff5500;
+}
+
+/* a:not( [href*='yourdomain.com'] ):not( [href^='#'] ):not( [href^='/'] ) */
+article a[target="_blank"]:after {
+    font-family: FontAwesome;
+    display: inline-block;
+    padding-left: 0.15em;
+    vertical-align: middle;
+    font-size: 70%;
+    content: "\f08e";
+}
+
+h2 { font-size: 1.75em; font-variant: small-caps; }
+h3 { font-size: 1.55em; font-variant: small-caps; }
+h4 { font-size: 1.45em; font-variant: small-caps; }
+h5 { font-size: 1.35em; font-variant: small-caps; }
+
+header h2 { font-size: 2.0em; font-variant: inherit; }
+header h2 a { text-decoration: none; }
+
 aside a {
     text-transform: none;
     font-size: 80%;
@@ -94,3 +127,4 @@ main article table td, main article table th {
 .highlight pre {
     border: none;
 }
+/* end code formatting */
