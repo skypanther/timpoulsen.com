@@ -10,6 +10,8 @@ SITESUBTITLE = 'Explorations of software and hardware'
 SITEDESCRIPTION = "Tim Poulsen's blog of software, hardware, and life"
 SITELOGO = '/images/tim_poulsen.jpg'
 
+ARTICLE_URL = '{date:%Y}/'
+
 STATIC_PATHS = ["static", 'images', 'extra/main.css', 'extra/custom.css']
 PLUGIN_PATHS = ["plugins", "/Users/timpoulsen/repos/other/pelican-plugins"]
 PLUGINS = ['pelicanfly', 'tag_cloud']
@@ -42,7 +44,8 @@ TIMEZONE = 'America/New_York'
 DEFAULT_LANG = 'en'
 
 # Feed generation is usually not desired when developing
-FEED_ALL_ATOM = None
+FEED_DOMAIN = SITEURL
+FEED_ALL_ATOM = 'feeds/all.atom.xml'
 CATEGORY_FEED_ATOM = None
 TRANSLATION_FEED_ATOM = None
 AUTHOR_FEED_ATOM = None
