@@ -128,3 +128,7 @@ main article table td, main article table th {
     border: none;
 }
 /* end code formatting */
+
+/* color classes for font-awesome icons */
+.blue { color: #3e5b98; }
+.red { color: #c92619; }

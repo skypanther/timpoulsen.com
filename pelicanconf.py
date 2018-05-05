@@ -10,7 +10,8 @@ SITESUBTITLE = 'Explorations of software and hardware'
 SITEDESCRIPTION = "Tim Poulsen's blog of software, hardware, and life"
 SITELOGO = '/images/tim_poulsen.jpg'
 
-# ARTICLE_URL = '{date:%Y}/{slug}.html'
+ARTICLE_URL = '{date:%Y}/{slug}.html'
+ARTICLE_SAVE_AS = '{date:%Y}/{slug}.html'
 
 STATIC_PATHS = ["static", 'images', 'extra/main.css', 'extra/custom.css']
 PLUGIN_PATHS = ["plugins", "/Users/timpoulsen/repos/other/pelican-plugins"]
