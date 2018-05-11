@@ -1,0 +1,231 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,400italic' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" type="text/css" href="../theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="../theme/pygments/github.min.css">
+  <link rel="stylesheet" type="text/css" href="../theme/css/main.css">
+  <link rel="stylesheet" type="text/css" href="../theme/font-awesome/css/font-awesome.min.css">
+
+    <link href="http://www.timpoulsen.com/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Tim Poulsen Atom">
+
+
+  <link rel="apple-touch-icon" sizes="57x57" href="/images/favicons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/images/favicons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/images/favicons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/images/favicons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/images/favicons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/images/favicons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/images/favicons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/images/favicons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/images/favicons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/images/favicons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicons/favicon-16x16.png">
+  <link rel="manifest" href="/images/favicons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/images/favicons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="index, follow" />
+
+    <!-- Chrome, Firefox OS and Opera -->
+    <meta name="theme-color" content="#143742">
+    <!-- Windows Phone -->
+    <meta name="msapplication-navbutton-color" content="#143742">
+    <!-- iOS Safari -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+<meta name="author" content="Tim Poulsen" />
+<meta name="description" content="Most professional programmers have gone through a code review. Before you can add or change code, your co-workers look it over to make sure it meets specified criteria. As the one submitting code to be reviewed, you have a lot of responsibilities. You need to write good code, document it …" />
+<meta name="keywords" content="engineering">
+<meta property="og:site_name" content="Tim Poulsen"/>
+<meta property="og:title" content="Code reviews from the reviewer's perspective"/>
+<meta property="og:description" content="Most professional programmers have gone through a code review. Before you can add or change code, your co-workers look it over to make sure it meets specified criteria. As the one submitting code to be reviewed, you have a lot of responsibilities. You need to write good code, document it …"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="../drafts/code-reviews-for-reviewers.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2018-04-29 00:00:00-04:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="../author/tim-poulsen.html">
+<meta property="article:section" content="Engineering"/>
+<meta property="article:tag" content="engineering"/>
+<meta property="og:image" content="/images/tim_poulsen.jpg">
+
+  <title>Tim Poulsen &ndash; Code reviews from the reviewer's perspective</title>
+
+
+    <link href="/theme/css/main.css" rel="stylesheet">
+
+</head>
+<body>
+  <aside class="leftbar" style="background-color: #030E36;">
+    <div class="leftbar" style="background-color: #030E36;">
+      <a href="..">
+        <img src="/images/tim_poulsen.jpg" alt="Tim Poulsen" title="Tim Poulsen">
+      </a>
+      <h1><a href="..">Tim Poulsen</a></h1>
+
+<p class="subtitle">Explorations of software and hardware</p>
+      <ul class="social">
+        <li><a class="sc-twitter" href="https://twitter.com/skypanther" target="_blank"><i class="fa fa-twitter"></i></a></li>
+        <li><a class="sc-github" href="https://github.com/skypanther" target="_blank"><i class="fa fa-github"></i></a></li>
+        <li><a class="sc-linkedin" href="https://www.linkedin.com/in/timpoulsen" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+        <li><a class="sc-rss" href="feeds/all.atom.xml" target="_blank"><i class="fa fa-rss"></i></a></li>
+      </ul>
+
+      <nav>
+        <ul class="list">
+          <li><a href="../pages/about.html#about">About</a></li>
+
+          <li><a href="/categories.html" target="_blank">Topics</a></li>
+          <li><a href="http://skypanther.com" target="_blank">Skypanther Studios</a></li>
+        </ul>
+      </nav>
+
+      <p class="subhead">Tags:</p>
+      <ul class="tagcloud">
+          <li class="tag-1">
+              <a href="../tag/python.html">
+              python
+              </a>
+          </li>
+          <li class="tag-1">
+              <a href="../tag/opencv.html">
+              opencv
+              </a>
+          </li>
+          <li class="tag-4">
+              <a href="../tag/raspberry-pi.html">
+              raspberry pi
+              </a>
+          </li>
+          <li class="tag-4">
+              <a href="../tag/making.html">
+              making
+              </a>
+          </li>
+          <li class="tag-4">
+              <a href="../tag/anaconda.html">
+              anaconda
+              </a>
+          </li>
+      </ul>
+
+    </div>
+
+
+  </aside>
+  <main>
+
+    <nav>
+      <a href="..">    Home
+</a>
+
+      <a href="/categories.html">Topics</a>
+      <a href="/pages/about.html">About</a>
+      <a href="/tags.html">Tags</a>
+
+      <a href="http://www.timpoulsen.com/feeds/all.atom.xml">    Atom
+</a>
+
+    </nav>
+
+<article class="single">
+  <header>
+    <h1 id="code-reviews-for-reviewers">Code reviews from the reviewer's perspective</h1>
+    <p>
+          Posted on Sun 29 April 2018 in <a href="../category/engineering.html">Engineering</a>
+
+
+    </p>
+  </header>
+
+
+  <div>
+    <p>Most professional programmers have gone through a code review. Before you can add or change code, your co-workers look it over to make sure it meets specified criteria.</p>
+<p>As the one submitting code to be reviewed, you have a lot of responsibilities. You need to write good code, document it appropriately, fill out whatever review request your team requires, and so forth. But, in this article, I want to focus on the responsibilities of the reviewer. </p>
+<p>That seems odd. As a reviewer, I critique the code, right? I point out all the things the submitter did wrong and tell him or her how I'd have done it, right? Absolutely not!</p>
+<h2>Reviewer responsibilities</h2>
+<p>As a code reviewer, your responsibilities are to make sure this new code meets your team's standards for:</p>
+<ul>
+<li>Suitability to the problem and constraints</li>
+<li>Readability and understandability</li>
+<li>Ease of maintenance and enhancement</li>
+<li>Security</li>
+<li>Efficiency</li>
+<li>Syntactical and language correctness</li>
+<li>Adherence to standards</li>
+</ul>
+<p>I've ranked those in the order I believe they apply. And really, "adherence to standards" shouldn't even be there...your linter and build tools should have enforced that before the PR could be submitted.</p>
+<h2>Suitability and applicability</h2>
+<p>"Suitability" might not make the top spot in many people's minds. But I believe it's critical. As the reviewer, you need to understand the business requirements that have led to this change, what will it do for the business, what are the deadlines, and so forth. Those details should be in the associated ticket or in the pull request's intro. It's <em>okay to ask</em> the submitter or project manager.</p>
+<p>Next, you should understand the engineering constraints. Does this new code interface with a third-party who specifies data formats, API interactions, security requirements, and so forth? Determine how often this code will run, is it internal or externally facing, what systems will it interact with, does it work with sensitive data, and so forth.</p>
+<p>Together, those business and engineering constraints should help you understand <em>why</em> this specific solution is being submitted. Those constraints should have guided its development, its techniques, and architecture.</p>
+<h2>Grok it</h2>
+<p>Next, and this can be super-hard, you need to <a href="https://en.wikipedia.org/wiki/Grok" target="_blank">grok</a> the code. You need to read it, figure out what it does and how it does it. You must determine how it fits into the rest of your codebase. You need to understand the data it works with and creates. And, you need to know at least the basics of any external APIs it interfaces with. <em>Critically, your task is to determine if it meet the constraints and goals.</em></p>
+<p>How long it takes you to grok the code is a good measure of "readability" and "ease of maintenance." If you struggle to understand the code now, it will be impossible to understand six months from now when a bug comes to light.</p>
+<p>If you're unsure along the way, you should ask the submitter. A code review is a conversation between you and the developer. Why did she do it this way? How did he account for this scenario?</p>
+<p>It's important to check your ego at the door. <strong>It doesn't matter how you would have written the code.</strong> Unless you can point to <em>specific, objective reasons</em> why the code should have been structured differently, it makes no difference that you would have used a different class hierarchy or language feature. If it meets the goals given the constraints, is secure and efficient (within the constraints), then the architecture is good enough.</p>
+<p>Finally, once you've determined that the overall code, its structure and approach are sound, only then you should critique the specifics of the code. This is the point in the review where you look for syntactical issues, proper use of language features, code compactness and elegance, and so forth.</p>
+<h2>Proper feedback</h2>
+<p>A code review is not an adversarial exchange. There is no place for a good guy vs. bad guy mentality in code reviews. This is an opportunity for both the reviewed and the reviewer to learn and grow the overall skills of the team.</p>
+<p>Your feedback should succinct and matter-of-fact, yet still friendly. Never belittle or insult the submitter. No one chooses to do something wrong. Either they didn't know how to do it the right way (in which case you teach them) or you don't know why they did what they did (in which case you learn).</p>
+<h2>You will be reviewed</h2>
+<p>Above all, keep in mind that the tables will be turned. Someone is going to review your code. If you've been a pedantic, abrasive, or egotistical reviewer, expect the same in return. </p>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="../tag/engineering.html">engineering</a>
+    </p>
+  </div>
+
+
+
+
+</article>
+
+    <footer>
+<p>
+  &copy; Tim Poulsen 2018 - This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>
+</p>
+<p>    Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a>
+</p><p>
+  <a rel="license"
+     href="http://creativecommons.org/licenses/by-sa/4.0/"
+     target="_blank">
+    <img alt="Creative Commons License"
+         title="Creative Commons License"
+         style="border-width:0"
+         src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png"
+         width="80"
+         height="15"/>
+  </a>
+</p>    </footer>
+  </main>
+
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Tim Poulsen ",
+  "url" : "..",
+  "image": "/images/tim_poulsen.jpg",
+  "description": "Tim Poulsen's blog of software, hardware, and life"
+}
+</script>
+</body>
+</html>
