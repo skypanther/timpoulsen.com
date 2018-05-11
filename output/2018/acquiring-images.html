@@ -1,0 +1,326 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,400italic' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" type="text/css" href="../theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="../theme/pygments/github.min.css">
+  <link rel="stylesheet" type="text/css" href="../theme/css/main.css">
+  <link rel="stylesheet" type="text/css" href="../theme/font-awesome/css/font-awesome.min.css">
+
+    <link href="http://www.timpoulsen.com/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Tim Poulsen Atom">
+
+
+  <link rel="apple-touch-icon" sizes="57x57" href="/images/favicons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/images/favicons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/images/favicons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/images/favicons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/images/favicons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/images/favicons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/images/favicons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/images/favicons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/images/favicons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/images/favicons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicons/favicon-16x16.png">
+  <link rel="manifest" href="/images/favicons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/images/favicons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="index, follow" />
+
+    <!-- Chrome, Firefox OS and Opera -->
+    <meta name="theme-color" content="#143742">
+    <!-- Windows Phone -->
+    <meta name="msapplication-navbutton-color" content="#143742">
+    <!-- iOS Safari -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+<meta name="author" content="Tim Poulsen" />
+<meta name="description" content="To manipulate an image, the first thing you must do is open it. OpenCV lets you open images and videos from files and cameras, both locally attached and on the network. Let's check it out. Still images We'll start with the simple case of still images. This is probably best …" />
+<meta name="keywords" content="opencv, python">
+<meta property="og:site_name" content="Tim Poulsen"/>
+<meta property="og:title" content="Acquiring images with OpenCV"/>
+<meta property="og:description" content="To manipulate an image, the first thing you must do is open it. OpenCV lets you open images and videos from files and cameras, both locally attached and on the network. Let's check it out. Still images We'll start with the simple case of still images. This is probably best …"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="../2018/acquiring-images.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2018-04-16 00:00:00-04:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="../author/tim-poulsen.html">
+<meta property="article:section" content="OpenCV"/>
+<meta property="article:tag" content="opencv"/>
+<meta property="article:tag" content="python"/>
+<meta property="og:image" content="/images/tim_poulsen.jpg">
+
+  <title>Tim Poulsen &ndash; Acquiring images with OpenCV</title>
+
+
+    <link href="/theme/css/main.css" rel="stylesheet">
+
+</head>
+<body>
+  <aside class="leftbar" style="background-color: #030E36;">
+    <div class="leftbar" style="background-color: #030E36;">
+      <a href="..">
+        <img src="/images/tim_poulsen.jpg" alt="Tim Poulsen" title="Tim Poulsen">
+      </a>
+      <h1><a href="..">Tim Poulsen</a></h1>
+
+<p class="subtitle">Explorations of software and hardware</p>
+      <ul class="social">
+        <li><a class="sc-twitter" href="https://twitter.com/skypanther" target="_blank"><i class="fa fa-twitter"></i></a></li>
+        <li><a class="sc-github" href="https://github.com/skypanther" target="_blank"><i class="fa fa-github"></i></a></li>
+        <li><a class="sc-linkedin" href="https://www.linkedin.com/in/timpoulsen" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+        <li><a class="sc-rss" href="feeds/all.atom.xml" target="_blank"><i class="fa fa-rss"></i></a></li>
+      </ul>
+
+      <nav>
+        <ul class="list">
+          <li><a href="../pages/about.html#about">About</a></li>
+
+          <li><a href="/categories.html" target="_blank">Topics</a></li>
+          <li><a href="http://skypanther.com" target="_blank">Skypanther Studios</a></li>
+        </ul>
+      </nav>
+
+      <p class="subhead">Tags:</p>
+      <ul class="tagcloud">
+          <li class="tag-1">
+              <a href="../tag/python.html">
+              python
+              </a>
+          </li>
+          <li class="tag-1">
+              <a href="../tag/opencv.html">
+              opencv
+              </a>
+          </li>
+          <li class="tag-4">
+              <a href="../tag/raspberry-pi.html">
+              raspberry pi
+              </a>
+          </li>
+          <li class="tag-4">
+              <a href="../tag/making.html">
+              making
+              </a>
+          </li>
+          <li class="tag-4">
+              <a href="../tag/anaconda.html">
+              anaconda
+              </a>
+          </li>
+      </ul>
+
+    </div>
+
+
+  </aside>
+  <main>
+
+    <nav>
+      <a href="..">    Home
+</a>
+
+      <a href="/categories.html">Topics</a>
+      <a href="/pages/about.html">About</a>
+      <a href="/tags.html">Tags</a>
+
+      <a href="http://www.timpoulsen.com/feeds/all.atom.xml">    Atom
+</a>
+
+    </nav>
+
+<article class="single">
+  <header>
+    <h1 id="acquiring-images">Acquiring images with OpenCV</h1>
+    <p>
+          Posted on Mon 16 April 2018 in <a href="../category/opencv.html">OpenCV</a>
+
+
+    </p>
+  </header>
+
+
+  <div>
+    <p>To manipulate an image, the first thing you must do is open it. OpenCV lets you open images and videos from files and cameras, both locally attached and on the network. Let's check it out.</p>
+<h2>Still images</h2>
+<p>We'll start with the simple case of still images. This is probably best illustrated with some sample code:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">cv2</span>
+
+<span class="c1"># read an image from the current folder</span>
+<span class="n">image</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s1">&#39;cat.jpg&#39;</span><span class="p">)</span>
+
+<span class="c1"># or from another folder</span>
+<span class="n">image</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s1">&#39;images/cat.jpg&#39;</span><span class="p">)</span>
+
+<span class="c1"># then we&#39;ll just show it in an OpenCV window</span>
+<span class="n">cv2</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="s1">&#39;Photo&#39;</span><span class="p">,</span> <span class="n">image</span><span class="p">)</span>
+</pre></div>
+</td></tr></table>
+
+<p>In the above example, the <code>image</code> variable is a binary object representing the RGB data of your file. Keep in mind that internally, OpenCV represents these "backwards" as BGR images. That will matter if you use a different library, such as matplotlib, in your script which expects RGB image data.</p>
+<p>OpenCV supports the most common image file formats, including JPG, PNG, WebP, TIF, and more.</p>
+<h3>Errors and exception handling</h3>
+<p>The <code>imread</code> method does not raise a proper exception in the case the file doesn't exist. So, you can't wrap your code in a try/except block to handle errors. Instead, you'll need to check before calling <code>imread</code> with Python's usual file-handling functions, for example:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">path</span>
+
+<span class="k">if</span> <span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="s1">&#39;cat.jpg&#39;</span><span class="p">):</span>
+    <span class="n">image</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s1">&#39;cat.jpg&#39;</span><span class="p">)</span>
+    <span class="o">...</span>
+</pre></div>
+</td></tr></table>
+
+<p>However, just because a file exists and can be opened by <code>imread</code> does not mean that you can successfully read image data from it. In such cases, the function will return <code>None</code> which you should test for:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">image</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s1">&#39;not_an_image.txt&#39;</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">image</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Could not read image data&#39;</span><span class="p">)</span>
+</pre></div>
+</td></tr></table>
+
+<p>Note: OpenCV determines the file type by its contents, not its extension. So, if you renamed cat.jpg to cat.txt, the <code>imread()</code> function would still be able to read it as a JPG file.</p>
+<h2>Video files and cameras</h2>
+<p>OpenCV lets you read video data from files and cameras. What's better, you use the same technique no matter the video source. First, you get a reference, or handle to the video source. Then, you read from that source frame by frame.</p>
+<p>Strictly speaking, you use the <code>cv2.VideoCapture.open()</code> method to get a reference to your video source. However, OpenCV offers a shorter equivalent in the <code>cv2.VideoCapture()</code> method.</p>
+<div class="highlight"><pre><span></span>VideoCapture(source[, options])
+</pre></div>
+
+
+<p>Where <em>source</em> is one of:</p>
+<ul>
+<li>an integer, representing which locally attached webcam to read from. A value of <code>0</code> represents your built-in webcam if available. </li>
+<li>a string, representing a path to a local video file</li>
+<li>a string, representing the URL to a streaming network camera, such as an IP camera</li>
+</ul>
+<p>Typically, you don't need to provide any options for the method. These flags would be used to specify the format of the data stream and other specifics. As with still images, OpenCV can typically figure out the video parameters automatically by examining the input data.</p>
+<p>Here is a very typical loop used to read frames from a video source. In this simple example, we just show each frame in an OpenCV window. Within each loop, the script checks for a key-press and if the letter "q" was typed, we break out of the loop, which in this example would release the video source and end the program:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">camera</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">VideoCapture</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+    <span class="c1"># loop continuously reading frame-by-frame</span>
+    <span class="n">success</span><span class="p">,</span> <span class="n">frame</span> <span class="o">=</span> <span class="n">camera</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">success</span><span class="p">:</span>
+        <span class="c1"># a frame was successfully read</span>
+        <span class="c1"># we&#39;ll just show it in a window</span>
+        <span class="n">cv2</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="s2">&quot;Live Video&quot;</span><span class="p">,</span> <span class="n">frame</span><span class="p">)</span>
+
+        <span class="c1"># if the &#39;q&#39; key is pressed, stop the loop</span>
+        <span class="k">if</span> <span class="n">cv2</span><span class="o">.</span><span class="n">waitKey</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mh">0xFF</span> <span class="o">==</span> <span class="nb">ord</span><span class="p">(</span><span class="s2">&quot;q&quot;</span><span class="p">):</span>
+            <span class="n">camera</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>
+            <span class="k">break</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># frame wasn&#39;t read, handle that problem, for example</span>
+        <span class="n">camera</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>
+        <span class="k">break</span>
+</pre></div>
+</td></tr></table>
+
+<h3>Errors and exceptions</h3>
+<p>As with reading still images, OpenCV does not offer proper exception handling when reading from a video source. If you specify a source that doesn't exist, you'll get an error like the following</p>
+<div class="highlight"><pre><span></span>out device of bound (0-0): 1 opencv: camera failed to properly initialize!
+</pre></div>
+
+
+<p>(To create the preceding error, I used <code>camera = cv2.VideoCapture(1)</code> and since my laptop has just one camera, camera <code>1</code> doesn't exist.)</p>
+<p>It's important to release the video source properly when you're done by calling the <code>release()</code> method. Failing to do so can leave your camera unusable. Below is an example of the error you get attempting to use the built-in camera on a Mac that was not released properly before.</p>
+<div class="highlight"><pre><span></span><span class="nl">OpenCV</span><span class="p">:</span> <span class="n">error</span> <span class="k">in</span> <span class="p">[</span><span class="bp">AVCaptureDeviceInput</span> <span class="nl">initWithDevice</span><span class="p">:</span><span class="nl">error</span><span class="p">:]</span>
+<span class="nl">OpenCV</span><span class="p">:</span> <span class="n">Cannot</span> <span class="n">Use</span> <span class="n">FaceTime</span> <span class="n">HD</span> <span class="n">Camera</span> <span class="p">(</span><span class="n">Built</span><span class="o">-</span><span class="k">in</span><span class="p">)</span>
+<span class="nl">OpenCV</span><span class="p">:</span> <span class="n">camera</span> <span class="n">failed</span> <span class="n">to</span> <span class="n">properly</span> <span class="n">initialize</span><span class="o">!</span>
+</pre></div>
+
+
+<p>If you end up in this state, you may have to restart your computer to recover. On the Mac, you can use the following command rather than restarting:</p>
+<div class="highlight"><pre><span></span>sudo killall VDCAssistant
+</pre></div>
+
+
+<h2>Summary</h2>
+<p>There you have it, the ins-and-outs of aquiring image data to use with OpenCV. </p>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="../tag/opencv.html">opencv</a>
+      <a href="../tag/python.html">python</a>
+    </p>
+  </div>
+
+
+
+
+</article>
+
+    <footer>
+<p>
+  &copy; Tim Poulsen 2018 - This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>
+</p>
+<p>    Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a>
+</p><p>
+  <a rel="license"
+     href="http://creativecommons.org/licenses/by-sa/4.0/"
+     target="_blank">
+    <img alt="Creative Commons License"
+         title="Creative Commons License"
+         style="border-width:0"
+         src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png"
+         width="80"
+         height="15"/>
+  </a>
+</p>    </footer>
+  </main>
+
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Tim Poulsen ",
+  "url" : "..",
+  "image": "/images/tim_poulsen.jpg",
+  "description": "Tim Poulsen's blog of software, hardware, and life"
+}
+</script>
+</body>
+</html>
