@@ -6,7 +6,7 @@ Slug: pi-birdcam
 
 My darling wife got me a Raspberry Pi 3B+ and a NOIR Pi camera for my birthday so that I could set up a streaming camera to monitor our nesting bluebirds. Here's how I did it.
 
-My first attempt was to use the Motion program as <a href="https://hackernoon.com/spy-your-pet-with-a-raspberry-pi-camera-server-e71bb74f79ea" target="_blank">described by Hackernoon</a>. It worked, but the resulting video stream was very slow and jerky. I'd say I was getting only a few frames a second at best. I knew I could do better.
+<img src="../images/2018/what_the_camera_sees.png" width="320" align="right" title="What the camera sees">My first attempt was to use the Motion program as <a href="https://hackernoon.com/spy-your-pet-with-a-raspberry-pi-camera-server-e71bb74f79ea" target="_blank">described by Hackernoon</a>. It worked, but the resulting video stream was very slow and jerky. I'd say I was getting only a few frames a second at best. I knew I could do better.
 
 ## Picamera
 
@@ -96,8 +96,20 @@ To avoid breaking the camera lens assembly right off the board, you'll want to h
 
 ![Focusing the Pi cam](../images/2018/focusing_pi_camera.jpg)
 
-## Installing the camera
+## Update
 
-I plan to install this in the box tomorrow. I'll update this post once it's done and running.
+Sadly, the nest box that had four bluebird eggs is now empty. Something (a snake, raccoon, house sparrow, grackle, etc.) raided the box and took the eggs. I found a partial shell about 30 feet from the box, so I suspect another bird. As sad as it is, nest raiding is unfortunately common. 
+
+As luck would have it, we have a nest with eggs in the next box over. We think it is a Carolina Wren nest based on the shape, building materials, and egg coloration. Unfortunately, Carolina Wrens make deep nests such that there's no way to mount the camera inside the box like I'd do with bluebirds. 
+
+<img src="../images/2018/camera_housing.jpg" width="320" title="My high tech housing">
+<br/>
+
+I went with a rather high-tech housing for the Pi, camera, and power supply. Everything fit inside an empty plastic nut container. I duct taped (Gorilla brand actually) it to a metal garden stake.
+
+<br/>
+<img src="../images/2018/camera_aiming.jpg" width="320" title="Aiming at the house">
+
+And aimed it at the house. We can watch the wrens come and go, which is definitely not as cool as seeing inside the box.
 
 Love them <i class="fa fa-twitter blue"></i>!
