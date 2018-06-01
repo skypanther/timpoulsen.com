@@ -96,7 +96,7 @@ To avoid breaking the camera lens assembly right off the board, you'll want to h
 
 ![Focusing the Pi cam](../images/2018/focusing_pi_camera.jpg)
 
-## Update
+## Update 1
 
 Sadly, the nest box that had four bluebird eggs is now empty. Something (a snake, raccoon, house sparrow, grackle, etc.) raided the box and took the eggs. I found a partial shell about 30 feet from the box, so I suspect another bird. As sad as it is, nest raiding is unfortunately common. 
 
@@ -105,11 +105,17 @@ As luck would have it, we have a nest with eggs in the next box over. We think i
 <img src="../images/2018/camera_housing.jpg" width="320" title="My high tech housing">
 <br/>
 
-I went with a rather high-tech housing for the Pi, camera, and power supply. Everything fit inside an empty plastic nut container. I duct taped (Gorilla brand actually) it to a metal garden stake.
+I went with a rather high-tech housing for the Pi, camera, and power supply. Everything fit inside an empty plastic nut container. I Gorilla-taped it to a metal garden stake. Ugly, but it works.
 
 <br/>
 <img src="../images/2018/camera_aiming.jpg" width="320" title="Aiming at the house">
 
 And aimed it at the house. We can watch the wrens come and go, which is definitely not as cool as seeing inside the box.
+
+## Update 2
+
+The damn sparrows got the wrens too. Fortunately, a bluebird pair nested in another nearby box on our property. So far, they're safe and happily watching their eggs. Here's a brief look inside (recorded, not live).
+
+<img src="../images/2018/bluebirdcam.gif" width="320" title="Animated gif of mama bluebird tending her eggs">
 
 Love them <i class="fa fa-twitter blue"></i>!
