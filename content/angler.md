@@ -11,11 +11,11 @@ As I read the article and looked through their GitHub project, I realized that m
 2. Isolate the tape from the background by strongly thresholding the image.
 3. Find the largest contour that surrounds the tape track.
 4. Find the minimum size bounding box around that contour.
-5. Finally, calculate angle of that bounding box to the Y axis
+5. Finally, calculate the angle of that bounding box to the Y axis
 
 That angle is the needed turning angle to keep the car on track. From there, given the car's speed, you would want to apply some smoothing (turn somewhat less than the angle) to avoid jerky, sudden turns. (I'll note some other limitations below.)
 
-The script is short enough that I'll just include the whole thing here. An explanation follows the code.
+The script is short enough that I'll just include the whole thing here. Comments inline explain the code.
 
     #!python
     import cv2
