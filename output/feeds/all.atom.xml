@@ -1,5 +1,156 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Tim Poulsen</title><link href="http://www.timpoulsen.com/" rel="alternate"></link><link href="http://www.timpoulsen.com/feeds/all.atom.xml" rel="self"></link><id>http://www.timpoulsen.com/</id><updated>2018-06-03T00:00:00-04:00</updated><entry><title>Path prediction with OpenCV</title><link href="http://www.timpoulsen.com/2018/path-prediction-with-opencv.html" rel="alternate"></link><published>2018-06-03T00:00:00-04:00</published><updated>2018-06-03T00:00:00-04:00</updated><author><name>Tim Poulsen</name></author><id>tag:www.timpoulsen.com,2018-06-03:/2018/path-prediction-with-opencv.html</id><summary type="html">&lt;p&gt;Recently, I spotted an article on HackerNews, &lt;a href="https://news.ycombinator.com/item?id=17142815"&gt;Self-driving RC car that uses AI to predict turning angles&lt;/a&gt;. The project looked interesting. They applied AI to predict the path a radio-controlled car should take to stay centered over a tape track on the floor. Using a Raspberry Pi and PiCam mounted …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Recently, I spotted an article on HackerNews, &lt;a href="https://news.ycombinator.com/item?id=17142815"&gt;Self-driving RC car that uses AI to predict turning angles&lt;/a&gt;. The project looked interesting. They applied AI to predict the path a radio-controlled car should take to stay centered over a tape track on the floor. Using a Raspberry Pi and PiCam mounted to the car, their algorithm performed path prediction and controlled the car's servos via the Pi's GPIO pins.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Tim Poulsen</title><link href="http://www.timpoulsen.com/" rel="alternate"></link><link href="http://www.timpoulsen.com/feeds/all.atom.xml" rel="self"></link><id>http://www.timpoulsen.com/</id><updated>2018-07-06T00:00:00-04:00</updated><entry><title>Ad-hoc objects in Python</title><link href="http://www.timpoulsen.com/2018/ad-hoc-objects-in-python.html" rel="alternate"></link><published>2018-07-06T00:00:00-04:00</published><updated>2018-07-06T00:00:00-04:00</updated><author><name>Tim Poulsen</name></author><id>tag:www.timpoulsen.com,2018-07-06:/2018/ad-hoc-objects-in-python.html</id><summary type="html">&lt;p&gt;If you know one programming language, it's natural to look for parallels as you learn a new language. In my case, I've coded in JavaScript for many years while Python is much more recent for me. I regularly find myself thinking "in JavaScript, I'd do ..."&lt;/p&gt;
+&lt;p&gt;Take object handling. I really …&lt;/p&gt;</summary><content type="html">&lt;p&gt;If you know one programming language, it's natural to look for parallels as you learn a new language. In my case, I've coded in JavaScript for many years while Python is much more recent for me. I regularly find myself thinking "in JavaScript, I'd do ..."&lt;/p&gt;
+&lt;p&gt;Take object handling. I really like JavaScript's dynamic handling of objects. With JS, there's no need to create a class template (though you can). Just create an ad-hoc object and start assigning it properties and methods. For example:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;// JavaScript example&lt;/span&gt;
+&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;js_obj&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{};&lt;/span&gt;
+
+&lt;span class="c1"&gt;// dynamically add a property&lt;/span&gt;
+&lt;span class="nx"&gt;js_obj&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;foo&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;bar&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+&lt;span class="c1"&gt;// and use it&lt;/span&gt;
+&lt;span class="nx"&gt;console&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;log&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;js_obj&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;foo&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt; &lt;span class="c1"&gt;// bar&lt;/span&gt;
+
+&lt;span class="c1"&gt;// you can even create methods&lt;/span&gt;
+&lt;span class="nx"&gt;js_obj&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;sum&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kd"&gt;function&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;y&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nx"&gt;x&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="nx"&gt;y&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="c1"&gt;// and use them&lt;/span&gt;
+&lt;span class="nx"&gt;console&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;log&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;js_obj&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;sum&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;));&lt;/span&gt; &lt;span class="c1"&gt;// 7&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;What wasn't obvious to me at first was that I could do similar things in Python. I saw the &lt;code&gt;class ClassName()&lt;/code&gt; syntax and was fooled into thinking that I had to predefine my class with all its attributes and methods before I could instantiate objects from it. Not perfectly parallel, but in Python, we can do this:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# Python example&lt;/span&gt;
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Object&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;object&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;pass&lt;/span&gt;
+
+
+&lt;span class="n"&gt;py_obj&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Object&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="n"&gt;py_obj&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;bar&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;baz&amp;#39;&lt;/span&gt;
+
+&lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;py_obj&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;bar&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  &lt;span class="c1"&gt;# baz&lt;/span&gt;
+
+&lt;span class="c1"&gt;# we can dynamically assign methods with lambdas&lt;/span&gt;
+&lt;span class="n"&gt;py_obj&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sum&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;lambda&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;
+
+&lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;py_obj&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sum&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;  &lt;span class="c1"&gt;# 7&lt;/span&gt;
+
+
+&lt;span class="c1"&gt;# or even full functions&lt;/span&gt;
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;exponential&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;num&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;num&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;undefined&amp;#39;&lt;/span&gt;
+    &lt;span class="n"&gt;exp&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;num&lt;/span&gt;
+    &lt;span class="n"&gt;start&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;num&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;step_down&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;range&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;start&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;step_down&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;exp&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;exp&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;step_down&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;exp&lt;/span&gt;
+
+
+&lt;span class="n"&gt;py_obj&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;exp&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;exponential&lt;/span&gt;
+
+&lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;py_obj&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;exp&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;  &lt;span class="c1"&gt;# 120&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;That's great. But a leg-up that JS has is that objects are "associative arrays" meaning that in addition to the dot-notation, we can use array notation (e.g. Python's dict notation) to access properties of JS objects:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;// this works in JS:
+js_obj[&amp;#39;foo&amp;#39;]
+
+# but in Python, this wouldn&amp;#39;t work
+py_obj[&amp;#39;bar&amp;#39;]
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Why would that matter you ask? If you need to dynamically access properties of an object, say by looping through a list of keys returned by an API, the associative array notation comes in very handy. &lt;/p&gt;
+&lt;p&gt;Here I present a simple class that gives similar functionality in Python. The Object class will create an object that you can access with either dot or dict notation. It offers support for iteration via &lt;code&gt;items()&lt;/code&gt; and could be used by methods expecting a &lt;code&gt;__getitem__&lt;/code&gt; accessor. &lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Object&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;object&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="sd"&gt;&amp;#39;&amp;#39;&amp;#39;&lt;/span&gt;
+&lt;span class="sd"&gt;    Creates an object for simple key/value storage; enables access via&lt;/span&gt;
+&lt;span class="sd"&gt;    object or dictionary syntax (i.e. obj.foo or obj[&amp;#39;foo&amp;#39;]).&lt;/span&gt;
+&lt;span class="sd"&gt;    &amp;#39;&amp;#39;&amp;#39;&lt;/span&gt;
+
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="fm"&gt;__init__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;kwargs&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;arg&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;kwargs&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="nb"&gt;setattr&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;arg&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;kwargs&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;arg&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="fm"&gt;__getitem__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;prop&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="sd"&gt;&amp;#39;&amp;#39;&amp;#39;&lt;/span&gt;
+&lt;span class="sd"&gt;        Enables dict-like access, ie. foo[&amp;#39;bar&amp;#39;]&lt;/span&gt;
+&lt;span class="sd"&gt;        &amp;#39;&amp;#39;&amp;#39;&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="fm"&gt;__getattribute__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;prop&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="fm"&gt;__str__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="sd"&gt;&amp;#39;&amp;#39;&amp;#39;&lt;/span&gt;
+&lt;span class="sd"&gt;        String-representation as newline-separated string useful in print()&lt;/span&gt;
+&lt;span class="sd"&gt;        &amp;#39;&amp;#39;&amp;#39;&lt;/span&gt;
+        &lt;span class="n"&gt;state&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;{attr}: {val}&amp;#39;&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;attr&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;val&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="vm"&gt;__dict__&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;items&lt;/span&gt;&lt;span class="p"&gt;()]&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;join&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;state&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;items&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="sd"&gt;&amp;#39;&amp;#39;&amp;#39;&lt;/span&gt;
+&lt;span class="sd"&gt;        Enables enumeration via foo.items()&lt;/span&gt;
+&lt;span class="sd"&gt;        &amp;#39;&amp;#39;&amp;#39;&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="vm"&gt;__dict__&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;items&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;To use it:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;generic_object&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Object&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;foo&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;bar&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;generic_object&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;foo&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  &lt;span class="c1"&gt;# bar&lt;/span&gt;
+&lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;generic_object&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;foo&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;  &lt;span class="c1"&gt;# bar&lt;/span&gt;
+
+&lt;span class="o"&gt;//&lt;/span&gt; &lt;span class="n"&gt;add&lt;/span&gt; &lt;span class="n"&gt;attributes&lt;/span&gt; &lt;span class="n"&gt;dynamically&lt;/span&gt;
+&lt;span class="n"&gt;generic_object&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;baz&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;123&lt;/span&gt;
+&lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;generic_object&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;baz&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  &lt;span class="c1"&gt;# 123&lt;/span&gt;
+
+&lt;span class="c1"&gt;# iterate over its attributes&lt;/span&gt;
+&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;key&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;value&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;generic_object&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;items&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;key&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;value&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;# even use its convenience string representation&lt;/span&gt;
+&lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;generic_object&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  &lt;span class="c1"&gt;# prints multi-line string of key/values&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;This simple generic object class uses a couple of the &lt;a href="https://docs.python.org/3/reference/datamodel.html#special-method-names" target="_blank"&gt;special attribute names&lt;/a&gt; common to all Python objects. By overriding &lt;code&gt;__getitem__&lt;/code&gt;, &lt;code&gt;__str__&lt;/code&gt;, and &lt;code&gt;items&lt;/code&gt; we give custom functionality to objects created from this class.&lt;/p&gt;
+&lt;p&gt;Just because you can, doesn't mean you should. Many would argue that ad-hoc objects like this are not "Pythonic." There are other data structures in Python that can serve a similar purpose as generic containers of data:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;There's the Dict (dictionary) and for pre-Python 3.7, OrderedDict. The disadvantage to dicts is the way you access their attributes &amp;mdash; &lt;code&gt;my_dict['some_attribute']&lt;/code&gt;. It's wordy, and to me inelegant compared to the &lt;code&gt;my_object.some_attribute&lt;/code&gt; syntax of objects.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://docs.python.org/3/library/collections.html#collections.namedtuple" target="_blank"&gt;Named tuples&lt;/a&gt; offer similar functionality, though like "normal" tuples, they are immutable.&lt;/li&gt;
+&lt;li&gt;And starting with Python 3.7, you have &lt;a href="https://docs.python.org/3/library/dataclasses.html" target="_blank"&gt;data classes&lt;/a&gt; (also see &lt;a href="https://hackernoon.com/a-brief-tour-of-python-3-7-data-classes-22ee5e046517" target="_blank"&gt;Hackernoon's overview article&lt;/a&gt;). If you can use Python 3.7, data classes are superior to my simple class above (such as enforcing type hinting) so use them instead.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;As always, use the data structure that best suits your needs and will most clearly communicate to future readers of your code its purpose and requirements. But don't be afraid to explore the ins and outs of the language too.&lt;/p&gt;</content><category term="python"></category></entry><entry><title>Path prediction with OpenCV</title><link href="http://www.timpoulsen.com/2018/path-prediction-with-opencv.html" rel="alternate"></link><published>2018-06-03T00:00:00-04:00</published><updated>2018-06-03T00:00:00-04:00</updated><author><name>Tim Poulsen</name></author><id>tag:www.timpoulsen.com,2018-06-03:/2018/path-prediction-with-opencv.html</id><summary type="html">&lt;p&gt;Recently, I spotted an article on HackerNews, &lt;a href="https://news.ycombinator.com/item?id=17142815"&gt;Self-driving RC car that uses AI to predict turning angles&lt;/a&gt;. The project looked interesting. They applied AI to predict the path a radio-controlled car should take to stay centered over a tape track on the floor. Using a Raspberry Pi and PiCam mounted …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Recently, I spotted an article on HackerNews, &lt;a href="https://news.ycombinator.com/item?id=17142815"&gt;Self-driving RC car that uses AI to predict turning angles&lt;/a&gt;. The project looked interesting. They applied AI to predict the path a radio-controlled car should take to stay centered over a tape track on the floor. Using a Raspberry Pi and PiCam mounted to the car, their algorithm performed path prediction and controlled the car's servos via the Pi's GPIO pins.&lt;/p&gt;
 &lt;p&gt;As I read the article and looked through their GitHub project, I realized that much of what they were doing with AI could probably be done nearly as effectively with OpenCV. My solution below won't cover all the functionality of the original project. But, at a basic level, here's what we'll do instead:&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;Acquire an image and pre-process it.&lt;/li&gt;

@@ -1,0 +1,352 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,400italic' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" type="text/css" href="../theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="../theme/pygments/github.min.css">
+  <link rel="stylesheet" type="text/css" href="../theme/css/main.css">
+  <link rel="stylesheet" type="text/css" href="../theme/font-awesome/css/font-awesome.min.css">
+
+    <link href="http://www.timpoulsen.com/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Tim Poulsen Atom">
+
+
+  <link rel="apple-touch-icon" sizes="57x57" href="/images/favicons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/images/favicons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/images/favicons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/images/favicons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/images/favicons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/images/favicons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/images/favicons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/images/favicons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/images/favicons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/images/favicons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicons/favicon-16x16.png">
+  <link rel="manifest" href="/images/favicons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/images/favicons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="index, follow" />
+
+    <!-- Chrome, Firefox OS and Opera -->
+    <meta name="theme-color" content="#143742">
+    <!-- Windows Phone -->
+    <meta name="msapplication-navbutton-color" content="#143742">
+    <!-- iOS Safari -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+<meta name="author" content="Tim Poulsen" />
+<meta name="description" content="If you know one programming language, it's natural to look for parallels as you learn a new language. In my case, I've coded in JavaScript for many years while Python is much more recent for me. I regularly find myself thinking "in JavaScript, I'd do ..." Take object handling. I really …" />
+<meta name="keywords" content="python">
+<meta property="og:site_name" content="Tim Poulsen"/>
+<meta property="og:title" content="Ad-hoc objects in Python"/>
+<meta property="og:description" content="If you know one programming language, it's natural to look for parallels as you learn a new language. In my case, I've coded in JavaScript for many years while Python is much more recent for me. I regularly find myself thinking "in JavaScript, I'd do ..." Take object handling. I really …"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="../2018/ad-hoc-objects-in-python.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2018-07-06 00:00:00-04:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="../author/tim-poulsen.html">
+<meta property="article:section" content="Python"/>
+<meta property="article:tag" content="python"/>
+<meta property="og:image" content="/images/tim_poulsen.jpg">
+
+  <title>Tim Poulsen &ndash; Ad-hoc objects in Python</title>
+
+
+    <link href="/theme/css/main.css" rel="stylesheet">
+
+</head>
+<body>
+  <aside class="leftbar" style="background-color: #030E36;">
+    <div class="leftbar" style="background-color: #030E36;">
+      <a href="..">
+        <img src="/images/tim_poulsen.jpg" alt="Tim Poulsen" title="Tim Poulsen">
+      </a>
+      <h1><a href="..">Tim Poulsen</a></h1>
+
+<p class="subtitle">Explorations of software and hardware</p>
+      <ul class="social">
+        <li><a class="sc-twitter" href="https://twitter.com/skypanther" target="_blank"><i class="fa fa-twitter"></i></a></li>
+        <li><a class="sc-github" href="https://github.com/skypanther" target="_blank"><i class="fa fa-github"></i></a></li>
+        <li><a class="sc-linkedin" href="https://www.linkedin.com/in/timpoulsen" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+        <li><a class="sc-rss" href="feeds/all.atom.xml" target="_blank"><i class="fa fa-rss"></i></a></li>
+      </ul>
+
+      <nav>
+        <ul class="list">
+          <li><a href="../pages/about.html#about">About</a></li>
+
+          <li><a href="/categories.html" target="_blank">Topics</a></li>
+          <li><a href="http://skypanther.com" target="_blank">Skypanther Studios</a></li>
+        </ul>
+      </nav>
+
+      <p class="subhead">Tags:</p>
+      <ul class="tagcloud">
+          <li class="tag-1">
+              <a href="../tag/python.html">
+              python
+              </a>
+          </li>
+          <li class="tag-1">
+              <a href="../tag/opencv.html">
+              opencv
+              </a>
+          </li>
+          <li class="tag-4">
+              <a href="../tag/raspberry-pi.html">
+              raspberry pi
+              </a>
+          </li>
+          <li class="tag-4">
+              <a href="../tag/making.html">
+              making
+              </a>
+          </li>
+          <li class="tag-4">
+              <a href="../tag/anaconda.html">
+              anaconda
+              </a>
+          </li>
+      </ul>
+
+    </div>
+
+
+  </aside>
+  <main>
+
+    <nav>
+      <a href="..">    Home
+</a>
+
+      <a href="/categories.html">Topics</a>
+      <a href="/pages/about.html">About</a>
+      <a href="/tags.html">Tags</a>
+
+      <a href="http://www.timpoulsen.com/feeds/all.atom.xml">    Atom
+</a>
+
+    </nav>
+
+<article class="single">
+  <header>
+    <h1 id="ad-hoc-objects-in-python">Ad-hoc objects in Python</h1>
+    <p>
+          Posted on Fri 06 July 2018 in <a href="../category/python.html">Python</a>
+
+
+    </p>
+  </header>
+
+
+  <div>
+    <p>If you know one programming language, it's natural to look for parallels as you learn a new language. In my case, I've coded in JavaScript for many years while Python is much more recent for me. I regularly find myself thinking "in JavaScript, I'd do ..."</p>
+<p>Take object handling. I really like JavaScript's dynamic handling of objects. With JS, there's no need to create a class template (though you can). Just create an ad-hoc object and start assigning it properties and methods. For example:</p>
+<div class="highlight"><pre><span></span><span class="c1">// JavaScript example</span>
+<span class="kd">var</span> <span class="nx">js_obj</span> <span class="o">=</span> <span class="p">{};</span>
+
+<span class="c1">// dynamically add a property</span>
+<span class="nx">js_obj</span><span class="p">.</span><span class="nx">foo</span> <span class="o">=</span> <span class="s1">&#39;bar&#39;</span><span class="p">;</span>
+
+<span class="c1">// and use it</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">js_obj</span><span class="p">.</span><span class="nx">foo</span><span class="p">);</span> <span class="c1">// bar</span>
+
+<span class="c1">// you can even create methods</span>
+<span class="nx">js_obj</span><span class="p">.</span><span class="nx">sum</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">x</span> <span class="o">+</span> <span class="nx">y</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="c1">// and use them</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">js_obj</span><span class="p">.</span><span class="nx">sum</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">));</span> <span class="c1">// 7</span>
+</pre></div>
+
+
+<p>What wasn't obvious to me at first was that I could do similar things in Python. I saw the <code>class ClassName()</code> syntax and was fooled into thinking that I had to predefine my class with all its attributes and methods before I could instantiate objects from it. Not perfectly parallel, but in Python, we can do this:</p>
+<div class="highlight"><pre><span></span><span class="c1"># Python example</span>
+<span class="k">class</span> <span class="nc">Object</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">pass</span>
+
+
+<span class="n">py_obj</span> <span class="o">=</span> <span class="n">Object</span><span class="p">()</span>
+<span class="n">py_obj</span><span class="o">.</span><span class="n">bar</span> <span class="o">=</span> <span class="s1">&#39;baz&#39;</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">py_obj</span><span class="o">.</span><span class="n">bar</span><span class="p">)</span>  <span class="c1"># baz</span>
+
+<span class="c1"># we can dynamically assign methods with lambdas</span>
+<span class="n">py_obj</span><span class="o">.</span><span class="n">sum</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">py_obj</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>  <span class="c1"># 7</span>
+
+
+<span class="c1"># or even full functions</span>
+<span class="k">def</span> <span class="nf">exponential</span><span class="p">(</span><span class="n">num</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">num</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s1">&#39;undefined&#39;</span>
+    <span class="n">exp</span> <span class="o">=</span> <span class="n">num</span>
+    <span class="n">start</span> <span class="o">=</span> <span class="n">num</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="k">for</span> <span class="n">step_down</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">step_down</span><span class="p">)</span>
+        <span class="n">exp</span> <span class="o">=</span> <span class="n">exp</span> <span class="o">*</span> <span class="n">step_down</span>
+    <span class="k">return</span> <span class="n">exp</span>
+
+
+<span class="n">py_obj</span><span class="o">.</span><span class="n">exp</span> <span class="o">=</span> <span class="n">exponential</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">py_obj</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>  <span class="c1"># 120</span>
+</pre></div>
+
+
+<p>That's great. But a leg-up that JS has is that objects are "associative arrays" meaning that in addition to the dot-notation, we can use array notation (e.g. Python's dict notation) to access properties of JS objects:</p>
+<div class="highlight"><pre><span></span>// this works in JS:
+js_obj[&#39;foo&#39;]
+
+# but in Python, this wouldn&#39;t work
+py_obj[&#39;bar&#39;]
+</pre></div>
+
+
+<p>Why would that matter you ask? If you need to dynamically access properties of an object, say by looping through a list of keys returned by an API, the associative array notation comes in very handy. </p>
+<p>Here I present a simple class that gives similar functionality in Python. The Object class will create an object that you can access with either dot or dict notation. It offers support for iteration via <code>items()</code> and could be used by methods expecting a <code>__getitem__</code> accessor. </p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Object</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Creates an object for simple key/value storage; enables access via</span>
+<span class="sd">    object or dictionary syntax (i.e. obj.foo or obj[&#39;foo&#39;]).</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+            <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">[</span><span class="n">arg</span><span class="p">])</span>
+
+    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prop</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Enables dict-like access, ie. foo[&#39;bar&#39;]</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__getattribute__</span><span class="p">(</span><span class="n">prop</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        String-representation as newline-separated string useful in print()</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">state</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span><span class="s1">&#39;{attr}: {val}&#39;</span> <span class="k">for</span> <span class="p">(</span><span class="n">attr</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">items</span><span class="p">()]</span>
+        <span class="k">return</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">items</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Enables enumeration via foo.items()</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+</pre></div>
+</td></tr></table>
+
+<p>To use it:</p>
+<div class="highlight"><pre><span></span><span class="n">generic_object</span> <span class="o">=</span> <span class="n">Object</span><span class="p">(</span><span class="n">foo</span><span class="o">=</span><span class="s1">&#39;bar&#39;</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">generic_object</span><span class="o">.</span><span class="n">foo</span><span class="p">)</span>  <span class="c1"># bar</span>
+<span class="k">print</span><span class="p">(</span><span class="n">generic_object</span><span class="p">[</span><span class="s1">&#39;foo&#39;</span><span class="p">])</span>  <span class="c1"># bar</span>
+
+<span class="o">//</span> <span class="n">add</span> <span class="n">attributes</span> <span class="n">dynamically</span>
+<span class="n">generic_object</span><span class="o">.</span><span class="n">baz</span> <span class="o">=</span> <span class="mi">123</span>
+<span class="k">print</span><span class="p">(</span><span class="n">generic_object</span><span class="o">.</span><span class="n">baz</span><span class="p">)</span>  <span class="c1"># 123</span>
+
+<span class="c1"># iterate over its attributes</span>
+<span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">generic_object</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+<span class="c1"># even use its convenience string representation</span>
+<span class="k">print</span><span class="p">(</span><span class="n">generic_object</span><span class="p">)</span>  <span class="c1"># prints multi-line string of key/values</span>
+</pre></div>
+
+
+<p>This simple generic object class uses a couple of the <a href="https://docs.python.org/3/reference/datamodel.html#special-method-names" target="_blank">special attribute names</a> common to all Python objects. By overriding <code>__getitem__</code>, <code>__str__</code>, and <code>items</code> we give custom functionality to objects created from this class.</p>
+<p>Just because you can, doesn't mean you should. Many would argue that ad-hoc objects like this are not "Pythonic." There are other data structures in Python that can serve a similar purpose as generic containers of data:</p>
+<ul>
+<li>There's the Dict (dictionary) and for pre-Python 3.7, OrderedDict. The disadvantage to dicts is the way you access their attributes &mdash; <code>my_dict['some_attribute']</code>. It's wordy, and to me inelegant compared to the <code>my_object.some_attribute</code> syntax of objects.</li>
+<li><a href="https://docs.python.org/3/library/collections.html#collections.namedtuple" target="_blank">Named tuples</a> offer similar functionality, though like "normal" tuples, they are immutable.</li>
+<li>And starting with Python 3.7, you have <a href="https://docs.python.org/3/library/dataclasses.html" target="_blank">data classes</a> (also see <a href="https://hackernoon.com/a-brief-tour-of-python-3-7-data-classes-22ee5e046517" target="_blank">Hackernoon's overview article</a>). If you can use Python 3.7, data classes are superior to my simple class above (such as enforcing type hinting) so use them instead.</li>
+</ul>
+<p>As always, use the data structure that best suits your needs and will most clearly communicate to future readers of your code its purpose and requirements. But don't be afraid to explore the ins and outs of the language too.</p>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="../tag/python.html">python</a>
+    </p>
+  </div>
+
+
+
+
+</article>
+
+    <footer>
+<p>
+  &copy; Tim Poulsen 2018 - This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>
+</p>
+<p>    Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a>
+</p><p>
+  <a rel="license"
+     href="http://creativecommons.org/licenses/by-sa/4.0/"
+     target="_blank">
+    <img alt="Creative Commons License"
+         title="Creative Commons License"
+         style="border-width:0"
+         src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png"
+         width="80"
+         height="15"/>
+  </a>
+</p>    </footer>
+  </main>
+
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Tim Poulsen ",
+  "url" : "..",
+  "image": "/images/tim_poulsen.jpg",
+  "description": "Tim Poulsen's blog of software, hardware, and life"
+}
+</script>
+</body>
+</html>
