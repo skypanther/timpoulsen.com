@@ -56,4 +56,13 @@ That tan is not too bad, but you probably won't find any pixels in the puppy tha
 Instead, let's try a more powerful method. We'll find the most common colors in our image using _K-means clustering_.
 
 
+source materials:
+
+* https://adamspannbauer.github.io/2018/03/02/app-icon-dominant-colors/
+* https://code.likeagirl.io/finding-dominant-colour-on-an-image-b4e075f98097
+* https://stackoverflow.com/questions/43111029/how-to-find-the-average-colour-of-an-image-in-python-with-opencv
+* https://www.pyimagesearch.com/2014/05/26/opencv-python-k-means-color-clustering/
+
+
+
 <i class="fa fa-robot"></i> - <i class="fa fa-heart red"></i>
