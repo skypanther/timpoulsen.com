@@ -155,9 +155,9 @@
   <div>
     <p>A common way to isolate or find an object in an image is to look for its color. You specify a range of colors, then use OpenCV to identify regions in an image that contain colors within that range. But, even if you know the exact color of your target, lighting, shadows, and your camera's sensor will alter the detected color. So, how do you best determine the color range to use?</p>
 <p>In this article, I'll explore some different methods to work with colors. By the end, I'll show you how to <a href="https://www.timpoulsen.com/2018/handling-mouse-events-in-opencv.html">select a region of interest</a> within an image, then get the exact range of colors needed to isolate that object in a live video stream.</p>
-<p>Let's say your goal is to isolate the puppy in this image. You'll notice that his fur color varies between an off-white to a golden tan. The toy he has is only a bit darker red-brown. </p>
+<p>Let's say your goal is to isolate the puppy in this image. You'll notice that his fur color varies between an off-white to a golden tan. The foreground is brighter, making his hindquarters darker and less richly colored. The toy he has is only a bit darker red-brown.</p>
 <p><img src="../images/2018/puppy.jpg" width="480" title="Puppy"/></p>
-<p>Your first attempt might be to take an average of the colors to find the midpoint of his range of colors. Of course, you wouldn't want to include the grass in the average. Assuming a cropped version of just the puppy, you could use this script to calculate the average color:</p>
+<p>Your first attempt might be to take an average of the colors to find the midpoint of his range of colors. Then, to make the range you might choose colors a bit darker and lighter than that average. Of course, you wouldn't want to include the grass in the average. Assuming a cropped version of just the puppy, you could use this script to calculate the average color:</p>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -218,9 +218,19 @@
 
 <p>Which would give you this:</p>
 <p><img src="../images/2018/average_color.png" width="480" title="Average color of the puppy"/></p>
-<p>That tan is not too bad, but you probably won't find any pixels in the puppy that match that shade. Worse yet, finding the average color would totally fail on a multi-colored object, like the NASA logo.</p>
-<p><img src="../images/2018/meatball_average.png" width="480" title="Average color of the NASA log"/></p>
+<p>That tan is not too bad, but you probably won't find any pixels in the puppy that match that exact shade. In a range of lighter to darker than that average, only a few of his pixels would be included. It's even likely you'd get a few pixels of his toy. As bad as the average works with the puppy, the average would totally fail on a multi-colored object like the FIRST&reg; logo.</p>
+<p><img src="../images/2018/first_logo_average.png" width="480" title="Average color of the NASA log"/></p>
+<p class="imgcaption">FIRST&reg;, the FIRST&reg; logo, FIRST&reg; Robotics Competition (formerly also known as FRC&reg;), FIRST&reg; Tech Challenge (formerly also known as FTC&reg;) are trademarks of For Inspiration and Recognition of Science and Technology (FIRST&reg;).</p>
+
+<p><caption>Testing 1, 2, 3...</caption></p>
 <p>Instead, let's try a more powerful method. We'll find the most common colors in our image using <em>K-means clustering</em>.</p>
+<p>source materials:</p>
+<ul>
+<li>https://adamspannbauer.github.io/2018/03/02/app-icon-dominant-colors/</li>
+<li>https://code.likeagirl.io/finding-dominant-colour-on-an-image-b4e075f98097</li>
+<li>https://stackoverflow.com/questions/43111029/how-to-find-the-average-colour-of-an-image-in-python-with-opencv</li>
+<li>https://www.pyimagesearch.com/2014/05/26/opencv-python-k-means-color-clustering/</li>
+</ul>
 <p><i class="fa fa-robot"></i> - <i class="fa fa-heart red"></i></p>
   </div>
   <div class="tag-cloud">

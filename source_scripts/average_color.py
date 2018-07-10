@@ -1,7 +1,7 @@
 import cv2
 import numpy as np
 
-img = cv2.imread('meatball.png')
+img = cv2.imread('puppy.jpg')
 height, width, _ = np.shape(img)
 
 # calculate the average color of each row of our image
