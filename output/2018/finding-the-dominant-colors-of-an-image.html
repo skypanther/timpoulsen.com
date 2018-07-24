@@ -46,15 +46,15 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
 <meta name="author" content="Tim Poulsen" />
-<meta name="description" content="A common way to isolate or find an object in an image is to look for its color. You specify a range of colors, then use OpenCV to identify regions in an image that contain colors within that range. But, even if you know the exact color of your target …" />
+<meta name="description" content="The typical way to isolate or find an object in an image is to look for its color. You specify a range of colors, then use OpenCV to identify regions in an image that contain colors within that range. But, even if you know the exact color of your target …" />
 <meta name="keywords" content="opencv, python">
 <meta property="og:site_name" content="Tim Poulsen"/>
-<meta property="og:title" content="Finding the dominant color"/>
-<meta property="og:description" content="A common way to isolate or find an object in an image is to look for its color. You specify a range of colors, then use OpenCV to identify regions in an image that contain colors within that range. But, even if you know the exact color of your target …"/>
+<meta property="og:title" content="Finding the dominant colors of an image"/>
+<meta property="og:description" content="The typical way to isolate or find an object in an image is to look for its color. You specify a range of colors, then use OpenCV to identify regions in an image that contain colors within that range. But, even if you know the exact color of your target …"/>
 <meta property="og:locale" content="en_US"/>
-<meta property="og:url" content="../drafts/finding-the-dominant-color.html"/>
+<meta property="og:url" content="../2018/finding-the-dominant-colors-of-an-image.html"/>
 <meta property="og:type" content="article"/>
-<meta property="article:published_time" content="2018-07-10 00:00:00-04:00"/>
+<meta property="article:published_time" content="2018-07-24 00:00:00-04:00"/>
 <meta property="article:modified_time" content=""/>
 <meta property="article:author" content="../author/tim-poulsen.html">
 <meta property="article:section" content="OpenCV"/>
@@ -62,7 +62,7 @@
 <meta property="article:tag" content="python"/>
 <meta property="og:image" content="/images/tim_poulsen.jpg">
 
-  <title>Tim Poulsen &ndash; Finding the dominant color</title>
+  <title>Tim Poulsen &ndash; Finding the dominant colors of an image</title>
 
 
     <link href="/theme/css/main.css" rel="stylesheet">
@@ -143,9 +143,9 @@
 
 <article class="single">
   <header>
-    <h1 id="finding-the-dominant-color">Finding the dominant color</h1>
+    <h1 id="finding-the-dominant-colors-of-an-image">Finding the dominant colors of an image</h1>
     <p>
-          Posted on Tue 10 July 2018 in <a href="../category/opencv.html">OpenCV</a>
+          Posted on Tue 24 July 2018 in <a href="../category/opencv.html">OpenCV</a>
 
 
     </p>
@@ -153,10 +153,11 @@
 
 
   <div>
-    <p>A common way to isolate or find an object in an image is to look for its color. You specify a range of colors, then use OpenCV to identify regions in an image that contain colors within that range. But, even if you know the exact color of your target, lighting, shadows, and your camera's sensor will alter the detected color. So, how do you best determine the color range to use?</p>
-<p>In this article, I'll explore some different methods to work with colors. By the end, I'll show you how to <a href="https://www.timpoulsen.com/2018/handling-mouse-events-in-opencv.html">select a region of interest</a> within an image, then get the exact range of colors needed to isolate that object in a live video stream.</p>
+    <p>The typical way to isolate or find an object in an image is to look for its color. You specify a range of colors, then use OpenCV to identify regions in an image that contain colors within that range. But, even if you know the exact color of your target, lighting, shadows, and your camera's sensor will alter the detected color. So, how do you best determine the color range to use?</p>
+<p>In this article, I'll explore some different methods to work with colors. In a future article, we'll use this knowledge, plus <a href="https://www.timpoulsen.com/2018/handling-mouse-events-in-opencv.html">selecting a region of interest</a> within an image/video to determine the exact range of colors needed to isolate an object.</p>
 <p>Let's say your goal is to isolate the puppy in this image. You'll notice that his fur color varies between an off-white to a golden tan. The foreground is brighter, making his hindquarters darker and less richly colored. The toy he has is only a bit darker red-brown.</p>
 <p><img src="../images/2018/puppy.jpg" width="480" title="Puppy"/></p>
+<h2>An average solution</h2>
 <p>Your first attempt might be to take an average of the colors to find the midpoint of his range of colors. Then, to make the range you might choose colors a bit darker and lighter than that average. Of course, you wouldn't want to include the grass in the average. Assuming a cropped version of just the puppy, you could use this script to calculate the average color:</p>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
@@ -224,13 +225,14 @@
 
 <p>Which would give you this:</p>
 <p><img src="../images/2018/average_color.png" width="480" title="Average color of the puppy"/></p>
-<p>That tan is not too bad, but you probably won't find any pixels in the puppy that match that exact shade. In a range of lighter to darker than that average, only a few of his pixels would be included. It's even likely you'd get a few pixels of his toy. As bad as the average works with the puppy, the average would totally fail on a multi-colored object like the FIRST<sup>&reg;</sup> logo.</p>
+<p>Visually, that resulting average tan looks like it would represent the puppy's colors. In practice though, you probably won't find any pixels in the puppy that match that exact shade. Even if you looked at a range of shades lighter to darker than that average, only a few of his pixels would be included. It's even likely you'd get a few pixels of his toy. As bad as the average works with the puppy, the average would totally fail on a multi-colored object, for example the FIRST<sup>&reg;</sup> logo.</p>
 <p><img src="../images/2018/first_logo_average.png" width="480" title="Average color of the NASA log"/></p>
 <p class="imgcaption">FIRST&reg;, the FIRST&reg; logo, FIRST&reg; Robotics Competition (formerly also known as FRC&reg;), FIRST&reg; Tech Challenge (formerly also known as FTC&reg;) are trademarks of For Inspiration and Recognition of Science and Technology (FIRST&reg;).</p>
 
+<h2>K-means clustering</h2>
 <p>Let's try a more powerful method. We'll find the most common colors in our image using <em>k-means clustering</em>. A <a href="https://en.wikipedia.org/wiki/K-means_clustering" target="_blank">formal definition</a> would go something like "<em>k-means clustering partitions n observations into k clusters</em>". In our case, we have a bunch of pixels (our <code>n</code>) and we want to pull out some number (the <code>k</code>) of colors.</p>
 <p>With k-means, you have to specify the number of clusters up-front. There are other techniques that don't have this requirement. In any case, it's not a significant limitation for our needs here.</p>
-<p>We'll use the scikit-learn library's <a href="http://scikit-learn.org/stable/modules/generated/sklearn.cluster.KMeans.html" target="_blank"><code>sklearn.cluster.kmeans</code></a> function to do the heavy lifting. (OpenCV itself offers a <code>kmeans()</code> function, but scikit's is a bit more flexible for our needs). The following script is based on a post on <a href="https://www.pyimagesearch.com/2014/05/26/opencv-python-k-means-color-clustering/" target="_blank">the PyImageSearch blog</a> (a great resource!):</p>
+<p>We'll use the scikit-learn library's <a href="http://scikit-learn.org/stable/modules/generated/sklearn.cluster.KMeans.html" target="_blank"><code>sklearn.cluster.kmeans</code></a> function to do the heavy lifting. (OpenCV itself offers a <code>kmeans()</code> function, but scikit's is a bit more flexible for our needs). The following script is based on a post on <a href="https://www.pyimagesearch.com/2014/05/26/opencv-python-k-means-color-clustering/" target="_blank">the PyImageSearch blog</a> (a great resource!)</p>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -316,7 +318,8 @@
 83
 84
 85
-86</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">#</span>
+86
+87</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">#</span>
 <span class="c1">#  Use k-means clustering to find the most-common colors in an image</span>
 <span class="c1">#</span>
 <span class="kn">import</span> <span class="nn">cv2</span>
@@ -366,6 +369,7 @@
     <span class="k">return</span> <span class="p">[</span><span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">bars_with_indexes</span><span class="p">]</span>
 
 
+<span class="c1"># START HERE</span>
 <span class="n">img</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s1">&#39;puppy_cropped.jpg&#39;</span><span class="p">)</span>
 <span class="n">height</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
 
@@ -405,7 +409,9 @@
 </pre></div>
 </td></tr></table>
 
-<p>This script does a few things here. First, it examines the image (our cropped puppy) to find the five most common colors (lines 58 - 60). Next, we use a histogram to count the pixels of those colors, and sort them into a descending order of most to least common. Starting on line 69, the code handles output. We loop through our "buckets" to create images (aka "bars") from those colors. We also save the RGB and HSV values.</p>
+<p>That's a bunch of code I realize. This script does a few things; let's go through it. Skip the functions for now and jump to the "Start Here" part. The script reads in our image and determines its height and width. Then we convert it from a height by width matrix into a list of RBG values for easier processing. </p>
+<p>Next, the script examines the image (our cropped puppy) and uses <code>KMeans()</code> to find the five most common colors (lines 59 - 61). The <code>make_histogram()</code> function essentially counts the pixels in each of those "buckets" returning those counts as a value between 0 and 1. We sort those "buckets" into a descending order of most to least common. Finally, starting on line 70, the code outputs some useful info about those dominant colors. We loop through our "buckets" to create images (aka "bars") from those colors and show them in OpenCV windows.</p>
+<h2>Output</h2>
 <p>Check out your console: the script outputs the RGB and HSV color values for each of the colored boxes. </p>
 <div class="highlight"><pre><span></span>&gt; python dominant_color.py 
 Bar <span class="m">1</span>
@@ -426,18 +432,19 @@ Bar <span class="m">5</span>
 </pre></div>
 
 
-<p>Given our cropped puppy image, the script outputs two CV2 windows showing colored boxes in the top 5 colors, listed most to least common left to right. If you move that window out of the way, you'll see a similar one showing those same colors arranged in HSV order.</p>
+<p>Given our cropped puppy image, the script outputs two CV2 windows. The first shows colored boxes for the top 5 dominant colors, listed most to least common left to right. If you move that window out of the way, you'll see a similar one showing those same colors arranged in HSV order (sorted lowest to highest by hue, saturation, then value).</p>
 <p><img src="../images/2018/puppy_5_colors_with_hsv.png" width="480" title="Top 5 colors of the puppy"/></p>
-<p>It might be surprising when seen as RGB boxes on your screen, but the dominant colors are fairly close in hue, even in saturation. In fact, hue values range between 12 and 15. A note though, in OpenCV, hue ranges from 0-180, not 0-360 as you might expect based on how a graphics app represents HSV.</p>
-<p>The detected HSV values will be what we use for object detection. We'll use OpenCV to detect and isolate elements in an image (or video frame) based on a range of HSV values.</p>
+<p>It might be surprising when seen as RGB boxes on your screen, but the dominant colors are fairly close in hue, even in saturation. In fact, hue values range between 12 and 15. (Sidenote: OpenCV represents hue ranges from 0-180, not 0-360 as graphics apps typically do.)</p>
+<p>This gives us just what we need to isolate objects in an image or video stream. In a future article, I'll show how to isolate objects based on their color. My plan is to then go on to show how to discern info about the object, such as its actual size, position in the real world, and so forth. But, let's not get ahead of ourselves!</p>
+<h2>In summary</h2>
+<p>In this article, I showed how to find an average color of an image. While I didn't go on to prove it with an object isolation script, average colors are typically the best way to represent a target object. Instead, I showed a more powerful technique, the k-means cluster. I showed how to determine the five most common colors. The script I provided output convenient RGB and HSV values that you can use for object isolation.</p>
 <p>Source materials and further explorations:</p>
 <ul>
-<li>https://adamspannbauer.github.io/2018/03/02/app-icon-dominant-colors/</li>
-<li>https://code.likeagirl.io/finding-dominant-colour-on-an-image-b4e075f98097</li>
-<li>https://stackoverflow.com/questions/43111029/how-to-find-the-average-colour-of-an-image-in-python-with-opencv</li>
-<li>https://www.pyimagesearch.com/2014/05/26/opencv-python-k-means-color-clustering/</li>
+<li><a href="https://www.timpoulsen.com/2018/handling-mouse-events-in-opencv.html">Selecting a region of interest</a> within an image/video (from this site)</li>
+<li><a href="https://www.pyimagesearch.com/2014/05/26/opencv-python-k-means-color-clustering/" target="_blank">PyImageSearch: OpenCV k-means color clustering</a></li>
+<li><a href="https://stackoverflow.com/questions/43111029/how-to-find-the-average-colour-of-an-image-in-python-with-opencv" target="_blank">StackOverflow: How to find the average colour of an image in python</a></li>
+<li><a href="https://adamspannbauer.github.io/2018/03/02/app-icon-dominant-colors/" target="_blank">Adam Spannbauer: Dominant colors in app icons</a></li>
 </ul>
-<p><i class="fa fa-robot"></i> - <i class="fa fa-heart red"></i></p>
   </div>
   <div class="tag-cloud">
     <p>
