@@ -33,17 +33,21 @@ Next, you’ll need the OpenCV source code. Clone OpenCV and OpenCV_contrib:
 Next you’ll configure `make` with the following command. All of this is one big command, split over multiple lines, and yes it does end with two periods. You can just copy it all and paste in your terminal.
 
     cmake -D CMAKE_BUILD_TYPE=RELEASE \
-        -D CMAKE_INSTALL_PREFIX=$(python -c "import sys; print(sys.prefix)") \
-        -D OPENCV_EXTRA_MODULES_PATH=/Users/timpoulsen/repos/opencv/opencv_contrib/modules \
-        -D PYTHON3_INCLUDE_DIR=$(python -c "from distutils.sysconfig import get_python_inc; print(get_python_inc())") \
+        -D CMAKE_INSTALL_PREFIX=$(python3 -c "import sys; print(sys.prefix)") \
+        -D OPENCV_EXTRA_MODULES_PATH=~/opencv_contrib/modules \
+        -D PYTHON3_INCLUDE_DIR=$(python3 -c "from distutils.sysconfig import get_python_inc; print(get_python_inc())") \
         -D PYTHON_PACKAGES_PATH=$(python3 -c "from distutils.sysconfig import get_python_lib; print(get_python_lib())") \
-        -D PYTHON3_EXECUTABLE=$(which python) \
+        -D PYTHON3_EXECUTABLE=$(which python3) \
         -D BUILD_opencv_python2=OFF \
         -D BUILD_opencv_python3=ON \
-        -D INSTALL_PYTHON_EXAMPLES=ON \
+        -D INSTALL_PYTHON_EXAMPLES=OFF \
         -D INSTALL_C_EXAMPLES=OFF \
+        -D BUILD_TESTS=OFF \
+        -D BUILD_PERF_TESTS=OFF \
+        -D WITH_CUDA=OFF \
         -D WITH_FFMPEG=ON \
-        -D BUILD_EXAMPLES=ON ..
+        -D ENABLE_PRECOMPILED_HEADERS=OFF \
+        -D BUILD_EXAMPLES=OFF ..
 
 That command will take a while...after which you can do the actual build:
 

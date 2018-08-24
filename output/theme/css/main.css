@@ -86,6 +86,12 @@ main nav {
     color: #030E36;
 }
 
+.imgcaption {
+    font-size: 66%;
+    font-style: italic;
+    color: #aaa;
+}
+
 // Social icons in left bar
 ul.social a {
     display: inline-grid;
@@ -133,3 +139,4 @@ main article table td, main article table th {
 /* color classes for font-awesome icons */
 .blue { color: #3e5b98; }
 .red { color: #c92619; }
+.darkblue { color: #030E36; }
