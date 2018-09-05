@@ -1,8 +1,7 @@
 Title: Multiple cameras with a single Raspberry Pi
 Date: 2018-09-02
 Category: Python
-Tags: python, raspberrypi
-Status: draft
+Tags: python, raspberrypi, making
 
 The Arducam Multi Camera Adapter board is a neat accessory for a Raspberry Pi. With it, you can connect multiple cameras to a single Pi. A single board supports up to four cameras. According to Arducam, you can stack up to four boards for a total of 16 cameras on a single Pi.
 
