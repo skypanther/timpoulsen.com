@@ -160,10 +160,10 @@
 <li>Isolate the tape from the background by strongly thresholding the image.</li>
 <li>Find the largest contour that surrounds the tape track.</li>
 <li>Find the minimum size bounding box around that contour.</li>
-<li>Finally, calculate angle of that bounding box to the Y axis</li>
+<li>Finally, calculate the angle of that bounding box to the Y axis</li>
 </ol>
 <p>That angle is the needed turning angle to keep the car on track. From there, given the car's speed, you would want to apply some smoothing (turn somewhat less than the angle) to avoid jerky, sudden turns. (I'll note some other limitations below.)</p>
-<p>The script is short enough that I'll just include the whole thing here. An explanation follows the code.</p>
+<p>The script is short enough that I'll just include the whole thing here. Comments inline explain the code.</p>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
