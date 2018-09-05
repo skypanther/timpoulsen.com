@@ -448,10 +448,10 @@ py_obj[&amp;#39;bar&amp;#39;]
 &lt;li&gt;Isolate the tape from the background by strongly thresholding the image.&lt;/li&gt;
 &lt;li&gt;Find the largest contour that surrounds the tape track.&lt;/li&gt;
 &lt;li&gt;Find the minimum size bounding box around that contour.&lt;/li&gt;
-&lt;li&gt;Finally, calculate angle of that bounding box to the Y axis&lt;/li&gt;
+&lt;li&gt;Finally, calculate the angle of that bounding box to the Y axis&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;That angle is the needed turning angle to keep the car on track. From there, given the car's speed, you would want to apply some smoothing (turn somewhat less than the angle) to avoid jerky, sudden turns. (I'll note some other limitations below.)&lt;/p&gt;
-&lt;p&gt;The script is short enough that I'll just include the whole thing here. An explanation follows the code.&lt;/p&gt;
+&lt;p&gt;The script is short enough that I'll just include the whole thing here. Comments inline explain the code.&lt;/p&gt;
 &lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3

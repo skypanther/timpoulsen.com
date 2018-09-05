@@ -2,6 +2,7 @@ Title:
 Date: 
 Category: 
 Tags: 
+Status: draft
 
 first paragraph
 

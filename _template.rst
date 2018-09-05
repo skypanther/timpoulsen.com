@@ -4,6 +4,7 @@ Title goes here
 :date: 2018-05-21
 :tags: opencv
 :category: OpenCV
+:status: draft
 
 para
 
