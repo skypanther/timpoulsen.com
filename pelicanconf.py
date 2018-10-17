@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 
 AUTHOR = 'Tim Poulsen'
 SITENAME = 'Tim Poulsen'
-SITEURL = 'http://www.timpoulsen.com'
+SITEURL = 'https://www.timpoulsen.com'
 SITETITLE = 'Tim Poulsen'
 SITESUBTITLE = 'Explorations of software and hardware'
 SITEDESCRIPTION = "Tim Poulsen's blog of software, hardware, and life"
