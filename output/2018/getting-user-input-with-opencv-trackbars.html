@@ -1,0 +1,445 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,400italic' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" type="text/css" href="../theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="../theme/pygments/github.min.css">
+  <link rel="stylesheet" type="text/css" href="../theme/css/main.css">
+  <link rel="stylesheet" type="text/css" href="../theme/font-awesome/css/font-awesome.min.css">
+
+    <link href="http://www.timpoulsen.com/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Tim Poulsen Atom">
+
+
+  <link rel="apple-touch-icon" sizes="57x57" href="/images/favicons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/images/favicons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/images/favicons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/images/favicons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/images/favicons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/images/favicons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/images/favicons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/images/favicons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/images/favicons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/images/favicons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicons/favicon-16x16.png">
+  <link rel="manifest" href="/images/favicons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/images/favicons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="index, follow" />
+
+    <!-- Chrome, Firefox OS and Opera -->
+    <meta name="theme-color" content="#143742">
+    <!-- Windows Phone -->
+    <meta name="msapplication-navbutton-color" content="#143742">
+    <!-- iOS Safari -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+<meta name="author" content="Tim Poulsen" />
+<meta name="description" content="Trackbars, or sliders, are a simple way to get user input when working with OpenCV. In this post, I’ll show you how to add trackbars to an OpenCV window, read their values, and use those values in your Python scripts. To demonstrate a use for trackbars, we’ll read …" />
+<meta name="keywords" content="opencv, python">
+<meta property="og:site_name" content="Tim Poulsen"/>
+<meta property="og:title" content="Getting user input with OpenCV trackbars"/>
+<meta property="og:description" content="Trackbars, or sliders, are a simple way to get user input when working with OpenCV. In this post, I’ll show you how to add trackbars to an OpenCV window, read their values, and use those values in your Python scripts. To demonstrate a use for trackbars, we’ll read …"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="../2018/getting-user-input-with-opencv-trackbars.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2018-10-16 00:00:00-04:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="../author/tim-poulsen.html">
+<meta property="article:section" content="OpenCV"/>
+<meta property="article:tag" content="opencv"/>
+<meta property="article:tag" content="python"/>
+<meta property="og:image" content="/images/tim_poulsen.jpg">
+
+  <title>Tim Poulsen &ndash; Getting user input with OpenCV trackbars</title>
+
+
+    <link href="/theme/css/main.css" rel="stylesheet">
+
+</head>
+<body>
+  <aside class="leftbar" style="background-color: #030E36;">
+    <div class="leftbar" style="background-color: #030E36;">
+      <a href="..">
+        <img src="/images/tim_poulsen.jpg" alt="Tim Poulsen" title="Tim Poulsen">
+      </a>
+      <h1><a href="..">Tim Poulsen</a></h1>
+
+<p class="subtitle">Explorations of software and hardware</p>
+      <ul class="social">
+        <li><a class="sc-twitter" href="https://twitter.com/skypanther" target="_blank"><i class="fa fa-twitter"></i></a></li>
+        <li><a class="sc-github" href="https://github.com/skypanther" target="_blank"><i class="fa fa-github"></i></a></li>
+        <li><a class="sc-linkedin" href="https://www.linkedin.com/in/timpoulsen" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+        <li><a class="sc-rss" href="feeds/all.atom.xml" target="_blank"><i class="fa fa-rss"></i></a></li>
+      </ul>
+
+      <nav>
+        <ul class="list">
+          <li><a href="../pages/about.html#about">About</a></li>
+
+          <li><a href="/categories.html" target="_blank">Topics</a></li>
+          <li><a href="http://skypanther.com" target="_blank">Skypanther Studios</a></li>
+        </ul>
+      </nav>
+
+      <p class="subhead">Tags:</p>
+      <ul class="tagcloud">
+          <li class="tag-1">
+              <a href="../tag/python.html">
+              python
+              </a>
+          </li>
+          <li class="tag-1">
+              <a href="../tag/opencv.html">
+              opencv
+              </a>
+          </li>
+          <li class="tag-3">
+              <a href="../tag/making.html">
+              making
+              </a>
+          </li>
+          <li class="tag-4">
+              <a href="../tag/raspberrypi.html">
+              raspberrypi
+              </a>
+          </li>
+          <li class="tag-4">
+              <a href="../tag/raspberry-pi.html">
+              raspberry pi
+              </a>
+          </li>
+          <li class="tag-4">
+              <a href="../tag/anaconda.html">
+              anaconda
+              </a>
+          </li>
+      </ul>
+
+    </div>
+
+
+  </aside>
+  <main>
+
+    <nav>
+      <a href="..">    Home
+</a>
+
+      <a href="/categories.html">Topics</a>
+      <a href="/pages/about.html">About</a>
+      <a href="/tags.html">Tags</a>
+
+      <a href="http://www.timpoulsen.com/feeds/all.atom.xml">    Atom
+</a>
+
+    </nav>
+
+<article class="single">
+  <header>
+    <h1 id="getting-user-input-with-opencv-trackbars">Getting user input with OpenCV trackbars</h1>
+    <p>
+          Posted on Tue 16 October 2018 in <a href="../category/opencv.html">OpenCV</a>
+
+
+    </p>
+  </header>
+
+
+  <div>
+    <p>Trackbars, or sliders, are a simple way to get user input when working with OpenCV. In this post, I’ll show you how to add trackbars to an OpenCV window, read their values, and use those values in your Python scripts.</p>
+<img alt="Trackbars (sliders) on an OpenCV window" src="../images/2018/trackbars.png" style="width: 320px;" />
+<p>To demonstrate a use for trackbars, we’ll read user input from a pair of trackbars and use that input to tune edge detection parameters in real time. I’ll show you both the common way of reading trackbar values, and a more performant way to structure your code.</p>
+<div class="section" id="adding-trackbars">
+<h2>Adding trackbars</h2>
+<p>In order to use trackbars, you have to use a named OpenCV window. We use that name to specify which window to attach the trackbar to.</p>
+<div class="highlight"><pre><span></span><span class="c1"># first, create your named window</span>
+<span class="n">cv2</span><span class="o">.</span><span class="n">namedWindow</span><span class="p">(</span><span class="s1">&#39;Window_Name&#39;</span><span class="p">)</span>
+<span class="c1"># next, create the trackbar</span>
+<span class="n">cv2</span><span class="o">.</span><span class="n">createTrackbar</span><span class="p">(</span><span class="s1">&#39;Trackbar_label&#39;</span><span class="p">,</span> <span class="s1">&#39;Window_Name&#39;</span><span class="p">,</span> <span class="n">start_value</span><span class="p">,</span> <span class="n">max_value</span><span class="p">,</span> <span class="n">callback</span><span class="p">)</span>
+<span class="c1"># finally, show something in the window, the trackbar will be attached</span>
+<span class="n">cv2</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="s1">&#39;Window_Name&#39;</span><span class="p">,</span> <span class="n">image</span><span class="p">)</span>
+</pre></div>
+<p>Let’s take a quick look at the parameters we pass to <tt class="docutils literal">createTrackbar</tt>. The first param is a label that will be shown next to the trackbar. Next is the window name as discussed above. The minimum trackbar value is always 0, thus the third param is setting the starting value. Next comes the max value to which the trackbar can be set. Finally, we pass a reference to a function that will be called each time the trackbar’s value changes.</p>
+</div>
+<div class="section" id="edge-detection">
+<h2>Edge detection</h2>
+<p>Edge detection is the process of identifying edges in an image. Edge detection is useful for feature detection and feature extraction, as well as other applications. OpenCV supports a few edge detection algorithms; we’ll be using the <a href="https://en.wikipedia.org/wiki/Canny_edge_detector" target="_blank">Canny edge detection method</a>. In essence, this algorithm looks for a quick change from light to dark pixels (or vice versa) extending across some minimum area in an image to be considered an edge.</p>
+<p>A picture is worth a thousand words...</p>
+<img alt="Edges detected with Canny" src="../images/2018/edges.png" style="width: 320px;" />
+<p>Compare this image to the one at the top of the post. You can see that the edges (white lines) have been drawn in the areas where the itensity changed from light to dark, or dark to light, mostly marking the edges of the lamp.</p>
+<p>Canny edge detection is a multi-step process. The image is blurred slightly, a <a href="https://en.wikipedia.org/wiki/Sobel_operator" target="_blank">Sobel filter</a> is applied to find and emphasize strong gradients in the image. Then finally, a process of finding edges and filtering out false edges is performed. The Canny algorithm accepts three parameters to tune its operations. These are a minimum and maximum threshold and the aperture size.</p>
+<p>The aperture size is used in the Sobel filter, and in my experience seems to have the least effect on Canny results. The min and max threshold values, on the other hand, strongly affect the outcome. Tuning them just right will result in edges being detected; getting them wrong will result in unimportant gradient areas being identified as “edges.”</p>
+</div>
+<div class="section" id="tuning-with-trackbars">
+<h2>Tuning with trackbars</h2>
+<p>With that explanation out of the way, let's get down to code. We’ll use a pair of trackbars to let the user set the values of the min and max thresholds in the Canny edge detection algorithm. You can grab the image I used from <a href="https://unsplash.com/photos/wsvCC6UyKjs" target="_blank">Unsplash</a>.</p>
+<p>Let's start with the shell of our script:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">argparse</span>
+<span class="kn">import</span> <span class="nn">cv2</span>
+<span class="kn">import</span> <span class="nn">imutils</span>
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+   <span class="n">min_val</span> <span class="o">=</span> <span class="mi">200</span>
+   <span class="n">max_val</span> <span class="o">=</span> <span class="mi">300</span>
+   <span class="n">aperture_size</span> <span class="o">=</span> <span class="mi">3</span>
+
+   <span class="n">ap</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">()</span>
+   <span class="n">ap</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-i&#39;</span><span class="p">,</span> <span class="s1">&#39;--image&#39;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
+                   <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Image to use for edge detection&#39;</span><span class="p">)</span>
+   <span class="n">args</span> <span class="o">=</span> <span class="nb">vars</span><span class="p">(</span><span class="n">ap</span><span class="o">.</span><span class="n">parse_args</span><span class="p">())</span>
+   <span class="n">file_name</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="s1">&#39;image&#39;</span><span class="p">]</span>
+   <span class="n">image</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">file_name</span><span class="p">)</span>
+   <span class="n">image</span> <span class="o">=</span> <span class="n">imutils</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">480</span><span class="p">)</span>
+   <span class="n">gray</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_BGR2GRAY</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+   <span class="n">main</span><span class="p">()</span>
+</pre></div>
+</td></tr></table><p>In the script above, we import our required libraries and begin to build out our <cite>main()</cite> function. We'll be accepting the name of the image as a command line argument. So, we instantiate the <cite>ArgumentParser</cite> and specify our one argument.</p>
+<p>I'm resizing the image in my demo here, but keep in mind that doing so will reduce the effectiveness of edge detection. In a production app, you will probably want to work with full-size images. Finally, edge detection works best on a grayscale image, so I convert it with <tt class="docutils literal">cvtColor</tt>.</p>
+<p>Next, let's add the code to create our named window and trackbars. We'll attach these to the window showing the original version of the image.</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>18
+19
+20
+21</pre></div></td><td class="code"><div class="highlight"><pre><span></span>   <span class="n">cv2</span><span class="o">.</span><span class="n">namedWindow</span><span class="p">(</span><span class="s1">&#39;Original&#39;</span><span class="p">)</span>
+   <span class="n">cv2</span><span class="o">.</span><span class="n">createTrackbar</span><span class="p">(</span><span class="s1">&#39;Min&#39;</span><span class="p">,</span> <span class="s1">&#39;Original&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">800</span><span class="p">,</span> <span class="n">no_op</span><span class="p">)</span>
+   <span class="n">cv2</span><span class="o">.</span><span class="n">createTrackbar</span><span class="p">(</span><span class="s1">&#39;Max&#39;</span><span class="p">,</span> <span class="s1">&#39;Original&#39;</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">800</span><span class="p">,</span> <span class="n">no_op</span><span class="p">)</span>
+   <span class="n">cv2</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="s1">&#39;Original&#39;</span><span class="p">,</span> <span class="n">image</span><span class="p">)</span>
+</pre></div>
+</td></tr></table><p>We're not going to use the callback function, which is called when the user moves the trackbar. For that parameter, we'll pass a <tt class="docutils literal">no_op</tt> function, which we'll add in a minute. First, let's add a loop where we will check for user input.</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>22
+23
+24
+25
+26
+27
+28
+29
+30
+31</pre></div></td><td class="code"><div class="highlight"><pre><span></span>   <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+       <span class="n">min_val</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">cv2</span><span class="o">.</span><span class="n">getTrackbarPos</span><span class="p">(</span><span class="s1">&#39;Min&#39;</span><span class="p">,</span> <span class="s1">&#39;Original&#39;</span><span class="p">))</span>
+       <span class="n">max_val</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">cv2</span><span class="o">.</span><span class="n">getTrackbarPos</span><span class="p">(</span><span class="s1">&#39;Max&#39;</span><span class="p">,</span> <span class="s1">&#39;Original&#39;</span><span class="p">))</span>
+       <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Min: {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">min_val</span><span class="p">))</span>
+       <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Max: {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">max_val</span><span class="p">))</span>
+       <span class="n">edges</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">Canny</span><span class="p">(</span><span class="n">gray</span><span class="p">,</span> <span class="n">min_val</span><span class="p">,</span> <span class="n">max_val</span><span class="p">,</span> <span class="n">aperture_size</span><span class="p">)</span>
+       <span class="n">cv2</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="s1">&#39;Edges&#39;</span><span class="p">,</span> <span class="n">imutils</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="n">edges</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">480</span><span class="p">))</span>
+       <span class="k">if</span> <span class="n">cv2</span><span class="o">.</span><span class="n">waitKey</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mh">0xFF</span> <span class="o">==</span> <span class="nb">ord</span><span class="p">(</span><span class="s2">&quot;q&quot;</span><span class="p">):</span>
+           <span class="n">cv2</span><span class="o">.</span><span class="n">destroyAllWindows</span><span class="p">()</span>
+           <span class="nb">exit</span><span class="p">()</span>
+</pre></div>
+</td></tr></table><p>There are a few things going on in that loop! First, we use <tt class="docutils literal">getTrackbarPos</tt> to get the trackbar position. This function takes two parameters: the label of the trackbar we're reading from and the name of the window it's attached to. For our example script, we need the value as an integer, so we convert it with <tt class="docutils literal">int()</tt>.</p>
+<p>Here's also where we perform the edge detection. We call the <tt class="docutils literal">cv2.Canny</tt> method passing in the image, min and max values, and the aperture size. This returns the edge-detected version which we show in a new cv2 window.</p>
+<p>Let's not forget our <tt class="docutils literal">no_op</tt> function to finish this off:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>45
+46</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">no_op</span><span class="p">(</span><span class="n">new_val</span><span class="p">):</span>
+   <span class="k">pass</span>
+</pre></div>
+</td></tr></table><p>You can grab the entire script from this <a href="https://gist.github.com/skypanther/f4d4e7c4407fd9188c47b13f805a2380" target="_blank">Gist</a>.</p>
+</div>
+<div class="section" id="a-better-trackbar">
+<h2>A better trackbar</h2>
+<p>So, that script works. But, when you run it, you'll notice a couple of problems. The print statements spam your console. That loop is running continuously so that it can read user input. Even with that, the trackbars are somewhat unresponsive. You can't slide them too quickly and the script is slow to reflect your changes.</p>
+<p>We can fix those problems by using the callback functions we ignored earlier. The downside to this approach is that you can't control what arguments are passed to the callback; just the new trackbar value is passed. So, we'll need to be a little creative. Here's the full script with explanation following it:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">argparse</span>
+<span class="kn">import</span> <span class="nn">cv2</span>
+<span class="kn">import</span> <span class="nn">imutils</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="n">edge_params</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;min_val&#39;</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span>
+    <span class="s1">&#39;max_val&#39;</span><span class="p">:</span> <span class="mi">300</span><span class="p">,</span>
+    <span class="s1">&#39;aperture_size&#39;</span><span class="p">:</span> <span class="mi">3</span>
+<span class="p">}</span>
+<span class="n">gray</span> <span class="o">=</span> <span class="bp">None</span>
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="k">global</span> <span class="n">edge_params</span><span class="p">,</span> <span class="n">gray</span>
+    <span class="n">ap</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">()</span>
+    <span class="n">ap</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-i&#39;</span><span class="p">,</span> <span class="s1">&#39;--image&#39;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
+                    <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Image to use for edge detection&#39;</span><span class="p">)</span>
+    <span class="n">args</span> <span class="o">=</span> <span class="nb">vars</span><span class="p">(</span><span class="n">ap</span><span class="o">.</span><span class="n">parse_args</span><span class="p">())</span>
+    <span class="n">file_name</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="s1">&#39;image&#39;</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">file_name</span><span class="p">)</span> <span class="ow">is</span> <span class="bp">False</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Cannot open image, quitting...&#39;</span><span class="p">)</span>
+        <span class="nb">exit</span><span class="p">()</span>
+    <span class="n">image</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">file_name</span><span class="p">)</span>
+    <span class="n">image</span> <span class="o">=</span> <span class="n">imutils</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">480</span><span class="p">)</span>
+    <span class="n">gray</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_BGR2GRAY</span><span class="p">)</span>
+
+    <span class="n">cv2</span><span class="o">.</span><span class="n">namedWindow</span><span class="p">(</span><span class="s1">&#39;Original&#39;</span><span class="p">)</span>
+    <span class="n">cv2</span><span class="o">.</span><span class="n">createTrackbar</span><span class="p">(</span><span class="s1">&#39;Min&#39;</span><span class="p">,</span> <span class="s1">&#39;Original&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">800</span><span class="p">,</span> <span class="n">min_change</span><span class="p">)</span>
+    <span class="n">cv2</span><span class="o">.</span><span class="n">createTrackbar</span><span class="p">(</span><span class="s1">&#39;Max&#39;</span><span class="p">,</span> <span class="s1">&#39;Original&#39;</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">800</span><span class="p">,</span> <span class="n">max_change</span><span class="p">)</span>
+    <span class="n">cv2</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="s1">&#39;Original&#39;</span><span class="p">,</span> <span class="n">image</span><span class="p">)</span>
+    <span class="n">redraw_edges</span><span class="p">()</span>
+
+    <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">cv2</span><span class="o">.</span><span class="n">waitKey</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mh">0xFF</span> <span class="o">==</span> <span class="nb">ord</span><span class="p">(</span><span class="s2">&quot;q&quot;</span><span class="p">):</span>
+            <span class="n">cv2</span><span class="o">.</span><span class="n">destroyAllWindows</span><span class="p">()</span>
+            <span class="nb">exit</span><span class="p">()</span>
+
+<span class="k">def</span> <span class="nf">min_change</span><span class="p">(</span><span class="n">new_val</span><span class="p">):</span>
+    <span class="n">change_params</span><span class="p">(</span><span class="s1">&#39;min_val&#39;</span><span class="p">,</span> <span class="n">new_val</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">max_change</span><span class="p">(</span><span class="n">new_val</span><span class="p">):</span>
+    <span class="n">change_params</span><span class="p">(</span><span class="s1">&#39;max_val&#39;</span><span class="p">,</span> <span class="n">new_val</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">change_params</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">global</span> <span class="n">edge_params</span>
+    <span class="n">edge_params</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">edge_params</span><span class="p">)</span>
+    <span class="n">redraw_edges</span><span class="p">()</span>
+
+<span class="k">def</span> <span class="nf">redraw_edges</span><span class="p">():</span>
+    <span class="n">edges</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">Canny</span><span class="p">(</span><span class="n">gray</span><span class="p">,</span>
+                      <span class="n">edge_params</span><span class="p">[</span><span class="s1">&#39;min_val&#39;</span><span class="p">],</span>
+                      <span class="n">edge_params</span><span class="p">[</span><span class="s1">&#39;max_val&#39;</span><span class="p">],</span>
+                      <span class="n">edge_params</span><span class="p">[</span><span class="s1">&#39;aperture_size&#39;</span><span class="p">])</span>
+    <span class="n">cv2</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="s1">&#39;Edges&#39;</span><span class="p">,</span> <span class="n">imutils</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="n">edges</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">480</span><span class="p">))</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</pre></div>
+</td></tr></table><p>I've added a couple of global values to store references to our grayscale image and our edge detection parameters. The <tt class="docutils literal">createTrackbar</tt> calls now point to meaningful callback functions. But, since both are doing about the same thing, just on different data, each of those functions simply call the <tt class="docutils literal">change_params</tt> function with an identifier of the data to change. I've moved the edge detection code to its own function too.</p>
+<p>This script is also available at the same <a href="https://gist.github.com/skypanther/f4d4e7c4407fd9188c47b13f805a2380" target="_blank">Gist</a> linked to above. When you run it, you'll notice there's no console output until you move one of the trackbars. The trackbars should be a bit more responsive too. Performance will never be great. You're not writing a native compiled GUI app. But, it's certainly usable to get quick user input.</p>
+</div>
+<div class="section" id="summary">
+<h2>Summary</h2>
+<p>So, there you have it, trackbars (sliders) on an OpenCV window. Depending on your operating system, they'll be attached to either the top or bottom of the window (if there's a way to control that, I haven't found it). I don't think there's a limit to how many you can attach, other than the size of your screen. I find them very useful for operations like the edge detection I demoed with here; operations where I need to tune some parameters and don't want to keep updating code and re-running a script.</p>
+</div>
+
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="../tag/opencv.html">opencv</a>
+      <a href="../tag/python.html">python</a>
+    </p>
+  </div>
+
+
+
+
+</article>
+
+    <footer>
+<p>
+  &copy; Tim Poulsen 2018 - This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>
+</p>
+<p>    Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a>
+</p><p>
+  <a rel="license"
+     href="http://creativecommons.org/licenses/by-sa/4.0/"
+     target="_blank">
+    <img alt="Creative Commons License"
+         title="Creative Commons License"
+         style="border-width:0"
+         src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png"
+         width="80"
+         height="15"/>
+  </a>
+</p>    </footer>
+  </main>
+
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Tim Poulsen ",
+  "url" : "..",
+  "image": "/images/tim_poulsen.jpg",
+  "description": "Tim Poulsen's blog of software, hardware, and life"
+}
+</script>
+</body>
+</html>
