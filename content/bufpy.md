@@ -7,7 +7,7 @@ I gave a presentation to the Buffalo Python meetup group in December. My talk ce
 
 ![Slide preview](../images/2018/2018DecBufPy.jpg)
 
-View/download as a [PDF](2018DecBufPy.pdf), [PowerPoint](2018DecBufPy.pptx), or [Keynote](2018DecBufPy.key).
+View/download as a [PDF](../images/2018/2018DecBufPy.pdf), [PowerPoint](../images/2018/2018DecBufPy.pptx), or [Keynote](../images/2018/2018DecBufPy.key).
 
 During my talk, I referred to a bunch of sites and resources. These included:
 
