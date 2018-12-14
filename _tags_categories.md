@@ -2,7 +2,8 @@ Categories
 
 * Python
 * OpenCV
+* Making
 
 Tags
 
-python, opencv, robotics, rpi, xmas
+python, opencv, robotics, raspberry pi, anaconda, xmas
