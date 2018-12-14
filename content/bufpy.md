@@ -2,7 +2,6 @@ Title: Raspberry Pi for IoT
 Date: December 14, 2018
 Category: Making, Python
 Tags: raspberry pi, making, python
-Status: draft
 
 I gave a presentation to the Buffalo Python meetup group in December. My talk centered around using the Raspberry Pi as a platform for IoT and embedded development. I want to share my presentation and the resources I mentioned here on my blog.
 
