@@ -3,7 +3,11 @@ Date: December 14, 2018
 Category: Making, Python
 Tags: raspberry pi, making, python
 
+
 I gave a presentation to the Buffalo Python meetup group in December. My talk centered around using the Raspberry Pi as a platform for IoT and embedded development. I want to share my presentation and the resources I mentioned here on my blog.
+
+**Update** *I presented an expanded version of this talk to the RocDev group in January. My updated slides are here as a [PDF](../images/2019/2019RocDev_Pi_IoT.pdf) file. The links below still apply.*
+
 
 ![Slide preview](../images/2018/2018DecBufPy.jpg)
 
