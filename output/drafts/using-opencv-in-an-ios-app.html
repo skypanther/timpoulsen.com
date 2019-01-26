@@ -1,0 +1,320 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,400italic' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" type="text/css" href="../theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="../theme/pygments/github.min.css">
+  <link rel="stylesheet" type="text/css" href="../theme/css/main.css">
+  <link rel="stylesheet" type="text/css" href="../theme/font-awesome/css/font-awesome.min.css">
+
+    <link href="https://www.timpoulsen.com/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Tim Poulsen Atom">
+
+
+  <link rel="apple-touch-icon" sizes="57x57" href="/images/favicons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/images/favicons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/images/favicons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/images/favicons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/images/favicons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/images/favicons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/images/favicons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/images/favicons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/images/favicons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/images/favicons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicons/favicon-16x16.png">
+  <link rel="manifest" href="/images/favicons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/images/favicons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="index, follow" />
+
+    <!-- Chrome, Firefox OS and Opera -->
+    <meta name="theme-color" content="#143742">
+    <!-- Windows Phone -->
+    <meta name="msapplication-navbutton-color" content="#143742">
+    <!-- iOS Safari -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+<meta name="author" content="Tim Poulsen" />
+<meta name="description" content="Using OpenCV in your iOS app Integration steps Download and unzip the OpenCV pack: Go to https://opencv.org/releases.html Find 3.4.4 (or other suitable version) and click the iOS pack link Unzip the file to a convenient temporary location If necessary, create your Xcode project Drag …" />
+<meta name="keywords" content="OpenCV, iOS">
+<meta property="og:site_name" content="Tim Poulsen"/>
+<meta property="og:title" content="Using OpenCV in an iOS app"/>
+<meta property="og:description" content="Using OpenCV in your iOS app Integration steps Download and unzip the OpenCV pack: Go to https://opencv.org/releases.html Find 3.4.4 (or other suitable version) and click the iOS pack link Unzip the file to a convenient temporary location If necessary, create your Xcode project Drag …"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="../drafts/using-opencv-in-an-ios-app.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2019-01-08 00:00:00-05:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="../author/tim-poulsen.html">
+<meta property="article:section" content="opencv, swift, ios"/>
+<meta property="article:tag" content="OpenCV"/>
+<meta property="article:tag" content="iOS"/>
+<meta property="og:image" content="/images/tim_poulsen.jpg">
+
+  <title>Tim Poulsen &ndash; Using OpenCV in an iOS app</title>
+
+
+    <link href="/theme/css/main.css" rel="stylesheet">
+
+</head>
+<body>
+  <aside class="leftbar" style="background-color: #030E36;">
+    <div class="leftbar" style="background-color: #030E36;">
+      <a href="..">
+        <img src="/images/tim_poulsen.jpg" alt="Tim Poulsen" title="Tim Poulsen">
+      </a>
+      <h1><a href="..">Tim Poulsen</a></h1>
+
+<p class="subtitle">Explorations of software and hardware</p>
+      <ul class="social">
+        <li><a class="sc-twitter" href="https://twitter.com/skypanther" target="_blank"><i class="fa fa-twitter"></i></a></li>
+        <li><a class="sc-github" href="https://github.com/skypanther" target="_blank"><i class="fa fa-github"></i></a></li>
+        <li><a class="sc-linkedin" href="https://www.linkedin.com/in/timpoulsen" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+        <li><a class="sc-rss" href="feeds/all.atom.xml" target="_blank"><i class="fa fa-rss"></i></a></li>
+      </ul>
+
+      <nav>
+        <ul class="list">
+          <li><a href="../pages/about.html#about">About</a></li>
+
+          <li><a href="/categories.html" target="_blank">Topics</a></li>
+          <li><a href="http://skypanther.com" target="_blank">Skypanther Studios</a></li>
+        </ul>
+      </nav>
+
+      <p class="subhead">Tags:</p>
+      <ul class="tagcloud">
+          <li class="tag-1">
+              <a href="../tag/python.html">
+              python
+              </a>
+          </li>
+          <li class="tag-1">
+              <a href="../tag/opencv.html">
+              opencv
+              </a>
+          </li>
+          <li class="tag-2">
+              <a href="../tag/raspberry-pi.html">
+              raspberry pi
+              </a>
+          </li>
+          <li class="tag-2">
+              <a href="../tag/making.html">
+              making
+              </a>
+          </li>
+          <li class="tag-4">
+              <a href="../tag/anaconda.html">
+              anaconda
+              </a>
+          </li>
+      </ul>
+
+    </div>
+
+
+  </aside>
+  <main>
+
+    <nav>
+      <a href="..">    Home
+</a>
+
+      <a href="/categories.html">Topics</a>
+      <a href="/pages/about.html">About</a>
+      <a href="/tags.html">Tags</a>
+
+      <a href="https://www.timpoulsen.com/feeds/all.atom.xml">    Atom
+</a>
+
+    </nav>
+
+<article class="single">
+  <header>
+    <h1 id="using-opencv-in-an-ios-app">Using OpenCV in an iOS app</h1>
+    <p>
+          Posted on Tue 08 January 2019 in <a href="../category/opencv-swift-ios.html">opencv, swift, ios</a>
+
+
+    </p>
+  </header>
+
+
+  <div>
+    <p>Using OpenCV in your iOS app</p>
+<h2>Integration steps</h2>
+<ol>
+<li>Download and unzip the OpenCV pack:<ol>
+<li>Go to https://opencv.org/releases.html</li>
+<li>Find 3.4.4 (or other suitable version) and click the <strong>iOS pack</strong> link</li>
+<li>Unzip the file to a convenient temporary location</li>
+</ol>
+</li>
+<li>If necessary, create your Xcode project</li>
+<li>Drag the <strong>opencv2.framework</strong> bundle (special folder) into the Xcode project tree to add it to your project.<ul>
+<li>Make sure <strong>Copy items if needed</strong> is checked</li>
+<li>Make sure <strong>Create folder references</strong> is checked</li>
+<li>Make sure <strong>Add to targets: <em>your_project</em></strong> is checked</li>
+</ul>
+</li>
+<li>Create the wrapper and bridging header in your project:<ol>
+<li>Choose File &gt; New &gt; File</li>
+<li>Create a <strong>Cocoa Touch Class</strong> file, naming it <em>OpenCVWrapper</em> (or another name if you prefer)</li>
+<li>It should subclass <strong>NSOBject</strong></li>
+<li>It should be an <strong>Objective-</strong>C file</li>
+<li>When prompted, click the <strong>Create Bridging Header</strong> button</li>
+</ol>
+</li>
+<li>
+<p>Open the YourApp-Bridging-Header.h file and add this line:</p>
+<div class="highlight"><pre><span></span><span class="c1">#import &quot;OpenCVWrapper.h&quot;</span>
+</pre></div>
+
+
+</li>
+<li>
+<p>Change the name of the OpenCVWrapper.m file to <strong>OpenCVWrapper.mm</strong> (to set it as a C++ rather than C file)</p>
+</li>
+<li>
+<p>Make sure the imports at the top are in this order:</p>
+<div class="highlight"><pre><span></span><span class="c1">#import &lt;opencv2/opencv.hpp&gt;</span>
+<span class="c1">#import &quot;OpenCVWrapper.h&quot;</span>
+</pre></div>
+
+
+</li>
+<li>
+<p>Create a prefix header.</p>
+<ol>
+<li>Choose File &gt; New &gt; File</li>
+<li>Scroll to near the bottom and choose <strong>PCH File</strong></li>
+<li>Make sure your app is checked in the Targets list</li>
+<li>Click Create</li>
+</ol>
+</li>
+<li>
+<p>Before the closing <code>#endif</code> statement, add:</p>
+<div class="highlight"><pre><span></span><span class="cp">#ifdef __cplusplus</span>
+<span class="cp">#include</span> <span class="cpf">&lt;opencv2/opencv.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#endif</span>
+</pre></div>
+
+
+</li>
+<li>
+<p>You're done! Well, you can build the app now and OpenCV is integrated. Of course you've done nothing to implement OpenCV's functions yet. (Ignore all the semantic build warning from OpenCV's code.)</p>
+</li>
+</ol>
+<h2>Implementing an OpenCV function</h2>
+<p>The basic steps you'll follow to implement an OpenCV function and use it in your app are:</p>
+<ol>
+<li>Add the function signature to the OpenCVWrapper.h file</li>
+<li>Add the function's implementation code in the OpenCVWrapper.mm file</li>
+<li>Call that function in your Swift file</li>
+</ol>
+<p>For example:</p>
+<ol>
+<li>Open the OpenCVWrapper.h header file</li>
+<li>Between the <code>@interface OpenCVWrapper : NSObject</code> and <code>@end</code> lines, add: <div class="highlight"><pre><span></span>+ (NSString *)openCVVersionString;
+</pre></div>
+
+
+<p><br/>(Note: Per Objective-C syntax, the <code>+</code> indicates a class method; use <code>-</code> to indicate an instance method.)
+3. In the OpenCVWrapper.mm file, after the <code>@implementation OpenCVWrapper</code> line, add:</p>
+<div class="highlight"><pre><span></span><span class="p">+</span> <span class="p">(</span><span class="bp">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nf">openCVVersionString</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">[</span><span class="bp">NSString</span> <span class="nl">stringWithFormat</span><span class="p">:</span><span class="s">@&quot;OpenCV Version %s&quot;</span><span class="p">,</span>  <span class="n">CV_VERSION</span><span class="p">];</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<ol>
+<li>
+<p>In your main ViewController.swift file, update <strong>viewDidLoad</strong></p>
+<p>override func viewDidLoad() {
+    super.viewDidLoad()
+    print("(cv2.openVersionString())")
+}
+5. Build to a simulator and watch the Xcode debug console and you should see <code>OpenCV Version 3.4.4</code> there.</p>
+</li>
+</ol>
+</li>
+</ol>
+<p>first paragraph</p>
+<p>Syntax highlighting with &amp; without line numbers</p>
+<div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="s2">&quot;The triple-colon syntax will *not* show line numbers.&quot;</span><span class="p">)</span>
+</pre></div>
+
+
+<p>To display line numbers, use a path-less shebang instead of colons:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="s2">&quot;The path-less shebang syntax *will* show line numbers.&quot;</span><span class="p">)</span>
+
+<span class="c1">#!javascript</span>
+<span class="n">sample</span> <span class="n">code</span> <span class="n">block</span>
+</pre></div>
+</td></tr></table>
+
+<p>Include font-awesome symbols like this
+<i class="fa fa-heart red"></i></p>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="../tag/opencv.html">OpenCV</a>
+      <a href="../tag/ios.html">iOS</a>
+    </p>
+  </div>
+
+
+
+
+</article>
+
+    <footer>
+<p>
+  &copy; Tim Poulsen 2019 - This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>
+</p>
+<p>    Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a>
+</p><p>
+  <a rel="license"
+     href="http://creativecommons.org/licenses/by-sa/4.0/"
+     target="_blank">
+    <img alt="Creative Commons License"
+         title="Creative Commons License"
+         style="border-width:0"
+         src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png"
+         width="80"
+         height="15"/>
+  </a>
+</p>    </footer>
+  </main>
+
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Tim Poulsen ",
+  "url" : "..",
+  "image": "/images/tim_poulsen.jpg",
+  "description": "Tim Poulsen's blog of software, hardware, and life"
+}
+</script>
+</body>
+</html>
