@@ -1,5 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Tim Poulsen</title><link href="https://www.timpoulsen.com/" rel="alternate"></link><link href="https://www.timpoulsen.com/feeds/all.atom.xml" rel="self"></link><id>https://www.timpoulsen.com/</id><updated>2018-12-14T00:00:00-05:00</updated><entry><title>Raspberry Pi for IoT</title><link href="https://www.timpoulsen.com/2018/raspberry-pi-for-iot.html" rel="alternate"></link><published>2018-12-14T00:00:00-05:00</published><updated>2018-12-14T00:00:00-05:00</updated><author><name>Tim Poulsen</name></author><id>tag:www.timpoulsen.com,2018-12-14:/2018/raspberry-pi-for-iot.html</id><summary type="html">&lt;p&gt;I gave a presentation to the Buffalo Python meetup group in December. My talk centered around using the Raspberry Pi as a platform for IoT and embedded development. I want to share my presentation and the resources I mentioned here on my blog.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Tim Poulsen</title><link href="https://www.timpoulsen.com/" rel="alternate"></link><link href="https://www.timpoulsen.com/feeds/all.atom.xml" rel="self"></link><id>https://www.timpoulsen.com/</id><updated>2019-01-25T00:00:00-05:00</updated><entry><title>Publishing to PyPI</title><link href="https://www.timpoulsen.com/2019/publishing-to-pypi.html" rel="alternate"></link><published>2019-01-25T00:00:00-05:00</published><updated>2019-01-25T00:00:00-05:00</updated><author><name>Tim Poulsen</name></author><id>tag:www.timpoulsen.com,2019-01-25:/2019/publishing-to-pypi.html</id><summary type="html">&lt;p&gt;I recently published my first &lt;a href="https://pypi.org/project/robovision/"&gt;Python package&lt;/a&gt; to &lt;a href="https://pypi.org/"&gt;PyPI&lt;/a&gt;. The guides I found on how to do so were mostly out-of-date and confusing. Of course, PyPI is reportedly coming out with new updates soon and my instructions here will soon be outdated. In any case, here's my take on how …&lt;/p&gt;</summary><content type="html">&lt;p&gt;I recently published my first &lt;a href="https://pypi.org/project/robovision/"&gt;Python package&lt;/a&gt; to &lt;a href="https://pypi.org/"&gt;PyPI&lt;/a&gt;. The guides I found on how to do so were mostly out-of-date and confusing. Of course, PyPI is reportedly coming out with new updates soon and my instructions here will soon be outdated. In any case, here's my take on how you can publish your own project.&lt;/p&gt;
+&lt;p&gt;(&lt;em&gt;Note, the following guide will work for OS X and Linux. You'll need to make some adjustments for Windows, which I apologize but I'm unable to provide guidance for.&lt;/em&gt;)&lt;/p&gt;
+&lt;p&gt;I recommend you start right and use &lt;a href="https://github.com/audreyr/cookiecutter"&gt;CookieCutter&lt;/a&gt; to create the shell of your project. There are a couple of Python &lt;a href="https://github.com/audreyr/cookiecutter#python"&gt;package templates&lt;/a&gt; that will give you the shell of what you need. (I used the cookiecutter-pypackage-minimal template, but the "ultimate" template might fit your needs better.)&lt;/p&gt;
+&lt;p&gt;Many guides suggest you reserve your package's name on PyPI right away so that no one else "steals" it. However, PyPI no longer supports package name reservations. The best you can do is search ahead of time to be reasonably sure your chosen name is not already taken.&lt;/p&gt;
+&lt;h2&gt;Local package installation&lt;/h2&gt;
+&lt;p&gt;As you develop, you can test that your package is installable and working by installing it from your local folder. Use &lt;code&gt;pip&lt;/code&gt; to install from your development folder:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;cd path/to/your/package/folder
+pip install -e .
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;PyPI registration&lt;/h2&gt;
+&lt;p&gt;Once your package is ready, you'll need to create accounts on both &lt;a href="https://pypi.org/account/register/"&gt;pypi.org&lt;/a&gt; and &lt;a href="https://test.pypi.org/account/register/"&gt;test.pypi.org&lt;/a&gt;. PyPI says those systems will be linked eventually. But for now, the test and production environments are completely separate. You can use the same information to register for both sites.&lt;/p&gt;
+&lt;h2&gt;The &lt;code&gt;twine&lt;/code&gt; package uploader&lt;/h2&gt;
+&lt;p&gt;You'll be using &lt;code&gt;twine&lt;/code&gt; to upload your package to PyPI. Let's get that set up. First, install it with:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;pip install twine
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;You'll need to create a configuration file in your home directory. Using your favorite code editor, create a file named &lt;code&gt;.pypirc&lt;/code&gt; in your home directory with the following contents:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;[distutils]&lt;/span&gt;
+&lt;span class="na"&gt;index-servers&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&lt;/span&gt;
+&lt;span class="s"&gt;    testpypi&lt;/span&gt;
+&lt;span class="s"&gt;    pypi&lt;/span&gt;
+
+&lt;span class="k"&gt;[testpypi]&lt;/span&gt;
+&lt;span class="na"&gt;repository&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;https://test.pypi.org/legacy/&lt;/span&gt;
+&lt;span class="na"&gt;username&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;your_username&lt;/span&gt;
+&lt;span class="na"&gt;password&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;your_password&lt;/span&gt;
+
+&lt;span class="k"&gt;[pypi]&lt;/span&gt;
+&lt;span class="na"&gt;username&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;your_username&lt;/span&gt;
+&lt;span class="na"&gt;password&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;your_password&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Take note that there's no &lt;code&gt;repository&lt;/code&gt; line for the pypi (production) entry. Previous versions of twine required that line but it will cause an error with current versions.&lt;/p&gt;
+&lt;h2&gt;Configure distribution options&lt;/h2&gt;
+&lt;p&gt;You'll need to choose between the &lt;a href="https://packaging.python.org/discussions/wheel-vs-egg/"&gt;wheel and egg&lt;/a&gt; packaging formats. In most cases, you'll want to choose wheel. See the linked guide if you think you might need to use the older egg format.&lt;/p&gt;
+&lt;p&gt;Next, you're going to need to make sure you have a few files in your package directory. If you used one of the CookieCutter templates I linked to above, you'll have these. But, you'll need to make sure they're updated with correct information.&lt;/p&gt;
+&lt;p&gt;Use the ReStructuredText format for your readme or the info on the PyPI site will be all borked up. That means you'll need a &lt;code&gt;README.rst&lt;/code&gt; file in the root directory of your project. Supposedly PyPI supports Markdown but don't believe them. Most code repositories (GitHub, etc.) support ReStructuredText readmes, so you don't need to create multiple files.&lt;/p&gt;
+&lt;p&gt;Make sure to include a LICENSE and/or LICENSE.md file to announce your package's license.&lt;/p&gt;
+&lt;p&gt;You'll need to update the setup.cfg file to reflect your package publishing options. First, assuming you're using the wheel format, you'll need to set &lt;code&gt;universal=1&lt;/code&gt; for a package that targets &lt;em&gt;both&lt;/em&gt; Python 2.x and Python 3.x or &lt;code&gt;universal=0&lt;/code&gt; if targeting just Python 3.x. Second, make sure the &lt;code&gt;description-file&lt;/code&gt; references your readme file's name. Here's my setup.cfg:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;[bdist_wheel]&lt;/span&gt;
+&lt;span class="na"&gt;universal&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;0&lt;/span&gt;
+
+&lt;span class="k"&gt;[metadata]&lt;/span&gt;
+&lt;span class="na"&gt;description-file&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;README.rst&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Assuming you used CookieCutter, you should have already configured the basics of the setup.py file. It notes various settings and is used by &lt;code&gt;setuptools&lt;/code&gt; to create your distribution file. Make sure that the version number, readme file name, license, and other options are correct for your package.&lt;/p&gt;
+&lt;p&gt;Note that if you have Python files in subdirectories off your main package folder, you'll need to list them in the &lt;code&gt;packages=[]&lt;/code&gt; list. See &lt;a href="https://github.com/skypanther/robovision/blob/master/setup.py"&gt;my setup.py file&lt;/a&gt; and my source code organization if this doesn't make sense to you.&lt;/p&gt;
+&lt;h2&gt;Create your distribution file&lt;/h2&gt;
+&lt;p&gt;With all that configuration out of the way, you're ready to create your distribution wheel file. Use this command:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;python setup.py bdist_wheel
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;This will package up your file and create a wheel file in the dist directory in your project. &lt;/p&gt;
+&lt;h2&gt;Uploading&lt;/h2&gt;
+&lt;p&gt;You should upload to the test environment first, and install your package from the test environment. That way, you're assured everything is working as expected before you announce your package to the world. Use this command:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;twine upload dist/YOUR_PACKAGE_NAME.whl -r testpypi
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Use a command like this to install from the test environment:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;pip install -i https://test.pypi.org/simple YOUR_PACKAGE_NAME
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Once you're sure everything is in order, upload to the production PyPI server:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;twine upload dist/YOUR_PACKAGE_NAME.whl
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Congratulations! You've published a Python package to PyPI.&lt;/p&gt;
+&lt;h2&gt;Updating your package&lt;/h2&gt;
+&lt;p&gt;Going forward, as you make improvements and additions to your library, you'll need to do just a couple of things to publish an update.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;First, update setup.py with the new version number&lt;/li&gt;
+&lt;li&gt;Update your readme to note any new features, and probably new version number&lt;/li&gt;
+&lt;li&gt;Use &lt;code&gt;python setup.py bdist_wheel&lt;/code&gt; to create a new distribution file&lt;/li&gt;
+&lt;li&gt;Use &lt;code&gt;twine upload dist/YOUR_PACKAGE_NAME.whl&lt;/code&gt; to upload it&lt;/li&gt;
+&lt;/ul&gt;</content><category term="python"></category></entry><entry><title>Raspberry Pi for IoT</title><link href="https://www.timpoulsen.com/2018/raspberry-pi-for-iot.html" rel="alternate"></link><published>2018-12-14T00:00:00-05:00</published><updated>2018-12-14T00:00:00-05:00</updated><author><name>Tim Poulsen</name></author><id>tag:www.timpoulsen.com,2018-12-14:/2018/raspberry-pi-for-iot.html</id><summary type="html">&lt;p&gt;I gave a presentation to the Buffalo Python meetup group in December. My talk centered around using the Raspberry Pi as a platform for IoT and embedded development. I want to share my presentation and the resources I mentioned here on my blog.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Update&lt;/strong&gt; &lt;em&gt;I presented an expanded version of …&lt;/em&gt;&lt;/p&gt;</summary><content type="html">&lt;p&gt;I gave a presentation to the Buffalo Python meetup group in December. My talk centered around using the Raspberry Pi as a platform for IoT and embedded development. I want to share my presentation and the resources I mentioned here on my blog.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Update&lt;/strong&gt; &lt;em&gt;I presented an expanded version of this talk to the RocDev group in January. My updated slides are here as a &lt;a href="../images/2019/2019RocDev_Pi_IoT.pdf"&gt;PDF&lt;/a&gt; file. The links below still apply.&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img alt="Slide preview" src="../images/2018/2018DecBufPy.jpg"&gt;&lt;/p&gt;
