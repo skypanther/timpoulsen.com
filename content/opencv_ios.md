@@ -4,8 +4,6 @@ Category: OpenCV
 Tags: OpenCV, iOS, Swift
 
 
-Using OpenCV in your iOS app
-
 Computer vision is cool tech ... computer vision in an iOS app is even better! In this post, I'll describe how you can integrate and use OpenCV in your Swift-based iOS app. Before we dig in to the process, let's take a look at how the finished integration will work.
 
 ![Integration diagram](../images/2019/ios_opencv.png)
