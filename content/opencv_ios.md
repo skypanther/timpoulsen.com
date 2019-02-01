@@ -1,8 +1,7 @@
 Title: Using OpenCV in an iOS app
-Date: January 8, 2019
+Date: February 1, 2019
 Category: OpenCV
 Tags: OpenCV, iOS, Swift
-Status: draft
 
 
 Using OpenCV in your iOS app
