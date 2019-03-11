@@ -66,7 +66,7 @@ Here's a sample of how you might use robovision to calculate the distance in inc
             _, _, w, _ = target.get_rectangle(for_contour=contours[0])
             # Distance from formula: D’ = (W x F) / P
             d = 12 * fl / w
-            print("Assuming a 12-inch retroreflective tape, it is {} inches away".format(d))
+            print("Distance to tape: {} inches".format(d))
         cv2.imshow('CapturedImage', frame)
         # wait for Esc or q key and then exit
         key = cv2.waitKey(1) & 0xFF
