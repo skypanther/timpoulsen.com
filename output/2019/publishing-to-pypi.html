@@ -1,0 +1,301 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,400italic' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" type="text/css" href="../theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="../theme/pygments/github.min.css">
+  <link rel="stylesheet" type="text/css" href="../theme/css/main.css">
+  <link rel="stylesheet" type="text/css" href="../theme/font-awesome/css/font-awesome.min.css">
+
+    <link href="https://www.timpoulsen.com/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Tim Poulsen Atom">
+
+
+  <link rel="apple-touch-icon" sizes="57x57" href="/images/favicons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/images/favicons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/images/favicons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/images/favicons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/images/favicons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/images/favicons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/images/favicons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/images/favicons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/images/favicons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/images/favicons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicons/favicon-16x16.png">
+  <link rel="manifest" href="/images/favicons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/images/favicons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="index, follow" />
+
+    <!-- Chrome, Firefox OS and Opera -->
+    <meta name="theme-color" content="#143742">
+    <!-- Windows Phone -->
+    <meta name="msapplication-navbutton-color" content="#143742">
+    <!-- iOS Safari -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+<meta name="author" content="Tim Poulsen" />
+<meta name="description" content="I recently published my first Python package to PyPI. The guides I found on how to do so were mostly out-of-date and confusing. Of course, PyPI is reportedly coming out with new updates soon and my instructions here will soon be outdated. In any case, here's my take on how …" />
+<meta name="keywords" content="python">
+<meta property="og:site_name" content="Tim Poulsen"/>
+<meta property="og:title" content="Publishing to PyPI"/>
+<meta property="og:description" content="I recently published my first Python package to PyPI. The guides I found on how to do so were mostly out-of-date and confusing. Of course, PyPI is reportedly coming out with new updates soon and my instructions here will soon be outdated. In any case, here's my take on how …"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="../2019/publishing-to-pypi.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2019-01-25 00:00:00-05:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="../author/tim-poulsen.html">
+<meta property="article:section" content="Python"/>
+<meta property="article:tag" content="python"/>
+<meta property="og:image" content="/images/tim_poulsen.jpg">
+
+  <title>Tim Poulsen &ndash; Publishing to PyPI</title>
+
+
+    <link href="/theme/css/main.css" rel="stylesheet">
+
+</head>
+<body>
+  <aside class="leftbar" style="background-color: #030E36;">
+    <div class="leftbar" style="background-color: #030E36;">
+      <a href="..">
+        <img src="/images/tim_poulsen.jpg" alt="Tim Poulsen" title="Tim Poulsen">
+      </a>
+      <h1><a href="..">Tim Poulsen</a></h1>
+
+<p class="subtitle">Explorations of software and hardware</p>
+      <ul class="social">
+        <li><a class="sc-twitter" href="https://twitter.com/skypanther" target="_blank"><i class="fa fa-twitter"></i></a></li>
+        <li><a class="sc-github" href="https://github.com/skypanther" target="_blank"><i class="fa fa-github"></i></a></li>
+        <li><a class="sc-linkedin" href="https://www.linkedin.com/in/timpoulsen" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+        <li><a class="sc-rss" href="feeds/all.atom.xml" target="_blank"><i class="fa fa-rss"></i></a></li>
+      </ul>
+
+      <nav>
+        <ul class="list">
+          <li><a href="../pages/about.html#about">About</a></li>
+
+          <li><a href="/categories.html" target="_blank">Topics</a></li>
+          <li><a href="http://skypanther.com" target="_blank">Skypanther Studios</a></li>
+        </ul>
+      </nav>
+
+      <p class="subhead">Tags:</p>
+      <ul class="tagcloud">
+          <li class="tag-1">
+              <a href="../tag/python.html">
+              python
+              </a>
+          </li>
+          <li class="tag-1">
+              <a href="../tag/opencv.html">
+              opencv
+              </a>
+          </li>
+          <li class="tag-2">
+              <a href="../tag/raspberry-pi.html">
+              raspberry pi
+              </a>
+          </li>
+          <li class="tag-2">
+              <a href="../tag/making.html">
+              making
+              </a>
+          </li>
+          <li class="tag-4">
+              <a href="../tag/robotics.html">
+              robotics
+              </a>
+          </li>
+          <li class="tag-4">
+              <a href="../tag/ios.html">
+              iOS
+              </a>
+          </li>
+          <li class="tag-4">
+              <a href="../tag/swift.html">
+              Swift
+              </a>
+          </li>
+          <li class="tag-4">
+              <a href="../tag/anaconda.html">
+              anaconda
+              </a>
+          </li>
+      </ul>
+
+    </div>
+
+
+  </aside>
+  <main>
+
+    <nav>
+      <a href="..">    Home
+</a>
+
+      <a href="/categories.html">Topics</a>
+      <a href="/pages/about.html">About</a>
+      <a href="/tags.html">Tags</a>
+
+      <a href="https://www.timpoulsen.com/feeds/all.atom.xml">    Atom
+</a>
+
+    </nav>
+
+<article class="single">
+  <header>
+    <h1 id="publishing-to-pypi">Publishing to PyPI</h1>
+    <p>
+          Posted on Fri 25 January 2019 in <a href="../category/python.html">Python</a>
+
+
+    </p>
+  </header>
+
+
+  <div>
+    <p>I recently published my first <a href="https://pypi.org/project/robovision/">Python package</a> to <a href="https://pypi.org/">PyPI</a>. The guides I found on how to do so were mostly out-of-date and confusing. Of course, PyPI is reportedly coming out with new updates soon and my instructions here will soon be outdated. In any case, here's my take on how you can publish your own project.</p>
+<p>(<em>Note, the following guide will work for OS X and Linux. You'll need to make some adjustments for Windows, which I apologize but I'm unable to provide guidance for.</em>)</p>
+<p>I recommend you start right and use <a href="https://github.com/audreyr/cookiecutter">CookieCutter</a> to create the shell of your project. There are a couple of Python <a href="https://github.com/audreyr/cookiecutter#python">package templates</a> that will give you the shell of what you need. (I used the cookiecutter-pypackage-minimal template, but the "ultimate" template might fit your needs better.)</p>
+<p>Many guides suggest you reserve your package's name on PyPI right away so that no one else "steals" it. However, PyPI no longer supports package name reservations. The best you can do is search ahead of time to be reasonably sure your chosen name is not already taken.</p>
+<h2>Local package installation</h2>
+<p>As you develop, you can test that your package is installable and working by installing it from your local folder. Use <code>pip</code> to install from your development folder:</p>
+<div class="highlight"><pre><span></span>cd path/to/your/package/folder
+pip install -e .
+</pre></div>
+
+
+<h2>PyPI registration</h2>
+<p>Once your package is ready, you'll need to create accounts on both <a href="https://pypi.org/account/register/">pypi.org</a> and <a href="https://test.pypi.org/account/register/">test.pypi.org</a>. PyPI says those systems will be linked eventually. But for now, the test and production environments are completely separate. You can use the same information to register for both sites.</p>
+<h2>The <code>twine</code> package uploader</h2>
+<p>You'll be using <code>twine</code> to upload your package to PyPI. Let's get that set up. First, install it with:</p>
+<div class="highlight"><pre><span></span>pip install twine
+</pre></div>
+
+
+<p>You'll need to create a configuration file in your home directory. Using your favorite code editor, create a file named <code>.pypirc</code> in your home directory with the following contents:</p>
+<div class="highlight"><pre><span></span><span class="k">[distutils]</span>
+<span class="na">index-servers</span><span class="o">=</span><span class="s"></span>
+<span class="s">    testpypi</span>
+<span class="s">    pypi</span>
+
+<span class="k">[testpypi]</span>
+<span class="na">repository</span> <span class="o">=</span> <span class="s">https://test.pypi.org/legacy/</span>
+<span class="na">username</span> <span class="o">=</span> <span class="s">your_username</span>
+<span class="na">password</span> <span class="o">=</span> <span class="s">your_password</span>
+
+<span class="k">[pypi]</span>
+<span class="na">username</span> <span class="o">=</span> <span class="s">your_username</span>
+<span class="na">password</span> <span class="o">=</span> <span class="s">your_password</span>
+</pre></div>
+
+
+<p>Take note that there's no <code>repository</code> line for the pypi (production) entry. Previous versions of twine required that line but it will cause an error with current versions.</p>
+<h2>Configure distribution options</h2>
+<p>You'll need to choose between the <a href="https://packaging.python.org/discussions/wheel-vs-egg/">wheel and egg</a> packaging formats. In most cases, you'll want to choose wheel. See the linked guide if you think you might need to use the older egg format.</p>
+<p>Next, you're going to need to make sure you have a few files in your package directory. If you used one of the CookieCutter templates I linked to above, you'll have these. But, you'll need to make sure they're updated with correct information.</p>
+<p>Use the ReStructuredText format for your readme or the info on the PyPI site will be all borked up. That means you'll need a <code>README.rst</code> file in the root directory of your project. Supposedly PyPI supports Markdown but don't believe them. Most code repositories (GitHub, etc.) support ReStructuredText readmes, so you don't need to create multiple files.</p>
+<p>Make sure to include a LICENSE and/or LICENSE.md file to announce your package's license.</p>
+<p>You'll need to update the setup.cfg file to reflect your package publishing options. First, assuming you're using the wheel format, you'll need to set <code>universal=1</code> for a package that targets <em>both</em> Python 2.x and Python 3.x or <code>universal=0</code> if targeting just Python 3.x. Second, make sure the <code>description-file</code> references your readme file's name. Here's my setup.cfg:</p>
+<div class="highlight"><pre><span></span><span class="k">[bdist_wheel]</span>
+<span class="na">universal</span><span class="o">=</span><span class="s">0</span>
+
+<span class="k">[metadata]</span>
+<span class="na">description-file</span><span class="o">=</span><span class="s">README.rst</span>
+</pre></div>
+
+
+<p>Assuming you used CookieCutter, you should have already configured the basics of the setup.py file. It notes various settings and is used by <code>setuptools</code> to create your distribution file. Make sure that the version number, readme file name, license, and other options are correct for your package.</p>
+<p>Note that if you have Python files in subdirectories off your main package folder, you'll need to list them in the <code>packages=[]</code> list. See <a href="https://github.com/skypanther/robovision/blob/master/setup.py">my setup.py file</a> and my source code organization if this doesn't make sense to you.</p>
+<h2>Create your distribution file</h2>
+<p>With all that configuration out of the way, you're ready to create your distribution wheel file. Use this command:</p>
+<div class="highlight"><pre><span></span>python setup.py bdist_wheel
+</pre></div>
+
+
+<p>This will package up your file and create a wheel file in the dist directory in your project. </p>
+<h2>Uploading</h2>
+<p>You should upload to the test environment first, and install your package from the test environment. That way, you're assured everything is working as expected before you announce your package to the world. Use this command:</p>
+<div class="highlight"><pre><span></span>twine upload dist/YOUR_PACKAGE_NAME.whl -r testpypi
+</pre></div>
+
+
+<p>Use a command like this to install from the test environment:</p>
+<div class="highlight"><pre><span></span>pip install -i https://test.pypi.org/simple YOUR_PACKAGE_NAME
+</pre></div>
+
+
+<p>Once you're sure everything is in order, upload to the production PyPI server:</p>
+<div class="highlight"><pre><span></span>twine upload dist/YOUR_PACKAGE_NAME.whl
+</pre></div>
+
+
+<p>Congratulations! You've published a Python package to PyPI.</p>
+<h2>Updating your package</h2>
+<p>Going forward, as you make improvements and additions to your library, you'll need to do just a couple of things to publish an update.</p>
+<ul>
+<li>First, update setup.py with the new version number</li>
+<li>Update your readme to note any new features, and probably new version number</li>
+<li>Use <code>python setup.py bdist_wheel</code> to create a new distribution file</li>
+<li>Use <code>twine upload dist/YOUR_PACKAGE_NAME.whl</code> to upload it</li>
+</ul>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="../tag/python.html">python</a>
+    </p>
+  </div>
+
+
+
+
+</article>
+
+    <footer>
+<p>
+  &copy; Tim Poulsen 2019 - This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>
+</p>
+<p>    Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a>
+</p><p>
+  <a rel="license"
+     href="http://creativecommons.org/licenses/by-sa/4.0/"
+     target="_blank">
+    <img alt="Creative Commons License"
+         title="Creative Commons License"
+         style="border-width:0"
+         src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png"
+         width="80"
+         height="15"/>
+  </a>
+</p>    </footer>
+  </main>
+
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Tim Poulsen ",
+  "url" : "..",
+  "image": "/images/tim_poulsen.jpg",
+  "description": "Tim Poulsen's blog of software, hardware, and life"
+}
+</script>
+</body>
+</html>
