@@ -1,8 +1,7 @@
 Title: Robovision on our 2019 FRC bot
-Date: April 4, 2019
+Date: April 15, 2019
 Category: OpenCV
 Tags: robotics, opencv, python
-Status: draft
 
 
 Now that our 2019 FRC season is over, I'd like to describe how Team 1518 implemented vision processing on our bot. We set some aggressive goals, which we aimed to achieve by using the the [robovision](https://www.timpoulsen.com/2019/introducing-robovision.html) library, OpenCV, and Python on a Jetson TX2. The primary goals of this post are to cover the high-level approaches we used and to share what did or didn't work. Of course, I'll link to the code we created.
