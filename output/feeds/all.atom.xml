@@ -215,9 +215,9 @@
 &lt;li&gt;Click Create&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;Inside the prefix header, before the closing &lt;code&gt;#endif&lt;/code&gt; statement, add:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;#ifdef __cplusplus&lt;/span&gt;
-&lt;span class="cp"&gt;#include&lt;/span&gt; &lt;span class="cpf"&gt;&amp;lt;opencv2/opencv.hpp&amp;gt;&lt;/span&gt;&lt;span class="cp"&gt;&lt;/span&gt;
-&lt;span class="cp"&gt;#endif&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;#&lt;span class="nv"&gt;ifdef&lt;/span&gt; &lt;span class="nv"&gt;__cplusplus&lt;/span&gt;
+#&lt;span class="k"&gt;include&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nv"&gt;opencv2&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;opencv&lt;/span&gt;.&lt;span class="nv"&gt;hpp&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+#&lt;span class="k"&gt;endif&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -288,8 +288,8 @@
 &lt;p&gt;Many guides suggest you reserve your package's name on PyPI right away so that no one else "steals" it. However, PyPI no longer supports package name reservations. The best you can do is search ahead of time to be reasonably sure your chosen name is not already taken.&lt;/p&gt;
 &lt;h2&gt;Local package installation&lt;/h2&gt;
 &lt;p&gt;As you develop, you can test that your package is installable and working by installing it from your local folder. Use &lt;code&gt;pip&lt;/code&gt; to install from your development folder:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;cd path/to/your/package/folder
-pip install -e .
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;cd&lt;/span&gt; &lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="k"&gt;to&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;your&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;package&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;folder&lt;/span&gt;
+&lt;span class="n"&gt;pip&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;e&lt;/span&gt; &lt;span class="p"&gt;.&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -297,7 +297,7 @@ pip install -e .
 &lt;p&gt;Once your package is ready, you'll need to create accounts on both &lt;a href="https://pypi.org/account/register/"&gt;pypi.org&lt;/a&gt; and &lt;a href="https://test.pypi.org/account/register/"&gt;test.pypi.org&lt;/a&gt;. PyPI says those systems will be linked eventually. But for now, the test and production environments are completely separate. You can use the same information to register for both sites.&lt;/p&gt;
 &lt;h2&gt;The &lt;code&gt;twine&lt;/code&gt; package uploader&lt;/h2&gt;
 &lt;p&gt;You'll be using &lt;code&gt;twine&lt;/code&gt; to upload your package to PyPI. Let's get that set up. First, install it with:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;pip install twine
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;pip&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;twine&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -337,24 +337,24 @@ pip install -e .
 &lt;p&gt;Note that if you have Python files in subdirectories off your main package folder, you'll need to list them in the &lt;code&gt;packages=[]&lt;/code&gt; list. See &lt;a href="https://github.com/skypanther/robovision/blob/master/setup.py"&gt;my setup.py file&lt;/a&gt; and my source code organization if this doesn't make sense to you.&lt;/p&gt;
 &lt;h2&gt;Create your distribution file&lt;/h2&gt;
 &lt;p&gt;With all that configuration out of the way, you're ready to create your distribution wheel file. Use this command:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;python setup.py bdist_wheel
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;python&lt;/span&gt; &lt;span class="n"&gt;setup&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;py&lt;/span&gt; &lt;span class="n"&gt;bdist_wheel&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;This will package up your file and create a wheel file in the dist directory in your project. &lt;/p&gt;
 &lt;h2&gt;Uploading&lt;/h2&gt;
 &lt;p&gt;You should upload to the test environment first, and install your package from the test environment. That way, you're assured everything is working as expected before you announce your package to the world. Use this command:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;twine upload dist/YOUR_PACKAGE_NAME.whl -r testpypi
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;twine&lt;/span&gt; &lt;span class="n"&gt;upload&lt;/span&gt; &lt;span class="n"&gt;dist&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;YOUR_PACKAGE_NAME&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;whl&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;r&lt;/span&gt; &lt;span class="n"&gt;testpypi&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;Use a command like this to install from the test environment:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;pip install -i https://test.pypi.org/simple YOUR_PACKAGE_NAME
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;pip&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="n"&gt;https&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="n"&gt;test&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;pypi&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;org&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="k"&gt;simple&lt;/span&gt; &lt;span class="n"&gt;YOUR_PACKAGE_NAME&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;Once you're sure everything is in order, upload to the production PyPI server:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;twine upload dist/YOUR_PACKAGE_NAME.whl
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;twine&lt;/span&gt; &lt;span class="n"&gt;upload&lt;/span&gt; &lt;span class="n"&gt;dist&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;YOUR_PACKAGE_NAME&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;whl&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -1135,11 +1135,11 @@ Bar &lt;span class="m"&gt;5&lt;/span&gt;
 
 
 &lt;p&gt;That's great. But a leg-up that JS has is that objects are "associative arrays" meaning that in addition to the dot-notation, we can use array notation (e.g. Python's dict notation) to access properties of JS objects:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;// this works in JS:
-js_obj[&amp;#39;foo&amp;#39;]
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt; &lt;span class="n"&gt;this&lt;/span&gt; &lt;span class="n"&gt;works&lt;/span&gt; &lt;span class="k"&gt;in&lt;/span&gt; &lt;span class="n"&gt;JS&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;span class="n"&gt;js_obj&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;foo&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
 
-# but in Python, this wouldn&amp;#39;t work
-py_obj[&amp;#39;bar&amp;#39;]
+&lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="n"&gt;but&lt;/span&gt; &lt;span class="k"&gt;in&lt;/span&gt; &lt;span class="n"&gt;Python&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;this&lt;/span&gt; &lt;span class="n"&gt;wouldn&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;t work&lt;/span&gt;
+&lt;span class="s1"&gt;py_obj[&amp;#39;&lt;/span&gt;&lt;span class="n"&gt;bar&lt;/span&gt;&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -2138,7 +2138,7 @@ py_obj[&amp;#39;bar&amp;#39;]
 &lt;h2&gt;Video files and cameras&lt;/h2&gt;
 &lt;p&gt;OpenCV lets you read video data from files and cameras. What's better, you use the same technique no matter the video source. First, you get a reference, or handle to the video source. Then, you read from that source frame by frame.&lt;/p&gt;
 &lt;p&gt;Strictly speaking, you use the &lt;code&gt;cv2.VideoCapture.open()&lt;/code&gt; method to get a reference to your video source. However, OpenCV offers a shorter equivalent in the &lt;code&gt;cv2.VideoCapture()&lt;/code&gt; method.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;VideoCapture(source[, options])
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;VideoCapture&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;source&lt;/span&gt;&lt;span class="p"&gt;[,&lt;/span&gt; &lt;span class="k"&gt;options&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -2188,7 +2188,7 @@ py_obj[&amp;#39;bar&amp;#39;]
 
 &lt;h3&gt;Errors and exceptions&lt;/h3&gt;
 &lt;p&gt;As with reading still images, OpenCV does not offer proper exception handling when reading from a video source. If you specify a source that doesn't exist, you'll get an error like the following&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;out device of bound (0-0): 1 opencv: camera failed to properly initialize!
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;out&lt;/span&gt; &lt;span class="n"&gt;device&lt;/span&gt; &lt;span class="k"&gt;of&lt;/span&gt; &lt;span class="n"&gt;bound&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="n"&gt;opencv&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;camera&lt;/span&gt; &lt;span class="n"&gt;failed&lt;/span&gt; &lt;span class="k"&gt;to&lt;/span&gt; &lt;span class="n"&gt;properly&lt;/span&gt; &lt;span class="k"&gt;initialize&lt;/span&gt;&lt;span class="o"&gt;!&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -2201,7 +2201,7 @@ py_obj[&amp;#39;bar&amp;#39;]
 
 
 &lt;p&gt;If you end up in this state, you may have to restart your computer to recover. On the Mac, you can use the following command rather than restarting:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo killall VDCAssistant
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;killall&lt;/span&gt; &lt;span class="n"&gt;VDCAssistant&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -2225,12 +2225,12 @@ py_obj[&amp;#39;bar&amp;#39;]
 &lt;h2&gt;Installing OpenCV&lt;/h2&gt;
 &lt;p&gt;For Python environments, installing OpenCV is pretty simple. You'll need to choose between installing just OpenCV or the contributed modules as well. The "contrib" modules are extra functions provided by the community. Popular and well-written contrib modules sometimes get pulled into the core OpenCV distribution. However, not all of them are error free or fully optimized. &lt;/p&gt;
 &lt;p&gt;To install the core OpenCV Python version:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;pip install opencv-python
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;pip&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;opencv&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;python&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;To install the version containing the contrib modules:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;pip install opencv-contrib-python
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;pip&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;opencv&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;contrib&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;python&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -2254,19 +2254,19 @@ py_obj[&amp;#39;bar&amp;#39;]
 &lt;li&gt;Homebrew&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Once you have those installed, you’re ready to start. You’ll need to install some pre-requisite packages. Each of the following is a separate command:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;brew install cmake pkg-config
-brew install jpeg libpng libtiff openexr
-brew install eigen tbb
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;brew&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;cmake&lt;/span&gt; &lt;span class="n"&gt;pkg&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;config&lt;/span&gt;
+&lt;span class="n"&gt;brew&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;jpeg&lt;/span&gt; &lt;span class="n"&gt;libpng&lt;/span&gt; &lt;span class="n"&gt;libtiff&lt;/span&gt; &lt;span class="n"&gt;openexr&lt;/span&gt;
+&lt;span class="n"&gt;brew&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;eigen&lt;/span&gt; &lt;span class="n"&gt;tbb&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;Next, you’ll need the OpenCV source code. Clone OpenCV and OpenCV_contrib:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;cd ~
-git clone https://github.com/opencv/opencv
-git clone https://github.com/opencv/opencv_contrib
-cd ~/opencv
-mkdir build
-cd build
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;cd&lt;/span&gt; &lt;span class="o"&gt;~&lt;/span&gt;
+&lt;span class="n"&gt;git&lt;/span&gt; &lt;span class="n"&gt;clone&lt;/span&gt; &lt;span class="n"&gt;https&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="n"&gt;github&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;opencv&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;opencv&lt;/span&gt;
+&lt;span class="n"&gt;git&lt;/span&gt; &lt;span class="n"&gt;clone&lt;/span&gt; &lt;span class="n"&gt;https&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="n"&gt;github&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;opencv&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;opencv_contrib&lt;/span&gt;
+&lt;span class="n"&gt;cd&lt;/span&gt; &lt;span class="o"&gt;~/&lt;/span&gt;&lt;span class="n"&gt;opencv&lt;/span&gt;
+&lt;span class="n"&gt;mkdir&lt;/span&gt; &lt;span class="n"&gt;build&lt;/span&gt;
+&lt;span class="n"&gt;cd&lt;/span&gt; &lt;span class="n"&gt;build&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -2291,12 +2291,12 @@ cd build
 
 
 &lt;p&gt;That command will take a while...after which you can do the actual build:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;make -j4
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;make&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;j4&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;That will take even longer; depending on the speed of your system it could take an hour or longer. Once it’s all done, you’re ready to actually install the compiled project:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo make install
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;make&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
