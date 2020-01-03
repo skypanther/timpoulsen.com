@@ -1,8 +1,7 @@
 Title: Controlling Christmas lights with MQTT
-Date: December 13, 2019
+Date: January 2, 2020
 Category: Making
 Tags: python, arduino, xmas
-Status: draft
 
 I'm one of those Clark Griswold kind of guys that totally over-decorates his house. To make my lights more interesting, I've built my own light animation system which I call PiLit.
 
