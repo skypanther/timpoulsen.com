@@ -47,11 +47,14 @@ Nodes as I mentioned are smart devices. They are some type of microcontroller or
 
 For microcontrollers, you could use just about any Arduino-like board. The ESP8266s are great because they offer better specs than most Arduinos, at a lower price, and include WiFi support built in. The downside of most any of these microcontrollers is that they're 3.3V devices and the typical RGB LED is a 5V device. So, you'll need a level shifter to convert the 3.3 into 5V signals. You can generally buy 3.3V relays for on/off nodes, eliminating the need for a level shifter.
 
-The first Christmas light device I created was my Raspberry Pi-based megatree controller. Using a cheap 16-channel relay board, I control outlets into which the strings of lights on my tree are plugged. A Python script running on the Pi turns the outlets on or off. 
+<img src="../images/2020/pixel_node.jpg" width="600" title="A pixel_node in its box"/>
+
+
+The first Christmas light device I ever created was my Raspberry Pi-based megatree controller. Using a cheap 16-channel relay board, I controlled outlets into which the strings of lights on my tree were plugged. A Python script running on the Pi turned the outlets on or off. 
 
 <img src="../images/2020/multi_relay.jpg" width="600" title="My megatree multi-relay board"/>
 
-I've rewritten and updated that original script to fit the PiLit architecture. But, since I had the hardware, I kept this node as a Python script. There's no reason an ESP8266 couldn't be used instead, but I have no plans at the moment to create such a node.
+I've rewritten and updated that original script to fit the PiLit architecture. But, since I had the hardware, I kept this node as a Python script. There's no reason an ESP8266 couldn't be used instead, though new node control software would be needed.
 
 ## PiLit GUI
 
@@ -59,13 +62,13 @@ The show-generation app is for now called PiLit GUI. It's a React web app. Basic
 
 <img src="../images/2020/pilitgui.jpg" width="600" title="The PiLit GUI web app"/>
 
-This app lets you define one or more channels, each of which correspond to a node. Then, you define a series of animations for each channel. When done, you export your show to a JSON file. This file is the script you run with the PiLit Player.
+This app lets you define one or more channels, each of which corresponds to a node. Then, you define a series of animations for each channel. When done, you export your show to a JSON file. This file is the script you run with the PiLit Player.
 
 ## Challenges
 
 The system overall works well. The software portions of PiLit have worked out great. But I have had to deal with some physical / hardware challenges.
 
-Keeping water out of the nodes has been a big problem. I put each in some sort of plastic container (an old food container, craft box, etc.). But of course, wires must go in and out of the boxes. Despite my best attempts, water has gotten in causing shorts. One box filled with water, then froze. The ESP8266 in that node did not like being frozen in a block of ice -- it fried in fact. I also discovered that exterior latex caulk dissolves when exposed to constant moisture. Next year I'll use bathtub style caulk instead.
+Keeping water out of the nodes has been a big problem. I put each in some sort of plastic container (an old food container, craft box, etc.). But of course, wires must go in and out of the boxes. Despite my best attempts, water has gotten in causing shorts. One box filled with water, then froze. The ESP8266 in that node did not like being frozen in a block of ice -- it fried. I also discovered that exterior latex caulk dissolves when exposed to constant moisture. Next year I'll use bathtub style caulk instead.
 
 Another challenge has been solid wiring connections. The pixel strips are rather delicate. Wind and ice have broken my connections a few times. Apparently I'm not great at soldering since my connections at the microcontrollers have failed repeatedly too. More than once I've had to drag out my soldering tools and sit in the snow re-soldering connections.
 

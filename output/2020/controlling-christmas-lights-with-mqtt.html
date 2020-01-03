@@ -1,0 +1,322 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,400italic' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" type="text/css" href="../theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="../theme/pygments/github.min.css">
+  <link rel="stylesheet" type="text/css" href="../theme/css/main.css">
+  <link rel="stylesheet" type="text/css" href="../theme/font-awesome/css/font-awesome.min.css">
+
+    <link href="https://www.timpoulsen.com/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Tim Poulsen Atom">
+
+
+  <link rel="apple-touch-icon" sizes="57x57" href="/images/favicons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/images/favicons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/images/favicons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/images/favicons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/images/favicons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/images/favicons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/images/favicons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/images/favicons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/images/favicons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/images/favicons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicons/favicon-16x16.png">
+  <link rel="manifest" href="/images/favicons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/images/favicons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="index, follow" />
+
+    <!-- Chrome, Firefox OS and Opera -->
+    <meta name="theme-color" content="#143742">
+    <!-- Windows Phone -->
+    <meta name="msapplication-navbutton-color" content="#143742">
+    <!-- iOS Safari -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+<meta name="author" content="Tim Poulsen" />
+<meta name="description" content="I'm one of those Clark Griswold kind of guys that totally over-decorates his house. To make my lights more interesting, I've built my own light animation system which I call PiLit. Of course, all my code is free and open source. Check it out at https://github.com/skypanther/PiLit …" />
+<meta name="keywords" content="python, arduino, xmas">
+<meta property="og:site_name" content="Tim Poulsen"/>
+<meta property="og:title" content="Controlling Christmas lights with MQTT"/>
+<meta property="og:description" content="I'm one of those Clark Griswold kind of guys that totally over-decorates his house. To make my lights more interesting, I've built my own light animation system which I call PiLit. Of course, all my code is free and open source. Check it out at https://github.com/skypanther/PiLit …"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="../2020/controlling-christmas-lights-with-mqtt.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2020-01-02 00:00:00-05:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="../author/tim-poulsen.html">
+<meta property="article:section" content="Making"/>
+<meta property="article:tag" content="python"/>
+<meta property="article:tag" content="arduino"/>
+<meta property="article:tag" content="xmas"/>
+<meta property="og:image" content="/images/tim_poulsen.jpg">
+
+  <title>Tim Poulsen &ndash; Controlling Christmas lights with MQTT</title>
+
+
+    <link href="/theme/css/main.css" rel="stylesheet">
+
+</head>
+<body>
+  <aside class="leftbar" style="background-color: #030E36;">
+    <div class="leftbar" style="background-color: #030E36;">
+      <a href="..">
+        <img src="/images/tim_poulsen.jpg" alt="Tim Poulsen" title="Tim Poulsen">
+      </a>
+      <h1><a href="..">Tim Poulsen</a></h1>
+
+<p class="subtitle">Explorations of software and hardware</p>
+      <ul class="social">
+        <li><a class="sc-twitter" href="https://twitter.com/skypanther" target="_blank"><i class="fa fa-twitter"></i></a></li>
+        <li><a class="sc-github" href="https://github.com/skypanther" target="_blank"><i class="fa fa-github"></i></a></li>
+        <li><a class="sc-linkedin" href="https://www.linkedin.com/in/timpoulsen" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+        <li><a class="sc-rss" href="feeds/all.atom.xml" target="_blank"><i class="fa fa-rss"></i></a></li>
+      </ul>
+
+      <nav>
+        <ul class="list">
+          <li><a href="../pages/about.html#about">About</a></li>
+
+          <li><a href="/categories.html" target="_blank">Topics</a></li>
+          <li><a href="http://skypanther.com" target="_blank">Skypanther Studios</a></li>
+        </ul>
+      </nav>
+
+      <p class="subhead">Tags:</p>
+      <ul class="tagcloud">
+          <li class="tag-1">
+              <a href="../tag/python.html">
+              python
+              </a>
+          </li>
+          <li class="tag-1">
+              <a href="../tag/opencv.html">
+              opencv
+              </a>
+          </li>
+          <li class="tag-2">
+              <a href="../tag/raspberry-pi.html">
+              raspberry pi
+              </a>
+          </li>
+          <li class="tag-2">
+              <a href="../tag/making.html">
+              making
+              </a>
+          </li>
+          <li class="tag-3">
+              <a href="../tag/robotics.html">
+              robotics
+              </a>
+          </li>
+          <li class="tag-4">
+              <a href="../tag/arduino.html">
+              arduino
+              </a>
+          </li>
+          <li class="tag-4">
+              <a href="../tag/xmas.html">
+              xmas
+              </a>
+          </li>
+          <li class="tag-4">
+              <a href="../tag/ios.html">
+              iOS
+              </a>
+          </li>
+          <li class="tag-4">
+              <a href="../tag/swift.html">
+              Swift
+              </a>
+          </li>
+          <li class="tag-4">
+              <a href="../tag/anaconda.html">
+              anaconda
+              </a>
+          </li>
+      </ul>
+
+    </div>
+
+
+  </aside>
+  <main>
+
+    <nav>
+      <a href="..">    Home
+</a>
+
+      <a href="/categories.html">Topics</a>
+      <a href="/pages/about.html">About</a>
+      <a href="/tags.html">Tags</a>
+
+      <a href="https://www.timpoulsen.com/feeds/all.atom.xml">    Atom
+</a>
+
+    </nav>
+
+<article class="single">
+  <header>
+    <h1 id="controlling-christmas-lights-with-mqtt">Controlling Christmas lights with MQTT</h1>
+    <p>
+          Posted on Thu 02 January 2020 in <a href="../category/making.html">Making</a>
+
+
+    </p>
+  </header>
+
+
+  <div>
+    <p>I'm one of those Clark Griswold kind of guys that totally over-decorates his house. To make my lights more interesting, I've built my own light animation system which I call PiLit.</p>
+<p><img src="../images/2020/christmas2019.gif" width="600" title="Christmas lights controlled by PiLit"/></p>
+<p>Of course, all my code is free and open source. Check it out at <a href="https://github.com/skypanther/PiLit">https://github.com/skypanther/PiLit</a>.</p>
+<h2>Overview</h2>
+<p>PiLit is made up of three components:</p>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Function</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PiLit player</td>
+<td>The PiLit player is a python script that runs the show animation. It reads from a JSON "script" and sends commands on the network to control the lights.</td>
+</tr>
+<tr>
+<td>Nodes</td>
+<td>Nodes are the networked hardware components that control the lights.</td>
+</tr>
+<tr>
+<td>PiLit GUI</td>
+<td>A show generation web app to make creating show sequences relatively easy</td>
+</tr>
+</tbody>
+</table>
+<p>The player can run on any computer that supports Python and can connect to the same network as your nodes. I use a Raspberry Pi 3B+ for this. The player sends MQTT messages to the nodes with instructions of what light sequence to play. The nodes are smart devices in that they "know" how to perform various lighting functions. They listen for MQTT messages telling them what function to perform, but they do the actual controlling.</p>
+<p>There are a few benefits, and a few downsides to this architecture. On the plus side, much less data must be passed across the network and the nodes and player can use different architectures, programming languages, etc. In other words, the player can be a lot simpler but the nodes must be a bit more complex. Another downside is that to add new lighting functions, both the nodes and player need to be updated.</p>
+<h2>MQTT</h2>
+<p>I chose to use <a href="https://www.baldengineer.com/mqtt-introduction.html">MQTT</a> for message transport because there is very little overhead associated with the MQTT protocol. Messages are transmitted very quickly. Plus there are some great libraries for both Python and C/C++.</p>
+<p>In PiLit, messages are basically in the form <code>channel/payload</code> where <code>channel</code> is the name of the node that should act on the message and <code>payload</code> is a string describing what animation to play. For example, a leaping arch node subscribed to an <code>arch1</code> channel would listen for a message like this:</p>
+<div class="highlight"><pre><span></span><span class="n">arch1</span><span class="o">/</span><span class="n">red</span><span class="p">:</span><span class="n">bounce</span><span class="p">:</span><span class="mi">5</span><span class="p">:</span><span class="mi">50</span><span class="p">:</span><span class="k">true</span>
+</pre></div>
+
+
+<p>The message is a colon-delimited string that tells the arch what color to show, what animation sequence to play, and additional timing and control values. See the repo for details on the actual message payloads.</p>
+<p>Nodes can subscribe to multiple channels, so a leaping arch might join both the <code>arch1</code> channel and the <code>all_arches</code> channel. If all my leaping arches have joined <code>all_arches</code> then I can set them all to the same animation with a single MQTT message addressed to that channel.</p>
+<h2>Nodes</h2>
+<p>Nodes as I mentioned are smart devices. They are some type of microcontroller or single-board computer running code that I wrote. PiLit currently includes three types of nodes:</p>
+<table>
+<thead>
+<tr>
+<th>Node type</th>
+<th>Platform</th>
+<th>Language</th>
+<th>Lights that are controlled</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>pixel_node</td>
+<td>Arduino/ESP8266</td>
+<td>C++</td>
+<td>RGB "neopixels"</td>
+</tr>
+<tr>
+<td>onoff_node</td>
+<td>Arduino/ESP8266</td>
+<td>C++</td>
+<td>Single relay (e.g. to turn on/off a spotlight)</td>
+</tr>
+<tr>
+<td>multi_relay</td>
+<td>Raspbery Pi</td>
+<td>Python</td>
+<td>Multi-channel relay (e.g. a Sainsmart 16-relay board)</td>
+</tr>
+</tbody>
+</table>
+<p>For microcontrollers, you could use just about any Arduino-like board. The ESP8266s are great because they offer better specs than most Arduinos, at a lower price, and include WiFi support built in. The downside of most any of these microcontrollers is that they're 3.3V devices and the typical RGB LED is a 5V device. So, you'll need a level shifter to convert the 3.3 into 5V signals. You can generally buy 3.3V relays for on/off nodes, eliminating the need for a level shifter.</p>
+<p><img src="../images/2020/pixel_node.jpg" width="600" title="A pixel_node in its box"/></p>
+<p>The first Christmas light device I ever created was my Raspberry Pi-based megatree controller. Using a cheap 16-channel relay board, I controlled outlets into which the strings of lights on my tree were plugged. A Python script running on the Pi turned the outlets on or off. </p>
+<p><img src="../images/2020/multi_relay.jpg" width="600" title="My megatree multi-relay board"/></p>
+<p>I've rewritten and updated that original script to fit the PiLit architecture. But, since I had the hardware, I kept this node as a Python script. There's no reason an ESP8266 couldn't be used instead, though new node control software would be needed.</p>
+<h2>PiLit GUI</h2>
+<p>The show-generation app is for now called PiLit GUI. It's a React web app. Basically, I needed to learn React for work so this was a great "real world" app to learn on. (In other words, don't judge the code too harshly. I'm sure I have not written the best React app here.)</p>
+<p><img src="../images/2020/pilitgui.jpg" width="600" title="The PiLit GUI web app"/></p>
+<p>This app lets you define one or more channels, each of which corresponds to a node. Then, you define a series of animations for each channel. When done, you export your show to a JSON file. This file is the script you run with the PiLit Player.</p>
+<h2>Challenges</h2>
+<p>The system overall works well. The software portions of PiLit have worked out great. But I have had to deal with some physical / hardware challenges.</p>
+<p>Keeping water out of the nodes has been a big problem. I put each in some sort of plastic container (an old food container, craft box, etc.). But of course, wires must go in and out of the boxes. Despite my best attempts, water has gotten in causing shorts. One box filled with water, then froze. The ESP8266 in that node did not like being frozen in a block of ice -- it fried. I also discovered that exterior latex caulk dissolves when exposed to constant moisture. Next year I'll use bathtub style caulk instead.</p>
+<p>Another challenge has been solid wiring connections. The pixel strips are rather delicate. Wind and ice have broken my connections a few times. Apparently I'm not great at soldering since my connections at the microcontrollers have failed repeatedly too. More than once I've had to drag out my soldering tools and sit in the snow re-soldering connections.</p>
+<h2>Looking ahead</h2>
+<p>I designed and wrote PiLit, and built most of my nodes, in my spare time in September and November this year. Over the next year, I plan to refine my physical node builds to better protect from the elements. I also plan to enhance the software components. A few areas I may tackle include:</p>
+<ul>
+<li>Improving timing &mdash; currently it's impossible to synchronize multiple nodes exactly. So for example, my three leaping arches don't "bounce" in time with each other.</li>
+<li>Adding more lighting sequences to the nodes, as well as improving performance.</li>
+<li>Updating the GUI show-creation app in various ways, such as offering a show preview mode and refining its UI.</li>
+<li>Adding more instructions on building the nodes, as well as on setting up and using PiLit in general.</li>
+</ul>
+<p>Finally, I'd really like to add an LED matrix display (to show images, video clips, and text) to my decorations. I'd also like to add an FM transmitter and audio track to my show. I will update PiLit to support those features if I can add those elements.</p>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="../tag/python.html">python</a>
+      <a href="../tag/arduino.html">arduino</a>
+      <a href="../tag/xmas.html">xmas</a>
+    </p>
+  </div>
+
+
+
+
+</article>
+
+    <footer>
+<p>
+  &copy; Tim Poulsen 2020 - This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>
+</p>
+<p>    Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a>
+</p><p>
+  <a rel="license"
+     href="http://creativecommons.org/licenses/by-sa/4.0/"
+     target="_blank">
+    <img alt="Creative Commons License"
+         title="Creative Commons License"
+         style="border-width:0"
+         src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png"
+         width="80"
+         height="15"/>
+  </a>
+</p>    </footer>
+  </main>
+
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Tim Poulsen ",
+  "url" : "..",
+  "image": "/images/tim_poulsen.jpg",
+  "description": "Tim Poulsen's blog of software, hardware, and life"
+}
+</script>
+</body>
+</html>
