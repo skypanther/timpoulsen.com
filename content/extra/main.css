@@ -144,3 +144,7 @@ main article table td, main article table th {
 article ul li {
     padding-bottom: 0.6em;
 }
+
+article th {
+    text-align: left;
+}

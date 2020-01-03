@@ -26,7 +26,7 @@ CC_LICENSE = {
     'slug': 'by-sa'
 }
 
-COPYRIGHT_YEAR = 2019
+COPYRIGHT_YEAR = 2020
 
 EXTRA_PATH_METADATA = {
     'extra/main.css': {'path': 'theme/css/main.css'},

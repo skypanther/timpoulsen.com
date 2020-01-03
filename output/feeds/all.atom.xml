@@ -1,5 +1,145 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Tim Poulsen</title><link href="https://www.timpoulsen.com/" rel="alternate"></link><link href="https://www.timpoulsen.com/feeds/all.atom.xml" rel="self"></link><id>https://www.timpoulsen.com/</id><updated>2019-03-10T00:00:00-05:00</updated><entry><title>Introducing Robovision</title><link href="https://www.timpoulsen.com/2019/introducing-robovision.html" rel="alternate"></link><published>2019-03-10T00:00:00-05:00</published><updated>2019-03-10T00:00:00-05:00</updated><author><name>Tim Poulsen</name></author><id>tag:www.timpoulsen.com,2019-03-10:/2019/introducing-robovision.html</id><summary type="html">&lt;p&gt;The FIRST robotics competition (FRC) challenges high school students to design and build a robot capable of performing multiple challenging tasks. These annual challenges typically involve computer vision components, such as identifying and using reflective markers to locate targets. High school computer science curriculum rarely covers software engineering topics, let …&lt;/p&gt;</summary><content type="html">&lt;p&gt;The FIRST robotics competition (FRC) challenges high school students to design and build a robot capable of performing multiple challenging tasks. These annual challenges typically involve computer vision components, such as identifying and using reflective markers to locate targets. High school computer science curriculum rarely covers software engineering topics, let alone advanced topics like computer vision.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Tim Poulsen</title><link href="https://www.timpoulsen.com/" rel="alternate"></link><link href="https://www.timpoulsen.com/feeds/all.atom.xml" rel="self"></link><id>https://www.timpoulsen.com/</id><updated>2020-01-02T00:00:00-05:00</updated><entry><title>Controlling Christmas lights with MQTT</title><link href="https://www.timpoulsen.com/2020/controlling-christmas-lights-with-mqtt.html" rel="alternate"></link><published>2020-01-02T00:00:00-05:00</published><updated>2020-01-02T00:00:00-05:00</updated><author><name>Tim Poulsen</name></author><id>tag:www.timpoulsen.com,2020-01-02:/2020/controlling-christmas-lights-with-mqtt.html</id><summary type="html">&lt;p&gt;I'm one of those Clark Griswold kind of guys that totally over-decorates his house. To make my lights more interesting, I've built my own light animation system which I call PiLit.&lt;/p&gt;
+&lt;p&gt;&lt;img src="../images/2020/christmas2019.gif" width="600" title="Christmas lights controlled by PiLit"/&gt;&lt;/p&gt;
+&lt;p&gt;Of course, all my code is free and open source. Check it out at &lt;a href="https://github.com/skypanther/PiLit"&gt;https://github.com/skypanther/PiLit …&lt;/a&gt;&lt;/p&gt;</summary><content type="html">&lt;p&gt;I'm one of those Clark Griswold kind of guys that totally over-decorates his house. To make my lights more interesting, I've built my own light animation system which I call PiLit.&lt;/p&gt;
+&lt;p&gt;&lt;img src="../images/2020/christmas2019.gif" width="600" title="Christmas lights controlled by PiLit"/&gt;&lt;/p&gt;
+&lt;p&gt;Of course, all my code is free and open source. Check it out at &lt;a href="https://github.com/skypanther/PiLit"&gt;https://github.com/skypanther/PiLit&lt;/a&gt;.&lt;/p&gt;
+&lt;h2&gt;Overview&lt;/h2&gt;
+&lt;p&gt;PiLit is made up of three components:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Component&lt;/th&gt;
+&lt;th&gt;Function&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;PiLit player&lt;/td&gt;
+&lt;td&gt;The PiLit player is a python script that runs the show animation. It reads from a JSON "script" and sends commands on the network to control the lights.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Nodes&lt;/td&gt;
+&lt;td&gt;Nodes are the networked hardware components that control the lights.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;PiLit GUI&lt;/td&gt;
+&lt;td&gt;A show generation web app to make creating show sequences relatively easy&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;The player can run on any computer that supports Python and can connect to the same network as your nodes. I use a Raspberry Pi 3B+ for this. The player sends MQTT messages to the nodes with instructions of what light sequence to play. The nodes are smart devices in that they "know" how to perform various lighting functions. They listen for MQTT messages telling them what function to perform, but they do the actual controlling.&lt;/p&gt;
+&lt;p&gt;There are a few benefits, and a few downsides to this architecture. On the plus side, much less data must be passed across the network and the nodes and player can use different architectures, programming languages, etc. In other words, the player can be a lot simpler but the nodes must be a bit more complex. Another downside is that to add new lighting functions, both the nodes and player need to be updated.&lt;/p&gt;
+&lt;h2&gt;MQTT&lt;/h2&gt;
+&lt;p&gt;I chose to use &lt;a href="https://www.baldengineer.com/mqtt-introduction.html"&gt;MQTT&lt;/a&gt; for message transport because there is very little overhead associated with the MQTT protocol. Messages are transmitted very quickly. Plus there are some great libraries for both Python and C/C++.&lt;/p&gt;
+&lt;p&gt;In PiLit, messages are basically in the form &lt;code&gt;channel/payload&lt;/code&gt; where &lt;code&gt;channel&lt;/code&gt; is the name of the node that should act on the message and &lt;code&gt;payload&lt;/code&gt; is a string describing what animation to play. For example, a leaping arch node subscribed to an &lt;code&gt;arch1&lt;/code&gt; channel would listen for a message like this:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;arch1&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;red&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="n"&gt;bounce&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;50&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="k"&gt;true&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;The message is a colon-delimited string that tells the arch what color to show, what animation sequence to play, and additional timing and control values. See the repo for details on the actual message payloads.&lt;/p&gt;
+&lt;p&gt;Nodes can subscribe to multiple channels, so a leaping arch might join both the &lt;code&gt;arch1&lt;/code&gt; channel and the &lt;code&gt;all_arches&lt;/code&gt; channel. If all my leaping arches have joined &lt;code&gt;all_arches&lt;/code&gt; then I can set them all to the same animation with a single MQTT message addressed to that channel.&lt;/p&gt;
+&lt;h2&gt;Nodes&lt;/h2&gt;
+&lt;p&gt;Nodes as I mentioned are smart devices. They are some type of microcontroller or single-board computer running code that I wrote. PiLit currently includes three types of nodes:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Node type&lt;/th&gt;
+&lt;th&gt;Platform&lt;/th&gt;
+&lt;th&gt;Language&lt;/th&gt;
+&lt;th&gt;Lights that are controlled&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;pixel_node&lt;/td&gt;
+&lt;td&gt;Arduino/ESP8266&lt;/td&gt;
+&lt;td&gt;C++&lt;/td&gt;
+&lt;td&gt;RGB "neopixels"&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;onoff_node&lt;/td&gt;
+&lt;td&gt;Arduino/ESP8266&lt;/td&gt;
+&lt;td&gt;C++&lt;/td&gt;
+&lt;td&gt;Single relay (e.g. to turn on/off a spotlight)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;multi_relay&lt;/td&gt;
+&lt;td&gt;Raspbery Pi&lt;/td&gt;
+&lt;td&gt;Python&lt;/td&gt;
+&lt;td&gt;Multi-channel relay (e.g. a Sainsmart 16-relay board)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;For microcontrollers, you could use just about any Arduino-like board. The ESP8266s are great because they offer better specs than most Arduinos, at a lower price, and include WiFi support built in. The downside of most any of these microcontrollers is that they're 3.3V devices and the typical RGB LED is a 5V device. So, you'll need a level shifter to convert the 3.3 into 5V signals. You can generally buy 3.3V relays for on/off nodes, eliminating the need for a level shifter.&lt;/p&gt;
+&lt;p&gt;&lt;img src="../images/2020/pixel_node.jpg" width="600" title="A pixel_node in its box"/&gt;&lt;/p&gt;
+&lt;p&gt;The first Christmas light device I ever created was my Raspberry Pi-based megatree controller. Using a cheap 16-channel relay board, I controlled outlets into which the strings of lights on my tree were plugged. A Python script running on the Pi turned the outlets on or off. &lt;/p&gt;
+&lt;p&gt;&lt;img src="../images/2020/multi_relay.jpg" width="600" title="My megatree multi-relay board"/&gt;&lt;/p&gt;
+&lt;p&gt;I've rewritten and updated that original script to fit the PiLit architecture. But, since I had the hardware, I kept this node as a Python script. There's no reason an ESP8266 couldn't be used instead, though new node control software would be needed.&lt;/p&gt;
+&lt;h2&gt;PiLit GUI&lt;/h2&gt;
+&lt;p&gt;The show-generation app is for now called PiLit GUI. It's a React web app. Basically, I needed to learn React for work so this was a great "real world" app to learn on. (In other words, don't judge the code too harshly. I'm sure I have not written the best React app here.)&lt;/p&gt;
+&lt;p&gt;&lt;img src="../images/2020/pilitgui.jpg" width="600" title="The PiLit GUI web app"/&gt;&lt;/p&gt;
+&lt;p&gt;This app lets you define one or more channels, each of which corresponds to a node. Then, you define a series of animations for each channel. When done, you export your show to a JSON file. This file is the script you run with the PiLit Player.&lt;/p&gt;
+&lt;h2&gt;Challenges&lt;/h2&gt;
+&lt;p&gt;The system overall works well. The software portions of PiLit have worked out great. But I have had to deal with some physical / hardware challenges.&lt;/p&gt;
+&lt;p&gt;Keeping water out of the nodes has been a big problem. I put each in some sort of plastic container (an old food container, craft box, etc.). But of course, wires must go in and out of the boxes. Despite my best attempts, water has gotten in causing shorts. One box filled with water, then froze. The ESP8266 in that node did not like being frozen in a block of ice -- it fried. I also discovered that exterior latex caulk dissolves when exposed to constant moisture. Next year I'll use bathtub style caulk instead.&lt;/p&gt;
+&lt;p&gt;Another challenge has been solid wiring connections. The pixel strips are rather delicate. Wind and ice have broken my connections a few times. Apparently I'm not great at soldering since my connections at the microcontrollers have failed repeatedly too. More than once I've had to drag out my soldering tools and sit in the snow re-soldering connections.&lt;/p&gt;
+&lt;h2&gt;Looking ahead&lt;/h2&gt;
+&lt;p&gt;I designed and wrote PiLit, and built most of my nodes, in my spare time in September and November this year. Over the next year, I plan to refine my physical node builds to better protect from the elements. I also plan to enhance the software components. A few areas I may tackle include:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Improving timing &amp;mdash; currently it's impossible to synchronize multiple nodes exactly. So for example, my three leaping arches don't "bounce" in time with each other.&lt;/li&gt;
+&lt;li&gt;Adding more lighting sequences to the nodes, as well as improving performance.&lt;/li&gt;
+&lt;li&gt;Updating the GUI show-creation app in various ways, such as offering a show preview mode and refining its UI.&lt;/li&gt;
+&lt;li&gt;Adding more instructions on building the nodes, as well as on setting up and using PiLit in general.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Finally, I'd really like to add an LED matrix display (to show images, video clips, and text) to my decorations. I'd also like to add an FM transmitter and audio track to my show. I will update PiLit to support those features if I can add those elements.&lt;/p&gt;</content><category term="python"></category><category term="arduino"></category><category term="xmas"></category></entry><entry><title>Robovision on our 2019 FRC bot</title><link href="https://www.timpoulsen.com/2019/robovision-on-our-2019-frc-bot.html" rel="alternate"></link><published>2019-04-15T00:00:00-04:00</published><updated>2019-04-15T00:00:00-04:00</updated><author><name>Tim Poulsen</name></author><id>tag:www.timpoulsen.com,2019-04-15:/2019/robovision-on-our-2019-frc-bot.html</id><summary type="html">&lt;p&gt;Now that our 2019 FRC season is over, I'd like to describe how Team 1518 implemented vision processing on our bot. We set some aggressive goals, which we aimed to achieve by using the the &lt;a href="https://www.timpoulsen.com/2019/introducing-robovision.html"&gt;robovision&lt;/a&gt; library, OpenCV, and Python on a Jetson TX2. The primary goals of this post …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Now that our 2019 FRC season is over, I'd like to describe how Team 1518 implemented vision processing on our bot. We set some aggressive goals, which we aimed to achieve by using the the &lt;a href="https://www.timpoulsen.com/2019/introducing-robovision.html"&gt;robovision&lt;/a&gt; library, OpenCV, and Python on a Jetson TX2. The primary goals of this post are to cover the high-level approaches we used and to share what did or didn't work. Of course, I'll link to the code we created.&lt;/p&gt;
+&lt;p&gt;We set out the following goals for vision on our bot this year:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Identify and isolate the retro-reflective tape targets&lt;/li&gt;
+&lt;li&gt;Determine our distance to those targets&lt;/li&gt;
+&lt;li&gt;Determine our angle to the plane of the targets&lt;/li&gt;
+&lt;li&gt;When aiming reasonably face-on, determine how far left or right of center we were situated relative to the targets&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;We had a few other needs, such as communicating with the RoboRIO and driver's station, and maintaining good performance while performing multiple tasks. We also decided to control a set of RGB "neopixel" LEDs to use as signals to the driver of the bot's state. And, we planned to use the Jetson to stream a pair of cameras back to the driver's station, with custom overlays.&lt;/p&gt;
+&lt;p&gt;That's a significant pile-of-priorities and I'm very proud of our sole vision sub-team programmer Emma. Working together, she and I accomplished all but one of those goals on the test field. Unfortunately, we never got to put it into "production." At the Finger Lakes Regional (FLR), our bot was overweight and we had to leave off the Jetson. Between then and Buckeye, we shaved off enough weight to permit the Jetson. But by then, the drive team was comfortable driving the bot manually and didn't want to deal with the new controls. Just the same, our system did work and we learned a lot from implementing it.&lt;/p&gt;
+&lt;div&gt;&lt;iframe width="640" height="360" src="https://www.youtube.com/embed/KfhcVvqHO0U" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen&gt;&lt;/iframe&gt;&lt;/div&gt;
+
+&lt;h2&gt;Targeting&lt;/h2&gt;
+&lt;p&gt;The core function of our efforts were target identification and measurement. As shown below, a pair of retro-reflective vision tapes were mounted aside each hatch opening. The 2019 Game Manual listed various details of the tapes, for example that they were tipped at inward at 14.5&amp;deg; angles. Our goal was to isolate those tapes and make sure we were looking at a matched pair. &lt;/p&gt;
+&lt;p&gt;&lt;img alt="Integration diagram" src="../images/2019/vision_targets.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;At a high level, we:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Grabbed frames from the camera&lt;/li&gt;
+&lt;li&gt;Used contour detection, looking for specific colors that represented the tape targets&lt;/li&gt;
+&lt;li&gt;Used a series of filters to be sure we were looking at a matched pair of tape targets while discarding false matches (e.g. the right tape of one set and the left tape of another)&lt;/li&gt;
+&lt;li&gt;Measured various characteristics of the targets when we found them&lt;/li&gt;
+&lt;li&gt;Shared that info with the Rio via NetworkTables and with the Arduino controlling our LEDs via serial-over-USB.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;That's all implemented in the &lt;a href="https://github.com/Raider-Robotics-Team-1518/Jetson/blob/master/parallelized/targeting.py" target="_blank"&gt;targeting.py&lt;/a&gt; file in the team's repo. There's a lot going on in this file. I'll go into some of the details below.&lt;/p&gt;
+&lt;h3&gt;Finding and isolating the targets&lt;/h3&gt;
+&lt;p&gt;The robovision library includes a pre-built contour detection method. We just needed to supply a range of colors to look for. We used the standard green LED ring light that comes in the FRC "kit of parts." We used an Axis IP camera with its exposure and brightness settings cranked about as low as they'd go. Through experimentation, we found that we could isolate the reflective tape by looking for colors between HSV (60, 100, 100) and HSV (100, 255, 255). &lt;/p&gt;
+&lt;p&gt;Looking at the &lt;a href="https://github.com/Raider-Robotics-Team-1518/Jetson/blob/752d2038b11c970363e4b3f2451afebb596343b8/parallelized/targeting.py#L69" target="_blank"&gt;&lt;code&gt;run()&lt;/code&gt; function&lt;/a&gt; you can see we call robovision's &lt;code&gt;target.get_contours(frame)&lt;/code&gt; in each iteration of the loop. Then, we call our own &lt;code&gt;self.process_contours(contours)&lt;/code&gt; function. It gives us back info like whether a target is in view.&lt;/p&gt;
+&lt;p&gt;In that function, we sort the contours left-to-right so that we can methodically step through them in a known order. Then, we pass them through a series of "filters" to eliminate false detections:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Aspect ratio &amp;mdash; the tape targets were 2-inches by 5.5-inches, giving an aspect ratio of 0.36. Any contour with an aspect ratio significantly different than this was ignored. &lt;/li&gt;
+&lt;li&gt;Solidity &amp;mdash; a contour that encloses a "non-solid" region (think of something shaped like a letter "C") wasn't likely to be one of the rectangular tape targets. So, we'd ignore it.&lt;/li&gt;
+&lt;li&gt;Angle &amp;mdash; the tape strips were attached at 14.5&amp;deg; angles. Contours that were not oriented at angles close to that were ignored. Robovision provides a convenient &lt;code&gt;target.get_skew_angle(contour)&lt;/code&gt; function for finding the contour orientation angle.&lt;/li&gt;
+&lt;li&gt;And to be a valid target, we need a pair of tapes, one tilted right and one tilted left.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Positional orienteering&lt;/h3&gt;
+&lt;p&gt;Once we had weeded out any false detections, we moved on to measuring and calculating. We used the "triangle similarity" technique, described on the &lt;a href="https://www.pyimagesearch.com/2015/01/19/find-distance-camera-objectmarker-using-python-opencv/" target="_blank"&gt;PyImageSearch blog&lt;/a&gt;, to measure the bot's distance from the tape targets. &lt;/p&gt;
+&lt;p&gt;In the "lab," we measured the perceived width in pixels of a 12" piece of reflective tape at various distances. This gave us a ratio of pixels seen in the image to actual distance. At game time, we used robovision's target.get_extreme_points(contour) function to find the x/y coordinates of the corners of the tape targets. Using those coordinates, we counted the pixels between the top-most and bottom-most points. We plugged that pixel count, plus our precalculated ratio, into the triangle formula to determine the bot-to-target distance. This technique was accurate to a fraction of an inch.&lt;/p&gt;
+&lt;p&gt;We also used those corner coordinates to determine how far left or right the bot was in relation to the midpoint between the tape targets. Our original bot design included an articulated ball/hatch-cover manipulator. We planned to use this offset info to move that arm, alleviating the need for the bot to be centered on the hatch. We were able to calculate the offset within a fraction of an inch.&lt;/p&gt;
+&lt;p&gt;We were not successful in calculating the bot's angle to the hatch (plane of the target tapes). We tried a few techniques, none of which worked. For example, basic trigonometry tells us that the arc-cosine of the distance between the tapes divided by the distance to the tape equals the approach angle. In practice, we never got a good result. We decided that there were just too few pixels to work with, leading to gross inaccuracies. This is definitely an area we'll explore more over the off-season.&lt;/p&gt;
+&lt;h3&gt;Communicating with the RoboRIO&lt;/h3&gt;
+&lt;p&gt;Per FRC rules, the Rio must control the bot's actions. The parameters calculated by our vision code could be inputs to the Rio's routines. But for that to work, we needed to pass the calculated values in realtime to the Rio.&lt;/p&gt;
+&lt;p&gt;We considered a couple of options, including streaming data across a custom socket connection. In the end, we settled on a super-simple technique. The wonderful folks at the &lt;a href="https://robotpy.readthedocs.io/en/stable/" target="_blank"&gt;RobotPy&lt;/a&gt; project have created a NetworkTables implementation that worked flawlessly for us. We simply wrote our calculated values to a NetworkTable and the Rio read them from there. (Note: NetworkTables might be too slow for a high-speed, shooting game.)&lt;/p&gt;
+&lt;h3&gt;Powering the Jetson&lt;/h3&gt;
+&lt;p&gt;Our original plan was to power the Jetson from a cellphone powerpack. We found one on Amazon that output 12V and wasn't too heavy. This would have given us a stable power source that wouldn't abruptly shut off when the bot powered down. Unfortunately, the inspectors at Buckeye would not permit us to use that battery because they said it had too high an amperage rating. &lt;/p&gt;
+&lt;p&gt;After some research, we found that the Jetson TX2 is set up to handle an "uncontrolled" power loss by going through a &lt;a href="https://devtalk.nvidia.com/default/topic/1030971/jetson-tx2/effects-when-the-vdd_in-cannot-keep-longer-than-20ms-in-an-uncontrolled-powerdown/" target="_blank"&gt;fast shutdown process.&lt;/a&gt; According to the support forums, a power loss shouldn't cause filesystem corruption issues. So, we wired the Jetson directly to the power distribution panel (PDP) and it seemed to work fine. Of course, we didn't use it on the field so your mileage may vary.&lt;/p&gt;
+&lt;h2&gt;Summary&lt;/h2&gt;
+&lt;p&gt;We were intrigued by the Limelight system that some teams used this year. It promised to provide prebuilt routines to do many of the tasks we had to code ourselves this year. Nvidia just released the Jetson Nano, which is much smaller and lighter and runs off a 5V power source. Our TX2 may be retired in favor of one of these other systems. But the techniques we learned this year have given us a deeper understanding of vision processing. We'll put that knowledge to good use next year regardless of which system we use to implement our vision subsystem.&lt;/p&gt;
+&lt;p&gt;Per FIRST's rules for future re-use, all our code is on our &lt;a href="https://github.com/Raider-Robotics-Team-1518/Jetson" target="_blank"&gt;GitHub&lt;/a&gt; repo. Feel free to explore it and use it in your projects; there's some cool stuff going on in there. In a future post, I'll go over the parallel processing code that we used to run multiple scripts across the cores of the Jetson TX2.&lt;/p&gt;</content><category term="robotics"></category><category term="opencv"></category><category term="python"></category></entry><entry><title>Introducing Robovision</title><link href="https://www.timpoulsen.com/2019/introducing-robovision.html" rel="alternate"></link><published>2019-03-10T00:00:00-05:00</published><updated>2019-03-10T00:00:00-05:00</updated><author><name>Tim Poulsen</name></author><id>tag:www.timpoulsen.com,2019-03-10:/2019/introducing-robovision.html</id><summary type="html">&lt;p&gt;The FIRST robotics competition (FRC) challenges high school students to design and build a robot capable of performing multiple challenging tasks. These annual challenges typically involve computer vision components, such as identifying and using reflective markers to locate targets. High school computer science curriculum rarely covers software engineering topics, let …&lt;/p&gt;</summary><content type="html">&lt;p&gt;The FIRST robotics competition (FRC) challenges high school students to design and build a robot capable of performing multiple challenging tasks. These annual challenges typically involve computer vision components, such as identifying and using reflective markers to locate targets. High school computer science curriculum rarely covers software engineering topics, let alone advanced topics like computer vision.&lt;/p&gt;
 &lt;p&gt;To help FRC teams, I have written the robovision python library. This library includes functions useful for the types of vision tasks typically involved in an FRC competition. The goal of this library is to reduce and hide some of the complexity involved with target identification, measuring, field orienteering, etc.&lt;/p&gt;
 &lt;p&gt;Robovision is open source, licenced under the permissive MIT license, and free for all FRC teams to use. You can install it from &lt;a href="https://pypi.org/project/robovision/" target="_blank"&gt;PyPI&lt;/a&gt; or directly from the &lt;a href="https://github.com/skypanther/robovision" target="_blank"&gt;GitHub repo&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Some of the functions included in robovision are:&lt;/p&gt;
@@ -104,9 +244,9 @@
 &lt;p&gt;FRC Team 1518, Raider Robotics used robovision successfully in its 2019 Deep Space Challenge bot. So, another good source of examples (as well as some "incomplete thoughts") is the &lt;a href="https://github.com/Raider-Robotics-Team-1518/Jetson" target="_blank"&gt;team's GitHub repository&lt;/a&gt;.&lt;/p&gt;
 &lt;h3&gt;Future&lt;/h3&gt;
 &lt;p&gt;Looking ahead, the library needs even more simplification and abstraction to make it easy for FRC teams to use. Additional documentation and examples are also needed. I have not extensively tested or optimized the library for the Raspberry Pi (we're using a Jetson TX2, which has plenty of horsepower for our vision tasks). I very much welcome pull requests and contributions to the project.&lt;/p&gt;
-&lt;p&gt;#omgrobots!&lt;/p&gt;</content><category term="python"></category><category term="opencv"></category><category term="robotics"></category></entry><entry><title>Using OpenCV in an iOS app</title><link href="https://www.timpoulsen.com/2019/using-opencv-in-an-ios-app.html" rel="alternate"></link><published>2019-02-01T00:00:00-05:00</published><updated>2019-02-01T00:00:00-05:00</updated><author><name>Tim Poulsen</name></author><id>tag:www.timpoulsen.com,2019-02-01:/2019/using-opencv-in-an-ios-app.html</id><summary type="html">&lt;p&gt;Using OpenCV in your iOS app&lt;/p&gt;
-&lt;p&gt;Computer vision is cool tech ... computer vision in an iOS app is even better! In this post, I'll describe how you can integrate and use OpenCV in your Swift-based iOS app. Before we dig in to the process, let's take a look at how …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Using OpenCV in your iOS app&lt;/p&gt;
-&lt;p&gt;Computer vision is cool tech ... computer vision in an iOS app is even better! In this post, I'll describe how you can integrate and use OpenCV in your Swift-based iOS app. Before we dig in to the process, let's take a look at how the finished integration will work.&lt;/p&gt;
+&lt;p&gt;#omgrobots!&lt;/p&gt;</content><category term="python"></category><category term="opencv"></category><category term="robotics"></category></entry><entry><title>Using OpenCV in an iOS app</title><link href="https://www.timpoulsen.com/2019/using-opencv-in-an-ios-app.html" rel="alternate"></link><published>2019-02-01T00:00:00-05:00</published><updated>2019-02-01T00:00:00-05:00</updated><author><name>Tim Poulsen</name></author><id>tag:www.timpoulsen.com,2019-02-01:/2019/using-opencv-in-an-ios-app.html</id><summary type="html">&lt;p&gt;Computer vision is cool tech ... computer vision in an iOS app is even better! In this post, I'll describe how you can integrate and use OpenCV in your Swift-based iOS app. Before we dig in to the process, let's take a look at how the finished integration will work.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Integration diagram" src="../images/2019/ios_opencv.png"&gt;&lt;/p&gt;
+&lt;p&gt;As …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Computer vision is cool tech ... computer vision in an iOS app is even better! In this post, I'll describe how you can integrate and use OpenCV in your Swift-based iOS app. Before we dig in to the process, let's take a look at how the finished integration will work.&lt;/p&gt;
 &lt;p&gt;&lt;img alt="Integration diagram" src="../images/2019/ios_opencv.png"&gt;&lt;/p&gt;
 &lt;p&gt;As shown in the diagram, you will continue to write most of your app in Swift as you normally would do. The OpenCV framework will be included in your app, inside a wrapper that you'll write. A bridging header will connect your Swift code to the Objective-C / C++ code of OpenCV. (You'll also add a prefix/precompile header to optimize build times.)&lt;/p&gt;
 &lt;p&gt;Once you've set all that up, you'll be able to make use of OpenCV with Swift code like:&lt;/p&gt;
@@ -168,9 +308,9 @@
 &lt;li&gt;Click Create&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;Inside the prefix header, before the closing &lt;code&gt;#endif&lt;/code&gt; statement, add:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;#ifdef __cplusplus&lt;/span&gt;
-&lt;span class="cp"&gt;#include&lt;/span&gt; &lt;span class="cpf"&gt;&amp;lt;opencv2/opencv.hpp&amp;gt;&lt;/span&gt;&lt;span class="cp"&gt;&lt;/span&gt;
-&lt;span class="cp"&gt;#endif&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;#&lt;span class="nv"&gt;ifdef&lt;/span&gt; &lt;span class="nv"&gt;__cplusplus&lt;/span&gt;
+#&lt;span class="k"&gt;include&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nv"&gt;opencv2&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;opencv&lt;/span&gt;.&lt;span class="nv"&gt;hpp&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+#&lt;span class="k"&gt;endif&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -241,8 +381,8 @@
 &lt;p&gt;Many guides suggest you reserve your package's name on PyPI right away so that no one else "steals" it. However, PyPI no longer supports package name reservations. The best you can do is search ahead of time to be reasonably sure your chosen name is not already taken.&lt;/p&gt;
 &lt;h2&gt;Local package installation&lt;/h2&gt;
 &lt;p&gt;As you develop, you can test that your package is installable and working by installing it from your local folder. Use &lt;code&gt;pip&lt;/code&gt; to install from your development folder:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;cd path/to/your/package/folder
-pip install -e .
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;cd&lt;/span&gt; &lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="k"&gt;to&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;your&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;package&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;folder&lt;/span&gt;
+&lt;span class="n"&gt;pip&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;e&lt;/span&gt; &lt;span class="p"&gt;.&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -250,7 +390,7 @@ pip install -e .
 &lt;p&gt;Once your package is ready, you'll need to create accounts on both &lt;a href="https://pypi.org/account/register/"&gt;pypi.org&lt;/a&gt; and &lt;a href="https://test.pypi.org/account/register/"&gt;test.pypi.org&lt;/a&gt;. PyPI says those systems will be linked eventually. But for now, the test and production environments are completely separate. You can use the same information to register for both sites.&lt;/p&gt;
 &lt;h2&gt;The &lt;code&gt;twine&lt;/code&gt; package uploader&lt;/h2&gt;
 &lt;p&gt;You'll be using &lt;code&gt;twine&lt;/code&gt; to upload your package to PyPI. Let's get that set up. First, install it with:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;pip install twine
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;pip&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;twine&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -290,24 +430,24 @@ pip install -e .
 &lt;p&gt;Note that if you have Python files in subdirectories off your main package folder, you'll need to list them in the &lt;code&gt;packages=[]&lt;/code&gt; list. See &lt;a href="https://github.com/skypanther/robovision/blob/master/setup.py"&gt;my setup.py file&lt;/a&gt; and my source code organization if this doesn't make sense to you.&lt;/p&gt;
 &lt;h2&gt;Create your distribution file&lt;/h2&gt;
 &lt;p&gt;With all that configuration out of the way, you're ready to create your distribution wheel file. Use this command:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;python setup.py bdist_wheel
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;python&lt;/span&gt; &lt;span class="n"&gt;setup&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;py&lt;/span&gt; &lt;span class="n"&gt;bdist_wheel&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;This will package up your file and create a wheel file in the dist directory in your project. &lt;/p&gt;
 &lt;h2&gt;Uploading&lt;/h2&gt;
 &lt;p&gt;You should upload to the test environment first, and install your package from the test environment. That way, you're assured everything is working as expected before you announce your package to the world. Use this command:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;twine upload dist/YOUR_PACKAGE_NAME.whl -r testpypi
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;twine&lt;/span&gt; &lt;span class="n"&gt;upload&lt;/span&gt; &lt;span class="n"&gt;dist&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;YOUR_PACKAGE_NAME&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;whl&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;r&lt;/span&gt; &lt;span class="n"&gt;testpypi&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;Use a command like this to install from the test environment:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;pip install -i https://test.pypi.org/simple YOUR_PACKAGE_NAME
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;pip&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="n"&gt;https&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="n"&gt;test&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;pypi&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;org&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="k"&gt;simple&lt;/span&gt; &lt;span class="n"&gt;YOUR_PACKAGE_NAME&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;Once you're sure everything is in order, upload to the production PyPI server:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;twine upload dist/YOUR_PACKAGE_NAME.whl
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;twine&lt;/span&gt; &lt;span class="n"&gt;upload&lt;/span&gt; &lt;span class="n"&gt;dist&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;YOUR_PACKAGE_NAME&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;whl&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -1088,11 +1228,11 @@ Bar &lt;span class="m"&gt;5&lt;/span&gt;
 
 
 &lt;p&gt;That's great. But a leg-up that JS has is that objects are "associative arrays" meaning that in addition to the dot-notation, we can use array notation (e.g. Python's dict notation) to access properties of JS objects:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;// this works in JS:
-js_obj[&amp;#39;foo&amp;#39;]
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt; &lt;span class="n"&gt;this&lt;/span&gt; &lt;span class="n"&gt;works&lt;/span&gt; &lt;span class="k"&gt;in&lt;/span&gt; &lt;span class="n"&gt;JS&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;span class="n"&gt;js_obj&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;foo&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
 
-# but in Python, this wouldn&amp;#39;t work
-py_obj[&amp;#39;bar&amp;#39;]
+&lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="n"&gt;but&lt;/span&gt; &lt;span class="k"&gt;in&lt;/span&gt; &lt;span class="n"&gt;Python&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;this&lt;/span&gt; &lt;span class="n"&gt;wouldn&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;t work&lt;/span&gt;
+&lt;span class="s1"&gt;py_obj[&amp;#39;&lt;/span&gt;&lt;span class="n"&gt;bar&lt;/span&gt;&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -2091,7 +2231,7 @@ py_obj[&amp;#39;bar&amp;#39;]
 &lt;h2&gt;Video files and cameras&lt;/h2&gt;
 &lt;p&gt;OpenCV lets you read video data from files and cameras. What's better, you use the same technique no matter the video source. First, you get a reference, or handle to the video source. Then, you read from that source frame by frame.&lt;/p&gt;
 &lt;p&gt;Strictly speaking, you use the &lt;code&gt;cv2.VideoCapture.open()&lt;/code&gt; method to get a reference to your video source. However, OpenCV offers a shorter equivalent in the &lt;code&gt;cv2.VideoCapture()&lt;/code&gt; method.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;VideoCapture(source[, options])
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;VideoCapture&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;source&lt;/span&gt;&lt;span class="p"&gt;[,&lt;/span&gt; &lt;span class="k"&gt;options&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -2141,7 +2281,7 @@ py_obj[&amp;#39;bar&amp;#39;]
 
 &lt;h3&gt;Errors and exceptions&lt;/h3&gt;
 &lt;p&gt;As with reading still images, OpenCV does not offer proper exception handling when reading from a video source. If you specify a source that doesn't exist, you'll get an error like the following&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;out device of bound (0-0): 1 opencv: camera failed to properly initialize!
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;out&lt;/span&gt; &lt;span class="n"&gt;device&lt;/span&gt; &lt;span class="k"&gt;of&lt;/span&gt; &lt;span class="n"&gt;bound&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="n"&gt;opencv&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;camera&lt;/span&gt; &lt;span class="n"&gt;failed&lt;/span&gt; &lt;span class="k"&gt;to&lt;/span&gt; &lt;span class="n"&gt;properly&lt;/span&gt; &lt;span class="k"&gt;initialize&lt;/span&gt;&lt;span class="o"&gt;!&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -2154,7 +2294,7 @@ py_obj[&amp;#39;bar&amp;#39;]
 
 
 &lt;p&gt;If you end up in this state, you may have to restart your computer to recover. On the Mac, you can use the following command rather than restarting:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo killall VDCAssistant
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;killall&lt;/span&gt; &lt;span class="n"&gt;VDCAssistant&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -2178,12 +2318,12 @@ py_obj[&amp;#39;bar&amp;#39;]
 &lt;h2&gt;Installing OpenCV&lt;/h2&gt;
 &lt;p&gt;For Python environments, installing OpenCV is pretty simple. You'll need to choose between installing just OpenCV or the contributed modules as well. The "contrib" modules are extra functions provided by the community. Popular and well-written contrib modules sometimes get pulled into the core OpenCV distribution. However, not all of them are error free or fully optimized. &lt;/p&gt;
 &lt;p&gt;To install the core OpenCV Python version:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;pip install opencv-python
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;pip&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;opencv&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;python&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;To install the version containing the contrib modules:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;pip install opencv-contrib-python
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;pip&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;opencv&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;contrib&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;python&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -2207,19 +2347,19 @@ py_obj[&amp;#39;bar&amp;#39;]
 &lt;li&gt;Homebrew&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Once you have those installed, you’re ready to start. You’ll need to install some pre-requisite packages. Each of the following is a separate command:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;brew install cmake pkg-config
-brew install jpeg libpng libtiff openexr
-brew install eigen tbb
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;brew&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;cmake&lt;/span&gt; &lt;span class="n"&gt;pkg&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;config&lt;/span&gt;
+&lt;span class="n"&gt;brew&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;jpeg&lt;/span&gt; &lt;span class="n"&gt;libpng&lt;/span&gt; &lt;span class="n"&gt;libtiff&lt;/span&gt; &lt;span class="n"&gt;openexr&lt;/span&gt;
+&lt;span class="n"&gt;brew&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;eigen&lt;/span&gt; &lt;span class="n"&gt;tbb&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;Next, you’ll need the OpenCV source code. Clone OpenCV and OpenCV_contrib:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;cd ~
-git clone https://github.com/opencv/opencv
-git clone https://github.com/opencv/opencv_contrib
-cd ~/opencv
-mkdir build
-cd build
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;cd&lt;/span&gt; &lt;span class="o"&gt;~&lt;/span&gt;
+&lt;span class="n"&gt;git&lt;/span&gt; &lt;span class="n"&gt;clone&lt;/span&gt; &lt;span class="n"&gt;https&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="n"&gt;github&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;opencv&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;opencv&lt;/span&gt;
+&lt;span class="n"&gt;git&lt;/span&gt; &lt;span class="n"&gt;clone&lt;/span&gt; &lt;span class="n"&gt;https&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="n"&gt;github&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;opencv&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;opencv_contrib&lt;/span&gt;
+&lt;span class="n"&gt;cd&lt;/span&gt; &lt;span class="o"&gt;~/&lt;/span&gt;&lt;span class="n"&gt;opencv&lt;/span&gt;
+&lt;span class="n"&gt;mkdir&lt;/span&gt; &lt;span class="n"&gt;build&lt;/span&gt;
+&lt;span class="n"&gt;cd&lt;/span&gt; &lt;span class="n"&gt;build&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -2244,12 +2384,12 @@ cd build
 
 
 &lt;p&gt;That command will take a while...after which you can do the actual build:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;make -j4
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;make&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;j4&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;That will take even longer; depending on the speed of your system it could take an hour or longer. Once it’s all done, you’re ready to actually install the compiled project:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo make install
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;make&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 

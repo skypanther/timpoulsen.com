@@ -115,9 +115,19 @@
               making
               </a>
           </li>
-          <li class="tag-4">
+          <li class="tag-3">
               <a href="../tag/robotics.html">
               robotics
+              </a>
+          </li>
+          <li class="tag-4">
+              <a href="../tag/arduino.html">
+              arduino
+              </a>
+          </li>
+          <li class="tag-4">
+              <a href="../tag/xmas.html">
+              xmas
               </a>
           </li>
           <li class="tag-4">
@@ -222,7 +232,7 @@
 <h2>Video files and cameras</h2>
 <p>OpenCV lets you read video data from files and cameras. What's better, you use the same technique no matter the video source. First, you get a reference, or handle to the video source. Then, you read from that source frame by frame.</p>
 <p>Strictly speaking, you use the <code>cv2.VideoCapture.open()</code> method to get a reference to your video source. However, OpenCV offers a shorter equivalent in the <code>cv2.VideoCapture()</code> method.</p>
-<div class="highlight"><pre><span></span>VideoCapture(source[, options])
+<div class="highlight"><pre><span></span><span class="n">VideoCapture</span><span class="p">(</span><span class="k">source</span><span class="p">[,</span> <span class="k">options</span><span class="p">])</span>
 </pre></div>
 
 
@@ -272,7 +282,7 @@
 
 <h3>Errors and exceptions</h3>
 <p>As with reading still images, OpenCV does not offer proper exception handling when reading from a video source. If you specify a source that doesn't exist, you'll get an error like the following</p>
-<div class="highlight"><pre><span></span>out device of bound (0-0): 1 opencv: camera failed to properly initialize!
+<div class="highlight"><pre><span></span><span class="k">out</span> <span class="n">device</span> <span class="k">of</span> <span class="n">bound</span> <span class="p">(</span><span class="mi">0</span><span class="o">-</span><span class="mi">0</span><span class="p">):</span> <span class="mi">1</span> <span class="n">opencv</span><span class="p">:</span> <span class="n">camera</span> <span class="n">failed</span> <span class="k">to</span> <span class="n">properly</span> <span class="k">initialize</span><span class="o">!</span>
 </pre></div>
 
 
@@ -285,7 +295,7 @@
 
 
 <p>If you end up in this state, you may have to restart your computer to recover. On the Mac, you can use the following command rather than restarting:</p>
-<div class="highlight"><pre><span></span>sudo killall VDCAssistant
+<div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">killall</span> <span class="n">VDCAssistant</span>
 </pre></div>
 
 
@@ -306,7 +316,7 @@
 
     <footer>
 <p>
-  &copy; Tim Poulsen 2019 - This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>
+  &copy; Tim Poulsen 2020 - This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>
 </p>
 <p>    Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a>
 </p><p>

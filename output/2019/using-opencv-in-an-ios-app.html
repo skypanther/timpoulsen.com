@@ -46,11 +46,11 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
 <meta name="author" content="Tim Poulsen" />
-<meta name="description" content="Using OpenCV in your iOS app Computer vision is cool tech ... computer vision in an iOS app is even better! In this post, I'll describe how you can integrate and use OpenCV in your Swift-based iOS app. Before we dig in to the process, let's take a look at how …" />
+<meta name="description" content="Computer vision is cool tech ... computer vision in an iOS app is even better! In this post, I'll describe how you can integrate and use OpenCV in your Swift-based iOS app. Before we dig in to the process, let's take a look at how the finished integration will work. As …" />
 <meta name="keywords" content="OpenCV, iOS, Swift">
 <meta property="og:site_name" content="Tim Poulsen"/>
 <meta property="og:title" content="Using OpenCV in an iOS app"/>
-<meta property="og:description" content="Using OpenCV in your iOS app Computer vision is cool tech ... computer vision in an iOS app is even better! In this post, I'll describe how you can integrate and use OpenCV in your Swift-based iOS app. Before we dig in to the process, let's take a look at how …"/>
+<meta property="og:description" content="Computer vision is cool tech ... computer vision in an iOS app is even better! In this post, I'll describe how you can integrate and use OpenCV in your Swift-based iOS app. Before we dig in to the process, let's take a look at how the finished integration will work. As …"/>
 <meta property="og:locale" content="en_US"/>
 <meta property="og:url" content="../2019/using-opencv-in-an-ios-app.html"/>
 <meta property="og:type" content="article"/>
@@ -116,9 +116,19 @@
               making
               </a>
           </li>
-          <li class="tag-4">
+          <li class="tag-3">
               <a href="../tag/robotics.html">
               robotics
+              </a>
+          </li>
+          <li class="tag-4">
+              <a href="../tag/arduino.html">
+              arduino
+              </a>
+          </li>
+          <li class="tag-4">
+              <a href="../tag/xmas.html">
+              xmas
               </a>
           </li>
           <li class="tag-4">
@@ -169,8 +179,7 @@
 
 
   <div>
-    <p>Using OpenCV in your iOS app</p>
-<p>Computer vision is cool tech ... computer vision in an iOS app is even better! In this post, I'll describe how you can integrate and use OpenCV in your Swift-based iOS app. Before we dig in to the process, let's take a look at how the finished integration will work.</p>
+    <p>Computer vision is cool tech ... computer vision in an iOS app is even better! In this post, I'll describe how you can integrate and use OpenCV in your Swift-based iOS app. Before we dig in to the process, let's take a look at how the finished integration will work.</p>
 <p><img alt="Integration diagram" src="../images/2019/ios_opencv.png"></p>
 <p>As shown in the diagram, you will continue to write most of your app in Swift as you normally would do. The OpenCV framework will be included in your app, inside a wrapper that you'll write. A bridging header will connect your Swift code to the Objective-C / C++ code of OpenCV. (You'll also add a prefix/precompile header to optimize build times.)</p>
 <p>Once you've set all that up, you'll be able to make use of OpenCV with Swift code like:</p>
@@ -232,9 +241,9 @@
 <li>Click Create</li>
 </ol>
 <p>Inside the prefix header, before the closing <code>#endif</code> statement, add:</p>
-<div class="highlight"><pre><span></span><span class="cp">#ifdef __cplusplus</span>
-<span class="cp">#include</span> <span class="cpf">&lt;opencv2/opencv.hpp&gt;</span><span class="cp"></span>
-<span class="cp">#endif</span>
+<div class="highlight"><pre><span></span>#<span class="nv">ifdef</span> <span class="nv">__cplusplus</span>
+#<span class="k">include</span> <span class="o">&lt;</span><span class="nv">opencv2</span><span class="o">/</span><span class="nv">opencv</span>.<span class="nv">hpp</span><span class="o">&gt;</span>
+#<span class="k">endif</span>
 </pre></div>
 
 
@@ -316,7 +325,7 @@
 
     <footer>
 <p>
-  &copy; Tim Poulsen 2019 - This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>
+  &copy; Tim Poulsen 2020 - This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>
 </p>
 <p>    Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a>
 </p><p>

@@ -114,9 +114,19 @@
               making
               </a>
           </li>
-          <li class="tag-4">
+          <li class="tag-3">
               <a href="../tag/robotics.html">
               robotics
+              </a>
+          </li>
+          <li class="tag-4">
+              <a href="../tag/arduino.html">
+              arduino
+              </a>
+          </li>
+          <li class="tag-4">
+              <a href="../tag/xmas.html">
+              xmas
               </a>
           </li>
           <li class="tag-4">
@@ -173,8 +183,8 @@
 <p>Many guides suggest you reserve your package's name on PyPI right away so that no one else "steals" it. However, PyPI no longer supports package name reservations. The best you can do is search ahead of time to be reasonably sure your chosen name is not already taken.</p>
 <h2>Local package installation</h2>
 <p>As you develop, you can test that your package is installable and working by installing it from your local folder. Use <code>pip</code> to install from your development folder:</p>
-<div class="highlight"><pre><span></span>cd path/to/your/package/folder
-pip install -e .
+<div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">path</span><span class="o">/</span><span class="k">to</span><span class="o">/</span><span class="n">your</span><span class="o">/</span><span class="n">package</span><span class="o">/</span><span class="n">folder</span>
+<span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">e</span> <span class="p">.</span>
 </pre></div>
 
 
@@ -182,7 +192,7 @@ pip install -e .
 <p>Once your package is ready, you'll need to create accounts on both <a href="https://pypi.org/account/register/">pypi.org</a> and <a href="https://test.pypi.org/account/register/">test.pypi.org</a>. PyPI says those systems will be linked eventually. But for now, the test and production environments are completely separate. You can use the same information to register for both sites.</p>
 <h2>The <code>twine</code> package uploader</h2>
 <p>You'll be using <code>twine</code> to upload your package to PyPI. Let's get that set up. First, install it with:</p>
-<div class="highlight"><pre><span></span>pip install twine
+<div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">twine</span>
 </pre></div>
 
 
@@ -222,24 +232,24 @@ pip install -e .
 <p>Note that if you have Python files in subdirectories off your main package folder, you'll need to list them in the <code>packages=[]</code> list. See <a href="https://github.com/skypanther/robovision/blob/master/setup.py">my setup.py file</a> and my source code organization if this doesn't make sense to you.</p>
 <h2>Create your distribution file</h2>
 <p>With all that configuration out of the way, you're ready to create your distribution wheel file. Use this command:</p>
-<div class="highlight"><pre><span></span>python setup.py bdist_wheel
+<div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">setup</span><span class="p">.</span><span class="n">py</span> <span class="n">bdist_wheel</span>
 </pre></div>
 
 
 <p>This will package up your file and create a wheel file in the dist directory in your project. </p>
 <h2>Uploading</h2>
 <p>You should upload to the test environment first, and install your package from the test environment. That way, you're assured everything is working as expected before you announce your package to the world. Use this command:</p>
-<div class="highlight"><pre><span></span>twine upload dist/YOUR_PACKAGE_NAME.whl -r testpypi
+<div class="highlight"><pre><span></span><span class="n">twine</span> <span class="n">upload</span> <span class="n">dist</span><span class="o">/</span><span class="n">YOUR_PACKAGE_NAME</span><span class="p">.</span><span class="n">whl</span> <span class="o">-</span><span class="n">r</span> <span class="n">testpypi</span>
 </pre></div>
 
 
 <p>Use a command like this to install from the test environment:</p>
-<div class="highlight"><pre><span></span>pip install -i https://test.pypi.org/simple YOUR_PACKAGE_NAME
+<div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">i</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">test</span><span class="p">.</span><span class="n">pypi</span><span class="p">.</span><span class="n">org</span><span class="o">/</span><span class="k">simple</span> <span class="n">YOUR_PACKAGE_NAME</span>
 </pre></div>
 
 
 <p>Once you're sure everything is in order, upload to the production PyPI server:</p>
-<div class="highlight"><pre><span></span>twine upload dist/YOUR_PACKAGE_NAME.whl
+<div class="highlight"><pre><span></span><span class="n">twine</span> <span class="n">upload</span> <span class="n">dist</span><span class="o">/</span><span class="n">YOUR_PACKAGE_NAME</span><span class="p">.</span><span class="n">whl</span>
 </pre></div>
 
 
@@ -266,7 +276,7 @@ pip install -e .
 
     <footer>
 <p>
-  &copy; Tim Poulsen 2019 - This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>
+  &copy; Tim Poulsen 2020 - This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>
 </p>
 <p>    Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a>
 </p><p>

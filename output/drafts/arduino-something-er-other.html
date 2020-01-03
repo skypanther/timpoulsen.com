@@ -45,18 +45,23 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
-    <meta name="author" content="Tim Poulsen" />
-    <meta name="description" content="Tim Poulsen's blog of software, hardware, and life" />
+<meta name="author" content="Tim Poulsen" />
+<meta name="description" content="The loop() function When I first got started with the Arduino, I thought the program loop was special somehow. Somewhere I came up with the notion that loop() ran at some fixed interval. I worried that I had to keep the code within the loop short, or the loop would …" />
+<meta name="keywords" content="arduino">
 <meta property="og:site_name" content="Tim Poulsen"/>
-<meta property="og:type" content="blog"/>
-<meta property="og:title" content="Tim Poulsen"/>
-<meta property="og:description" content="Tim Poulsen's blog of software, hardware, and life"/>
+<meta property="og:title" content="Arduino something-er-other"/>
+<meta property="og:description" content="The loop() function When I first got started with the Arduino, I thought the program loop was special somehow. Somewhere I came up with the notion that loop() ran at some fixed interval. I worried that I had to keep the code within the loop short, or the loop would …"/>
 <meta property="og:locale" content="en_US"/>
-<meta property="og:url" content=".."/>
+<meta property="og:url" content="../drafts/arduino-something-er-other.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2019-09-23 00:00:00-04:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="../author/tim-poulsen.html">
+<meta property="article:section" content="Arduino"/>
+<meta property="article:tag" content="arduino"/>
 <meta property="og:image" content="/images/tim_poulsen.jpg">
 
-  <title>Tim Poulsen &ndash;     Tag raspberry pi
-</title>
+  <title>Tim Poulsen &ndash; Arduino something-er-other</title>
 
 
     <link href="/theme/css/main.css" rel="stylesheet">
@@ -160,73 +165,47 @@
 
     </nav>
 
-
-
-<article>
+<article class="single">
   <header>
-    <h2><a href="../2018/raspberry-pi-for-iot.html#raspberry-pi-for-iot">Raspberry Pi for IoT</a></h2>
+    <h1 id="arduino-something-er-other">Arduino something-er-other</h1>
     <p>
-          Posted on Fri 14 December 2018 in <a href="../category/making-python.html">Making, Python</a>
+          Posted on Mon 23 September 2019 in <a href="../category/arduino.html">Arduino</a>
 
 
-          &#8226;     Tagged with
-
-              <a href="../tag/raspberry-pi.html">raspberry pi</a>,              <a href="../tag/making.html">making</a>,              <a href="../tag/python.html">python</a>
     </p>
   </header>
+
+
   <div>
-      <p>I gave a presentation to the Buffalo Python meetup group in December. My talk centered around using the Raspberry Pi as a platform for IoT and embedded development. I want to share my presentation and the resources I mentioned here on my blog.</p>
-<p><strong>Update</strong> <em>I presented an expanded version of …</em></p>
-      <br>
-      <a class="btn" href="../2018/raspberry-pi-for-iot.html#raspberry-pi-for-iot">    Continue reading
-</a>
+    <h2>The <code>loop()</code> function</h2>
+<p>When I first got started with the Arduino, I thought the program loop was special somehow. Somewhere I came up with the notion that <code>loop()</code> ran at some fixed interval. I worried that I had to keep the code within the loop short, or the loop would move to the next iteration before my code was done. As a result, I struggled to understand how I'd organize my code as my programs grew.</p>
+<p>While it seems like a special function, under the covers of the Arduino's magic, all that's happening is:</p>
+<div class="highlight"><pre><span></span><span class="k">while</span><span class="p">(</span><span class="nb">true</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">loop</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>In other words, <code>loop()</code> will take as long to execute as whatever you put into it. </p>
+<h2>Using Visual Studio Code for Arduino development</h2>
+<p>plugins, config you need to do (some of it every time)</p>
+<p>https://medium.com/home-wireless/use-visual-studio-code-for-arduino-2d0cf4c1760b</p>
+<h2>Multiple files in a sketch</h2>
+<p>https://arduino.stackexchange.com/a/61636</p>
+<p>Need to figure out the conflicting advice of using a src subfolder even though it doesn't work using the Arduino IDE.</p>
+<h2>Good stuff over at</h2>
+<p>https://hackaday.io/project/8238-embedding-c</p>
   </div>
-  <hr />
-</article>
-<article>
-  <header>
-    <h2><a href="../2018/multiple-cameras-with-a-single-raspberry-pi.html#multiple-cameras-with-a-single-raspberry-pi">Multiple cameras with a single Raspberry Pi</a></h2>
+  <div class="tag-cloud">
     <p>
-          Posted on Sun 02 September 2018 in <a href="../category/python.html">Python</a>
-
-
-          &#8226;     Tagged with
-
-              <a href="../tag/python.html">python</a>,              <a href="../tag/raspberry-pi.html">raspberry pi</a>,              <a href="../tag/making.html">making</a>
+      <a href="../tag/arduino.html">arduino</a>
     </p>
-  </header>
-  <div>
-      <p>The Arducam Multi Camera Adapter board is a neat accessory for a Raspberry Pi. With it, you can connect multiple cameras to a single Pi. A single board supports up to four cameras. According to Arducam, you can stack up to four boards for a total of 16 cameras on …</p>
-      <br>
-      <a class="btn" href="../2018/multiple-cameras-with-a-single-raspberry-pi.html#multiple-cameras-with-a-single-raspberry-pi">    Continue reading
-</a>
   </div>
-  <hr />
+
+
+
+
 </article>
-<article>
-  <header>
-    <h2><a href="../2018/pi-birdcam.html#pi-birdcam">Streaming birdcam with a Raspberry Pi and picamera</a></h2>
-    <p>
-          Posted on Fri 04 May 2018 in <a href="../category/making.html">Making</a>
-
-
-          &#8226;     Tagged with
-
-              <a href="../tag/raspberry-pi.html">raspberry pi</a>,              <a href="../tag/making.html">making</a>,              <a href="../tag/python.html">python</a>
-    </p>
-  </header>
-  <div>
-      <p>My darling wife got me a Raspberry Pi 3B+ and a NOIR Pi camera for my birthday so that I could set up a streaming camera to monitor our nesting bluebirds. Here's how I did it.</p>
-<p><img src="../images/2018/what_the_camera_sees.png" width="320" align="right" title="What the camera sees">My first attempt was to use the Motion program as <a href="https://hackernoon.com/spy-your-pet-with-a-raspberry-pi-camera-server-e71bb74f79ea" target="_blank">described by Hackernoon</a>. It …</p>
-      <br>
-      <a class="btn" href="../2018/pi-birdcam.html#pi-birdcam">    Continue reading
-</a>
-  </div>
-</article>
-
-
-
-
 
     <footer>
 <p>
