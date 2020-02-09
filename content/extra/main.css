@@ -1,33 +1,103 @@
-// Colors
+/* Colors */
+
+@media (prefers-color-scheme: light) {
+    :root {
+        --sidebar-bg: rgba(24, 31, 50, 1);
+        --sidebar-link: rgba(191, 192, 192, 1);
+        --tagcloud-bg: rgba(191, 192, 192, 0.1);
+        --tagcloud-bg-hover: rgba(191, 192, 192, 1);
+        --tagcloud-link: rgba(191, 192, 192, 1);
+        --tagcloud-link-hover: rgba(24, 31, 50, 1);
+
+        --article-fg: rgb(41, 45, 61);
+        --article-bg: rgba(228, 228, 228, 1);
+        --article-link: rgba(24, 31, 50, 1);
+        --article-button-bg: rgba(24, 31, 50, 1);
+        --article-tag-bg: rgba(239, 131, 84, 1);
+        --article-tag-bg-hover: rgba(252, 163, 17, 1);
+
+        --nav-link-fg: rgba(24, 31, 50, 1);
+        --nav-link-fg-hover: rgba(79, 93, 117, 1);
+
+        --code-bg: rgba(191, 192, 192, 1);
+        --code-bold: rgba(24, 31, 50, 1);
+        --code-bright: rgba(0, 0, 0, 1);
+        --code-faded: rgba(24, 31, 50, 0.85);
+        --code-highlight: rgb(5, 57, 139);
+        --code-constants: rgb(189, 79, 32);
+        --code-border: rgba(24, 31, 50, 1);
+        --code-comment: rgba(48, 48, 48, 0.65);
+        --code-blockcomment: rgba(24, 31, 50, 0.75);
+    }
+}
+@media (prefers-color-scheme: dark) {
+    :root {
+        --sidebar-bg: rgba(24, 31, 50, 1);
+        --sidebar-link: rgba(191, 192, 192, 1);
+        --tagcloud-bg: rgba(191, 192, 192, 0.1);
+        --tagcloud-bg-hover: rgba(191, 192, 192, 1);
+        --tagcloud-link: rgba(191, 192, 192, 1);
+        --tagcloud-link-hover: rgba(24, 31, 50, 1);
+
+        --article-bg: rgb(41, 45, 61);
+        --article-fg: rgba(191, 192, 192, 1);
+        --article-link: rgba(191, 192, 192, 1);
+        --article-button-bg: rgba(24, 31, 50, 1);
+        --article-tag-bg: rgba(239, 131, 84, 1);
+        --article-tag-bg-hover: rgba(252, 163, 17, 1);
+
+        --nav-link-fg: rgba(239, 131, 84, 1);
+        --nav-link-fg-hover: rgba(252, 163, 17, 1);
+
+        --code-bg: rgba(24, 31, 50, .9);
+        --code-bold: rgba(255, 255, 255, 1);
+        --code-bright: rgba(191, 192, 192, 1);
+        --code-faded: rgba(191, 192, 192, 0.85);
+        --code-highlight: rgba(239, 131, 84, 1);
+        --code-constants: rgb(211, 95, 46);
+        --code-border: rgba(24, 31, 50, 1);
+        --code-comment: rgba(128, 128, 128, 0.85);
+        --code-blockcomment: rgba(191, 192, 192, .75);
+        
+    }
+}
+
+body, main, article {
+    background-color: var(--article-bg);
+    color: var(--article-fg);
+}
+article p {
+    line-height: 1.55em;
+}
 aside.leftbar, div.leftbar {
-    background-color: #030E36 !important;
+    background-color: var(--sidebar-bg) !important;
+}
+aside.leftbar a {
+    color: var(--sidebar-link);
 }
 a {
-    color: #030E36;
+    color: var(--article-link);
 }
 a:hover {
-    color: #033626;
+    -webkit-transform: none !important;
+    transform: none !important;
 }
+
 a.btn {
-    background-color: #030E36;
+    background-color: var(--article-button-bg);
     text-decoration: none;
-}
-a.btn:hover {
-    background-color: #033626;
-    color: #fff;
 }
 
 article a {
-    color: #2c5894;
+    color: var(--article-link);
     text-decoration: underline;
 }
 article .tag-cloud a {
     text-decoration: none;
-    background-color: #ff4500;
+    background-color: var(--article-tag-bg);
 }
 article .tag-cloud a:hover {
-    color: black;
-    background-color: #ff5500;
+    background-color: var(--article-tag-bg-hover);
 }
 
 /* a:not( [href*='yourdomain.com'] ):not( [href^='#'] ):not( [href^='/'] ) */
@@ -57,9 +127,15 @@ main nav {
     text-align: left;
     padding-left: 2.0em;
 }
+main nav a {
+    color: var(--nav-link-fg);
+}
+main nav a:hover {
+    color: var(--nav-link-fg-hover);
+}
 
 .tagcloud {
-    background-color: #ffffff11;
+    background-color: var(--tagcloud-bg);
     padding: 15px 0 15px 0;
     border-radius: 5px;
     margin-top: 0;
@@ -81,8 +157,8 @@ main nav {
     padding-left: 0;
 }
 .tagcloud li a:hover {
-    background-color: white;
-    color: #030E36;
+    background-color: var(--tagcloud-bg-hover);
+    color: var(--tagcloud-link-hover);
 }
 
 .imgcaption {
@@ -91,7 +167,7 @@ main nav {
     color: #aaa;
 }
 
-// Social icons in left bar
+/* Social icons in left bar */
 ul.social a {
     display: inline-grid;
     height: 28px;
@@ -106,16 +182,29 @@ ul.social a i {
     line-height: 28px;
     font-size: 72%
 }
-ul.social a.sc-github {
-    background-color: #333;
+ul.social a.sc-github, ul.social a.sc-keybase {
+    background-color: var(--tagcloud-bg);
 }
 /* code formatting */
 main article table td, main article table th {
     border: none;
 }
-.highlight {
-    background-color: #eee;
+.highlight, code {
+    background-color: var(--code-bg);
 }
+code, .k, .kc, .kd, .kn, .kr, .nc, .o, .ow, .se {color: var(--code-bright);}
+.err, .nb, .nf, .nl, .nt, .s1, .s2, .si {color: var(--code-highlight);}
+.m, .mh, .mi, .nv, .s { color: var(--code-constants);}
+.nn, .sd {color: var(--code-blockcomment);}
+.bp { color: var(--code-faded); }
+.c1 { color: var(--code-comment); }
+
+main article code, main article pre {
+    background-color: var(--code-bg);
+    color: var(--code-bright);
+    border-color: var(--code-border);
+}
+
 .err {
     background-color: transparent;
 }
