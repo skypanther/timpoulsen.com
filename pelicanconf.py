@@ -59,10 +59,11 @@ LINKS = (('Topics', '/categories.html'),
 
 # Social widget
 SOCIAL = (('twitter', 'https://twitter.com/skypanther'),
-            ('github', 'https://github.com/skypanther'),
-            ('linkedin', 'https://www.linkedin.com/in/timpoulsen'),
-            ('rss', 'feeds/all.atom.xml'),
-            )
+          ('github', 'https://github.com/skypanther'),
+          ('linkedin', 'https://www.linkedin.com/in/timpoulsen'),
+          ('keybase', 'https://keybase.io/skypanther'),
+          ('rss', 'feeds/all.atom.xml'),
+        )
 
 MENUITEMS = (('Topics', '/categories.html'),
              ('About', '/pages/about.html'),
