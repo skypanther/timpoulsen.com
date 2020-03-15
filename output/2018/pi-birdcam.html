@@ -1,0 +1,339 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,400italic' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" type="text/css" href="../theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="../theme/pygments/github.min.css">
+  <link rel="stylesheet" type="text/css" href="../theme/css/main.css">
+  <link rel="stylesheet" type="text/css" href="../theme/font-awesome/css/fontawesome.css">
+
+
+    <link href="https://www.timpoulsen.com/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Tim Poulsen Atom">
+
+
+  <link rel="apple-touch-icon" sizes="57x57" href="/images/favicons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/images/favicons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/images/favicons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/images/favicons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/images/favicons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/images/favicons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/images/favicons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/images/favicons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/images/favicons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/images/favicons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicons/favicon-16x16.png">
+  <link rel="manifest" href="/images/favicons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/images/favicons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="index, follow" />
+
+    <!-- Chrome, Firefox OS and Opera -->
+    <meta name="theme-color" content="#143742">
+    <!-- Windows Phone -->
+    <meta name="msapplication-navbutton-color" content="#143742">
+    <!-- iOS Safari -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+<meta name="author" content="Tim Poulsen" />
+<meta name="description" content="My darling wife got me a Raspberry Pi 3B+ and a NOIR Pi camera for my birthday so that I could set up a streaming camera to monitor our nesting bluebirds. Here's how I did it. My first attempt was to use the Motion program as described by Hackernoon. It …" />
+<meta name="keywords" content="raspberry pi, making, python">
+<meta property="og:site_name" content="Tim Poulsen"/>
+<meta property="og:title" content="Streaming birdcam with a Raspberry Pi and picamera"/>
+<meta property="og:description" content="My darling wife got me a Raspberry Pi 3B+ and a NOIR Pi camera for my birthday so that I could set up a streaming camera to monitor our nesting bluebirds. Here's how I did it. My first attempt was to use the Motion program as described by Hackernoon. It …"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="../2018/pi-birdcam.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2018-05-04 00:00:00-04:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="../author/tim-poulsen.html">
+<meta property="article:section" content="Making"/>
+<meta property="article:tag" content="raspberry pi"/>
+<meta property="article:tag" content="making"/>
+<meta property="article:tag" content="python"/>
+<meta property="og:image" content="/images/tim_poulsen.jpg">
+
+  <title>Tim Poulsen &ndash; Streaming birdcam with a Raspberry Pi and picamera</title>
+
+
+    <link href="/theme/css/main.css" rel="stylesheet">
+
+</head>
+<body>
+  <aside class="leftbar" style="background-color: #030E36;">
+    <div class="leftbar" style="background-color: #030E36;">
+      <a href="..">
+        <img src="/images/tim_poulsen.jpg" alt="Tim Poulsen" title="Tim Poulsen">
+      </a>
+      <h1><a href="..">Tim Poulsen</a></h1>
+
+<p class="subtitle">Explorations of software and hardware</p>
+      <ul class="social">
+        <li><a class="sc-twitter" href="https://twitter.com/skypanther" target="_blank"><i class="fa fa-twitter"></i></a></li>
+        <li><a class="sc-github" href="https://github.com/skypanther" target="_blank"><i class="fa fa-github"></i></a></li>
+        <li><a class="sc-linkedin" href="https://www.linkedin.com/in/timpoulsen" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+        <li><a class="sc-keybase" href="https://keybase.io/skypanther" target="_blank"><i class="fa fa-keybase"></i></a></li>
+        <li><a class="sc-rss" href="feeds/all.atom.xml" target="_blank"><i class="fa fa-rss"></i></a></li>
+      </ul>
+
+      <nav>
+        <ul class="list">
+          <li><a href="../pages/about.html#about">About</a></li>
+
+          <li><a href="/categories.html" target="_blank">Topics</a></li>
+          <li><a href="http://skypanther.com" target="_blank">Skypanther Studios</a></li>
+        </ul>
+      </nav>
+
+      <p class="subhead">Tags:</p>
+      <ul class="tagcloud">
+          <li class="tag-1">
+              <a href="../tag/python.html">
+              python
+              </a>
+          </li>
+          <li class="tag-1">
+              <a href="../tag/opencv.html">
+              opencv
+              </a>
+          </li>
+          <li class="tag-2">
+              <a href="../tag/raspberry-pi.html">
+              raspberry pi
+              </a>
+          </li>
+          <li class="tag-2">
+              <a href="../tag/making.html">
+              making
+              </a>
+          </li>
+          <li class="tag-3">
+              <a href="../tag/robotics.html">
+              robotics
+              </a>
+          </li>
+          <li class="tag-4">
+              <a href="../tag/htmlcss.html">
+              html/css
+              </a>
+          </li>
+          <li class="tag-4">
+              <a href="../tag/webdev.html">
+              webdev
+              </a>
+          </li>
+          <li class="tag-4">
+              <a href="../tag/arduino.html">
+              arduino
+              </a>
+          </li>
+          <li class="tag-4">
+              <a href="../tag/xmas.html">
+              xmas
+              </a>
+          </li>
+          <li class="tag-4">
+              <a href="../tag/ios.html">
+              iOS
+              </a>
+          </li>
+          <li class="tag-4">
+              <a href="../tag/swift.html">
+              Swift
+              </a>
+          </li>
+          <li class="tag-4">
+              <a href="../tag/anaconda.html">
+              anaconda
+              </a>
+          </li>
+      </ul>
+
+    </div>
+
+
+  </aside>
+  <main>
+
+    <nav>
+      <a href="..">    Home
+</a>
+
+      <a href="/categories.html">Topics</a>
+      <a href="/pages/about.html">About</a>
+      <a href="/tags.html">Tags</a>
+
+      <a href="https://www.timpoulsen.com/feeds/all.atom.xml">    Atom
+</a>
+
+    </nav>
+
+<article class="single">
+  <header>
+    <h1 id="pi-birdcam">Streaming birdcam with a Raspberry Pi and picamera</h1>
+    <p>
+          Posted on Fri 04 May 2018 in <a href="../category/making.html">Making</a>
+
+
+    </p>
+  </header>
+
+
+  <div>
+    <p>My darling wife got me a Raspberry Pi 3B+ and a NOIR Pi camera for my birthday so that I could set up a streaming camera to monitor our nesting bluebirds. Here's how I did it.</p>
+<p><img src="../images/2018/what_the_camera_sees.png" width="320" align="right" title="What the camera sees">My first attempt was to use the Motion program as <a href="https://hackernoon.com/spy-your-pet-with-a-raspberry-pi-camera-server-e71bb74f79ea" target="_blank">described by Hackernoon</a>. It worked, but the resulting video stream was very slow and jerky. I'd say I was getting only a few frames a second at best. I knew I could do better.</p>
+<h2>Picamera</h2>
+<p>The better solution turned out to be <a href="https://picamera.readthedocs.io" target="_blank">picamera</a>. This is a Python module for using the Raspberry Pi camera. The author has not only written a fantastic library, but he's also provided lots of great recipes (sample scripts) showing how to use it.</p>
+<p>His <a href="https://github.com/waveform80/pistreaming/" target="_blank">pistreaming</a> recipe looked to be perfect for my needs. Raspbian Stretch comes with Python installed. So I jumped right into the pistreamer install steps described on the <a href="https://github.com/waveform80/pistreaming/" target="_blank">pistreaming GitHub site</a>.</p>
+<p>The setup was quite simple and within just a few minutes I had the script running. It streamed much faster than Motion. I just needed to get this streaming across the web and I would be good to go.</p>
+<h2>Houston, we have a problem</h2>
+<p>I hit a little snag at this point. While I could access the stream just fine from the Pi itself, I could not do so from another computer on my local network. I found that I could access the pistreaming page if I connected the Pi to my network over Ethernet. It had to be something with my wifi connection.</p>
+<p>Eventually I discovered that my Asus router or the Tomato firmware I run on it was blocking Wireless Multicast Routing, meaning that it was not allowing RTP/RTSP streaming between wifi nodes. Once I enabled that option, I could access the stream from my laptop.</p>
+<h2>Streaming to the internet</h2>
+<p>Streaming to the internet involved a couple of changes. First, I had to enable Port Forwarding in my router's admin tool:</p>
+<p><img alt="port forwarding in Tomato" src="../images/2018/portforwarding.png"></p>
+<p><small><strong>Note:</strong> Make sure you use the IP addresses of your Pi, not those in my screenshot. You'll also notice that I set a custom port for the stream (8888 rather than the default 8082). Make sure you use the port your copy of pistreaming is set up to use.</small></p>
+<p>According to a closed issue on the pistreaming repo, I needed to modify the script's index.html file. That file includes a hard-coded LAN address for the stream's address. It needs to be modified to use your public IP, which is the one your ISP gives you. You can do a Google search for "what's my IP" to find that address.</p>
+<p>Then, update index.html, changing the <code>var client</code> line near the bottom like this:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// change the var client line (at the bottom) to be:</span>
+<span class="kd">var</span> <span class="nx">client</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">WebSocket</span><span class="p">(</span><span class="s1">&#39;ws://your_external_ip_address:${WS_PORT}/&#39;</span><span class="p">);</span>
+</pre></div>
+</td></tr></table>
+
+<p>Make sure you have the quotes right on that. There are few quotes in there to start and you end up with two single quotes around everything between the parentheses.</p>
+<h2>Streaming on startup</h2>
+<p>I wanted the streaming server to start up automatically when the Pi booted up. To do this, I modified /etc/rc.local to run the server.py script. Keep in mind that scripts run by system processes like this don't have access to the same environment as you would have at a terminal prompt. When auto-running scripts like this, you have to use full (absolute) paths to python and your script.</p>
+<p>Here are my steps for this:</p>
+<ol>
+<li>First, I found the path to python with <code>which python3</code></li>
+<li>Then, I opened the file in nano (<code>sudo nano /etc/rc.local</code>)</li>
+<li>At the end of the file, right before the <code>exit 0</code> line, I added:<br/><code>/path/to/python3 /home/pi/pistreaming/server.py &amp;</code><br/> Note that the <code>&amp;</code> at the end runs the script in the background so that it will keep running once rc.local exits.</li>
+<li>Then, <code>Ctrl + o</code> to save and <code>Ctrl + x</code> to exit nano.</li>
+</ol>
+<p>I had one more change to make, again related to absolute paths. I had to modify server.py so it could find the index.html and jsmpg.js files when run by rc.local. The relative paths it used didn't work until I updated the <code>class StreamingHttpServer</code> class definition follows:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">StreamingHttpServer</span><span class="p">(</span><span class="n">HTTPServer</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># I added this line</span>
+        <span class="n">cwd</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">realpath</span><span class="p">(</span><span class="vm">__file__</span><span class="p">))</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">StreamingHttpServer</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+              <span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">HTTP_PORT</span><span class="p">),</span> <span class="n">StreamingHttpHandler</span><span class="p">)</span>
+        <span class="c1"># then modified this next line</span>
+        <span class="k">with</span> <span class="n">io</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cwd</span><span class="p">,</span> <span class="s1">&#39;index.html&#39;</span><span class="p">),</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">index_template</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+        <span class="c1"># this one too</span>
+        <span class="k">with</span> <span class="n">io</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cwd</span><span class="p">,</span> <span class="s1">&#39;jsmpg.js&#39;</span><span class="p">),</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">jsmpg_content</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+</pre></div>
+</td></tr></table>
+
+<p>And with that, I was done. A quick reboot of the Pi and a check and sure enough it was streaming away.</p>
+<h2>Lighting the way</h2>
+<p>The inside of a birdbox is pretty dark, even during the day. From what I could find in the literature, birds see wavelengths between roughly 300 to 700 nm. That would mean a 940 nm IR LED would be outside their vision range but it would be visible to my NOIR (no infrared filter) Pi camera.</p>
+<p>I used a 100 ohm resister and wired up the LED to <a href="https://pinout.xyz/" target="_blank">pins 6 (ground) and 12 (Broadcom pin 18)</a>. I chose this pin because it's the PWM pin, which means if the LED is too bright, I can dim it by implementing pulse width modulation in a script rather than having to solder in a bigger resister.</p>
+<p>Python on a Raspberry Pi comes with the <code>RPi.GPIO</code> library for accessing the pins. I happen to be using Berryconda (the Anaconda distribution for the Pi) which doesn't come with the library. But, it was a simple install with <code>pip install RPi.GPIO</code>. Here's my dead-simple script for turning on the LED.</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">RPi.GPIO</span> <span class="kn">as</span> <span class="nn">GPIO</span>
+
+<span class="n">ledPin</span> <span class="o">=</span> <span class="mi">18</span>  <span class="c1"># Pi pin 12 is Broadcom pin 18</span>
+
+<span class="n">GPIO</span><span class="o">.</span><span class="n">setmode</span><span class="p">(</span><span class="n">GPIO</span><span class="o">.</span><span class="n">BCM</span><span class="p">)</span> <span class="c1"># Use Broadcom pin-numbering mode</span>
+<span class="n">GPIO</span><span class="o">.</span><span class="n">setup</span><span class="p">(</span><span class="n">ledPin</span><span class="p">,</span> <span class="n">GPIO</span><span class="o">.</span><span class="n">OUT</span><span class="p">)</span> <span class="c1"># LED pin set as output</span>
+<span class="n">GPIO</span><span class="o">.</span><span class="n">output</span><span class="p">(</span><span class="n">ledPin</span><span class="p">,</span> <span class="n">GPIO</span><span class="o">.</span><span class="n">HIGH</span><span class="p">)</span>
+</pre></div>
+</td></tr></table>
+
+<p>I saved that as led.py in my home directory. I updated rc.local to also run this script after starting the streaming server.</p>
+<h2>Focusing the camera</h2>
+<p>Finally, I had to adjust the focus of the camera. A bluebird box is roughly 9 inches tall and the nests are usually a few inches of packed grass and sticks. By default, the Pi camera is not in focus that close. But, you can change that.</p>
+<p>To avoid breaking the camera lens assembly right off the board, you'll want to hold the square frame of the camera lens with one set of pliers. Then, use a pair of needle nose pliers to turn the inner lens to focus. I focused while watching the live stream until it was in focus at roughly 6 or 7 inches away. </p>
+<p><img alt="Focusing the Pi cam" src="../images/2018/focusing_pi_camera.jpg"></p>
+<h2>Update 1</h2>
+<p>Sadly, the nest box that had four bluebird eggs is now empty. Something (a snake, raccoon, house sparrow, grackle, etc.) raided the box and took the eggs. I found a partial shell about 30 feet from the box, so I suspect another bird. As sad as it is, nest raiding is unfortunately common. </p>
+<p>As luck would have it, we have a nest with eggs in the next box over. We think it is a Carolina Wren nest based on the shape, building materials, and egg coloration. Unfortunately, Carolina Wrens make deep nests such that there's no way to mount the camera inside the box like I'd do with bluebirds. </p>
+<p><img src="../images/2018/camera_housing.jpg" width="320" title="My high tech housing">
+<br/></p>
+<p>I went with a rather high-tech housing for the Pi, camera, and power supply. Everything fit inside an empty plastic nut container. I Gorilla-taped it to a metal garden stake. Ugly, but it works.</p>
+<p><br/>
+<img src="../images/2018/camera_aiming.jpg" width="320" title="Aiming at the house"></p>
+<p>And aimed it at the house. We can watch the wrens come and go, which is definitely not as cool as seeing inside the box.</p>
+<h2>Update 2</h2>
+<p>The damn sparrows got the wrens too. Fortunately, a bluebird pair nested in another nearby box on our property. So far, they're safe and happily watching their eggs. Here's a brief look inside (recorded, not live).</p>
+<p><img src="../images/2018/bluebirdcam.gif" width="320" title="Animated gif of mama bluebird tending her eggs"></p>
+<p>Love them <i class="fa fa-twitter blue"></i>!</p>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="../tag/raspberry-pi.html">raspberry pi</a>
+      <a href="../tag/making.html">making</a>
+      <a href="../tag/python.html">python</a>
+    </p>
+  </div>
+
+
+
+
+</article>
+
+    <footer>
+<p>
+  &copy; Tim Poulsen 2020 - This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>
+</p>
+<p>    Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a>
+</p><p>
+  <a rel="license"
+     href="http://creativecommons.org/licenses/by-sa/4.0/"
+     target="_blank">
+    <img alt="Creative Commons License"
+         title="Creative Commons License"
+         style="border-width:0"
+         src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png"
+         width="80"
+         height="15"/>
+  </a>
+</p>    </footer>
+  </main>
+
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Tim Poulsen ",
+  "url" : "..",
+  "image": "/images/tim_poulsen.jpg",
+  "description": "Tim Poulsen's blog of software, hardware, and life"
+}
+</script>
+</body>
+</html>
