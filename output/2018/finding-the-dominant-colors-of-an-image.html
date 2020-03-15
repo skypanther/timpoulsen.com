@@ -1,0 +1,532 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,400italic' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" type="text/css" href="../theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="../theme/pygments/github.min.css">
+  <link rel="stylesheet" type="text/css" href="../theme/css/main.css">
+  <link rel="stylesheet" type="text/css" href="../theme/font-awesome/css/fontawesome.css">
+
+
+    <link href="https://www.timpoulsen.com/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Tim Poulsen Atom">
+
+
+  <link rel="apple-touch-icon" sizes="57x57" href="/images/favicons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/images/favicons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/images/favicons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/images/favicons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/images/favicons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/images/favicons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/images/favicons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/images/favicons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/images/favicons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/images/favicons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicons/favicon-16x16.png">
+  <link rel="manifest" href="/images/favicons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/images/favicons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="index, follow" />
+
+    <!-- Chrome, Firefox OS and Opera -->
+    <meta name="theme-color" content="#143742">
+    <!-- Windows Phone -->
+    <meta name="msapplication-navbutton-color" content="#143742">
+    <!-- iOS Safari -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+<meta name="author" content="Tim Poulsen" />
+<meta name="description" content="The typical way to isolate or find an object in an image is to look for its color. You specify a range of colors, then use OpenCV to identify regions in an image that contain colors within that range. But, even if you know the exact color of your target …" />
+<meta name="keywords" content="opencv, python">
+<meta property="og:site_name" content="Tim Poulsen"/>
+<meta property="og:title" content="Finding the dominant colors of an image"/>
+<meta property="og:description" content="The typical way to isolate or find an object in an image is to look for its color. You specify a range of colors, then use OpenCV to identify regions in an image that contain colors within that range. But, even if you know the exact color of your target …"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="../2018/finding-the-dominant-colors-of-an-image.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2018-07-24 00:00:00-04:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="../author/tim-poulsen.html">
+<meta property="article:section" content="OpenCV"/>
+<meta property="article:tag" content="opencv"/>
+<meta property="article:tag" content="python"/>
+<meta property="og:image" content="/images/tim_poulsen.jpg">
+
+  <title>Tim Poulsen &ndash; Finding the dominant colors of an image</title>
+
+
+    <link href="/theme/css/main.css" rel="stylesheet">
+
+</head>
+<body>
+  <aside class="leftbar" style="background-color: #030E36;">
+    <div class="leftbar" style="background-color: #030E36;">
+      <a href="..">
+        <img src="/images/tim_poulsen.jpg" alt="Tim Poulsen" title="Tim Poulsen">
+      </a>
+      <h1><a href="..">Tim Poulsen</a></h1>
+
+<p class="subtitle">Explorations of software and hardware</p>
+      <ul class="social">
+        <li><a class="sc-twitter" href="https://twitter.com/skypanther" target="_blank"><i class="fa fa-twitter"></i></a></li>
+        <li><a class="sc-github" href="https://github.com/skypanther" target="_blank"><i class="fa fa-github"></i></a></li>
+        <li><a class="sc-linkedin" href="https://www.linkedin.com/in/timpoulsen" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+        <li><a class="sc-keybase" href="https://keybase.io/skypanther" target="_blank"><i class="fa fa-keybase"></i></a></li>
+        <li><a class="sc-rss" href="feeds/all.atom.xml" target="_blank"><i class="fa fa-rss"></i></a></li>
+      </ul>
+
+      <nav>
+        <ul class="list">
+          <li><a href="../pages/about.html#about">About</a></li>
+
+          <li><a href="/categories.html" target="_blank">Topics</a></li>
+          <li><a href="http://skypanther.com" target="_blank">Skypanther Studios</a></li>
+        </ul>
+      </nav>
+
+      <p class="subhead">Tags:</p>
+      <ul class="tagcloud">
+          <li class="tag-1">
+              <a href="../tag/python.html">
+              python
+              </a>
+          </li>
+          <li class="tag-1">
+              <a href="../tag/opencv.html">
+              opencv
+              </a>
+          </li>
+          <li class="tag-2">
+              <a href="../tag/raspberry-pi.html">
+              raspberry pi
+              </a>
+          </li>
+          <li class="tag-2">
+              <a href="../tag/making.html">
+              making
+              </a>
+          </li>
+          <li class="tag-3">
+              <a href="../tag/robotics.html">
+              robotics
+              </a>
+          </li>
+          <li class="tag-4">
+              <a href="../tag/htmlcss.html">
+              html/css
+              </a>
+          </li>
+          <li class="tag-4">
+              <a href="../tag/webdev.html">
+              webdev
+              </a>
+          </li>
+          <li class="tag-4">
+              <a href="../tag/arduino.html">
+              arduino
+              </a>
+          </li>
+          <li class="tag-4">
+              <a href="../tag/xmas.html">
+              xmas
+              </a>
+          </li>
+          <li class="tag-4">
+              <a href="../tag/ios.html">
+              iOS
+              </a>
+          </li>
+          <li class="tag-4">
+              <a href="../tag/swift.html">
+              Swift
+              </a>
+          </li>
+          <li class="tag-4">
+              <a href="../tag/anaconda.html">
+              anaconda
+              </a>
+          </li>
+      </ul>
+
+    </div>
+
+
+  </aside>
+  <main>
+
+    <nav>
+      <a href="..">    Home
+</a>
+
+      <a href="/categories.html">Topics</a>
+      <a href="/pages/about.html">About</a>
+      <a href="/tags.html">Tags</a>
+
+      <a href="https://www.timpoulsen.com/feeds/all.atom.xml">    Atom
+</a>
+
+    </nav>
+
+<article class="single">
+  <header>
+    <h1 id="finding-the-dominant-colors-of-an-image">Finding the dominant colors of an image</h1>
+    <p>
+          Posted on Tue 24 July 2018 in <a href="../category/opencv.html">OpenCV</a>
+
+
+    </p>
+  </header>
+
+
+  <div>
+    <p>The typical way to isolate or find an object in an image is to look for its color. You specify a range of colors, then use OpenCV to identify regions in an image that contain colors within that range. But, even if you know the exact color of your target, lighting, shadows, and your camera's sensor will alter the detected color. So, how do you best determine the color range to use?</p>
+<p>In this article, I'll explore some different methods to work with colors. In a future article, we'll use this knowledge, plus <a href="https://www.timpoulsen.com/2018/handling-mouse-events-in-opencv.html">selecting a region of interest</a> within an image/video to determine the exact range of colors needed to isolate an object.</p>
+<p>Let's say your goal is to isolate the puppy in this image. You'll notice that his fur color varies between an off-white to a golden tan. The foreground is brighter, making his hindquarters darker and less richly colored. The toy he has is only a bit darker red-brown.</p>
+<p><img src="../images/2018/puppy.jpg" width="480" title="Puppy"/></p>
+<h2>An average solution</h2>
+<p>Your first attempt might be to take an average of the colors to find the midpoint of his range of colors. Then, to make the range you might choose colors a bit darker and lighter than that average. Of course, you wouldn't want to include the grass in the average. Assuming a cropped version of just the puppy, you could use this script to calculate the average color:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">#</span>
+<span class="c1">#  Find the average color in an image</span>
+<span class="c1">#</span>
+<span class="kn">import</span> <span class="nn">cv2</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+
+<span class="n">img</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s1">&#39;puppy_cropped.jpg&#39;</span><span class="p">)</span>
+<span class="n">height</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+
+<span class="c1"># calculate the average color of each row of our image</span>
+<span class="n">avg_color_per_row</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># calculate the averages of our rows</span>
+<span class="n">avg_colors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="n">avg_color_per_row</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># avg_color is a tuple in BGR order of the average colors</span>
+<span class="c1"># but as float values</span>
+<span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;avg_colors: {avg_colors}&#39;</span><span class="p">)</span>
+
+<span class="c1"># so, convert that array to integers</span>
+<span class="n">int_averages</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">avg_colors</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;int_averages: {int_averages}&#39;</span><span class="p">)</span>
+
+<span class="c1"># create a new image of the same height/width as the original</span>
+<span class="n">average_image</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">height</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
+<span class="c1"># and fill its pixels with our average color</span>
+<span class="n">average_image</span><span class="p">[:]</span> <span class="o">=</span> <span class="n">int_averages</span>
+
+<span class="c1"># finally, show it side-by-side with the original</span>
+<span class="n">cv2</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="s2">&quot;Avg Color&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">([</span><span class="n">img</span><span class="p">,</span> <span class="n">average_image</span><span class="p">]))</span>
+<span class="n">cv2</span><span class="o">.</span><span class="n">waitKey</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</td></tr></table>
+
+<p>Which would give you this:</p>
+<p><img src="../images/2018/average_color.png" width="480" title="Average color of the puppy"/></p>
+<p>Visually, that resulting average tan looks like it would represent the puppy's colors. In practice though, you probably won't find any pixels in the puppy that match that exact shade. Even if you looked at a range of shades lighter to darker than that average, only a few of his pixels would be included. It's even likely you'd get a few pixels of his toy. As bad as the average works with the puppy, the average would totally fail on a multi-colored object, for example the FIRST<sup>&reg;</sup> logo.</p>
+<p><img src="../images/2018/first_logo_average.png" width="480" title="Average color of the NASA log"/></p>
+<p class="imgcaption">FIRST&reg;, the FIRST&reg; logo, FIRST&reg; Robotics Competition (formerly also known as FRC&reg;), FIRST&reg; Tech Challenge (formerly also known as FTC&reg;) are trademarks of For Inspiration and Recognition of Science and Technology (FIRST&reg;).</p>
+
+<h2>K-means clustering</h2>
+<p>Let's try a more powerful method. We'll find the most common colors in our image using <em>k-means clustering</em>. A <a href="https://en.wikipedia.org/wiki/K-means_clustering" target="_blank">formal definition</a> would go something like "<em>k-means clustering partitions n observations into k clusters</em>". In our case, we have a bunch of pixels (our <code>n</code>) and we want to pull out some number (the <code>k</code>) of colors.</p>
+<p>With k-means, you have to specify the number of clusters up-front. There are other techniques that don't have this requirement. In any case, it's not a significant limitation for our needs here.</p>
+<p>We'll use the scikit-learn library's <a href="http://scikit-learn.org/stable/modules/generated/sklearn.cluster.KMeans.html" target="_blank"><code>sklearn.cluster.kmeans</code></a> function to do the heavy lifting. (OpenCV itself offers a <code>kmeans()</code> function, but scikit's is a bit more flexible for our needs). The following script is based on a post on <a href="https://www.pyimagesearch.com/2014/05/26/opencv-python-k-means-color-clustering/" target="_blank">the PyImageSearch blog</a> (a great resource!)</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">#</span>
+<span class="c1">#  Use k-means clustering to find the most-common colors in an image</span>
+<span class="c1">#</span>
+<span class="kn">import</span> <span class="nn">cv2</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">sklearn.cluster</span> <span class="kn">import</span> <span class="n">KMeans</span>
+
+
+<span class="k">def</span> <span class="nf">make_histogram</span><span class="p">(</span><span class="n">cluster</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Count the number of pixels in each cluster</span>
+<span class="sd">    :param: KMeans cluster</span>
+<span class="sd">    :return: numpy histogram</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">numLabels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">cluster</span><span class="o">.</span><span class="n">labels_</span><span class="p">))</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">hist</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">histogram</span><span class="p">(</span><span class="n">cluster</span><span class="o">.</span><span class="n">labels_</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="n">numLabels</span><span class="p">)</span>
+    <span class="n">hist</span> <span class="o">=</span> <span class="n">hist</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;float32&#39;</span><span class="p">)</span>
+    <span class="n">hist</span> <span class="o">/=</span> <span class="n">hist</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">hist</span>
+
+
+<span class="k">def</span> <span class="nf">make_bar</span><span class="p">(</span><span class="n">height</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">color</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Create an image of a given color</span>
+<span class="sd">    :param: height of the image</span>
+<span class="sd">    :param: width of the image</span>
+<span class="sd">    :param: BGR pixel values of the color</span>
+<span class="sd">    :return: tuple of bar, rgb values, and hsv values</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">bar</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">height</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
+    <span class="n">bar</span><span class="p">[:]</span> <span class="o">=</span> <span class="n">color</span>
+    <span class="n">red</span><span class="p">,</span> <span class="n">green</span><span class="p">,</span> <span class="n">blue</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">color</span><span class="p">[</span><span class="mi">2</span><span class="p">]),</span> <span class="nb">int</span><span class="p">(</span><span class="n">color</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="nb">int</span><span class="p">(</span><span class="n">color</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">hsv_bar</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">bar</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_BGR2HSV</span><span class="p">)</span>
+    <span class="n">hue</span><span class="p">,</span> <span class="n">sat</span><span class="p">,</span> <span class="n">val</span> <span class="o">=</span> <span class="n">hsv_bar</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">bar</span><span class="p">,</span> <span class="p">(</span><span class="n">red</span><span class="p">,</span> <span class="n">green</span><span class="p">,</span> <span class="n">blue</span><span class="p">),</span> <span class="p">(</span><span class="n">hue</span><span class="p">,</span> <span class="n">sat</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">sort_hsvs</span><span class="p">(</span><span class="n">hsv_list</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Sort the list of HSV values</span>
+<span class="sd">    :param hsv_list: List of HSV tuples</span>
+<span class="sd">    :return: List of indexes, sorted by hue, then saturation, then value</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">bars_with_indexes</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">hsv_val</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">hsv_list</span><span class="p">):</span>
+        <span class="n">bars_with_indexes</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">index</span><span class="p">,</span> <span class="n">hsv_val</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">hsv_val</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">hsv_val</span><span class="p">[</span><span class="mi">2</span><span class="p">]))</span>
+    <span class="n">bars_with_indexes</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">elem</span><span class="p">:</span> <span class="p">(</span><span class="n">elem</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">elem</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">elem</span><span class="p">[</span><span class="mi">3</span><span class="p">]))</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">bars_with_indexes</span><span class="p">]</span>
+
+
+<span class="c1"># START HERE</span>
+<span class="n">img</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s1">&#39;puppy_cropped.jpg&#39;</span><span class="p">)</span>
+<span class="n">height</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+
+<span class="c1"># reshape the image to be a simple list of RGB pixels</span>
+<span class="n">image</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="n">height</span> <span class="o">*</span> <span class="n">width</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+
+<span class="c1"># we&#39;ll pick the 5 most common colors</span>
+<span class="n">num_clusters</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">clusters</span> <span class="o">=</span> <span class="n">KMeans</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="n">num_clusters</span><span class="p">)</span>
+<span class="n">clusters</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+
+<span class="c1"># count the dominant colors and put them in &quot;buckets&quot;</span>
+<span class="n">histogram</span> <span class="o">=</span> <span class="n">make_histogram</span><span class="p">(</span><span class="n">clusters</span><span class="p">)</span>
+<span class="c1"># then sort them, most-common first</span>
+<span class="n">combined</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">(</span><span class="n">histogram</span><span class="p">,</span> <span class="n">clusters</span><span class="o">.</span><span class="n">cluster_centers_</span><span class="p">)</span>
+<span class="n">combined</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">combined</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+<span class="c1"># finally, we&#39;ll output a graphic showing the colors in order</span>
+<span class="n">bars</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">hsv_values</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">rows</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">combined</span><span class="p">):</span>
+    <span class="n">bar</span><span class="p">,</span> <span class="n">rgb</span><span class="p">,</span> <span class="n">hsv</span> <span class="o">=</span> <span class="n">make_bar</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="n">rows</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;Bar {index + 1}&#39;</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;  RGB values: {rgb}&#39;</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;  HSV values: {hsv}&#39;</span><span class="p">)</span>
+    <span class="n">hsv_values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">hsv</span><span class="p">)</span>
+    <span class="n">bars</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">bar</span><span class="p">)</span>
+
+<span class="c1"># sort the bars[] list so that we can show the colored boxes sorted</span>
+<span class="c1"># by their HSV values -- sort by hue, then saturation</span>
+<span class="n">sorted_bar_indexes</span> <span class="o">=</span> <span class="n">sort_hsvs</span><span class="p">(</span><span class="n">hsv_values</span><span class="p">)</span>
+<span class="n">sorted_bars</span> <span class="o">=</span> <span class="p">[</span><span class="n">bars</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="n">sorted_bar_indexes</span><span class="p">]</span>
+
+<span class="n">cv2</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="s1">&#39;Sorted by HSV values&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">(</span><span class="n">sorted_bars</span><span class="p">))</span>
+<span class="n">cv2</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;{num_clusters} Most Common Colors&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">(</span><span class="n">bars</span><span class="p">))</span>
+<span class="n">cv2</span><span class="o">.</span><span class="n">waitKey</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</td></tr></table>
+
+<p>That's a bunch of code I realize. This script does a few things; let's go through it. Skip the functions for now and jump to the "Start Here" part. The script reads in our image and determines its height and width. Then we convert it from a height by width matrix into a list of RBG values for easier processing. </p>
+<p>Next, the script examines the image (our cropped puppy) and uses <code>KMeans()</code> to find the five most common colors (lines 59 - 61). The <code>make_histogram()</code> function essentially counts the pixels in each of those "buckets" returning those counts as a value between 0 and 1. We sort those "buckets" into a descending order of most to least common. Finally, starting on line 70, the code outputs some useful info about those dominant colors. We loop through our "buckets" to create images (aka "bars") from those colors and show them in OpenCV windows.</p>
+<h2>Output</h2>
+<p>Check out your console: the script outputs the RGB and HSV color values for each of the colored boxes. </p>
+<div class="highlight"><pre><span></span>&gt; python dominant_color.py 
+Bar <span class="m">1</span>
+  RGB values: <span class="o">(</span><span class="m">131</span>, <span class="m">114</span>, <span class="m">99</span><span class="o">)</span>
+  HSV values: <span class="o">(</span><span class="m">14</span>, <span class="m">62</span>, <span class="m">131</span><span class="o">)</span>
+Bar <span class="m">2</span>
+  RGB values: <span class="o">(</span><span class="m">153</span>, <span class="m">133</span>, <span class="m">114</span><span class="o">)</span>
+  HSV values: <span class="o">(</span><span class="m">15</span>, <span class="m">65</span>, <span class="m">153</span><span class="o">)</span>
+Bar <span class="m">3</span>
+  RGB values: <span class="o">(</span><span class="m">141</span>, <span class="m">138</span>, <span class="m">136</span><span class="o">)</span>
+  HSV values: <span class="o">(</span><span class="m">12</span>, <span class="m">9</span>, <span class="m">141</span><span class="o">)</span>
+Bar <span class="m">4</span>
+  RGB values: <span class="o">(</span><span class="m">165</span>, <span class="m">156</span>, <span class="m">148</span><span class="o">)</span>
+  HSV values: <span class="o">(</span><span class="m">14</span>, <span class="m">26</span>, <span class="m">165</span><span class="o">)</span>
+Bar <span class="m">5</span>
+  RGB values: <span class="o">(</span><span class="m">99</span>, <span class="m">87</span>, <span class="m">75</span><span class="o">)</span>
+  HSV values: <span class="o">(</span><span class="m">15</span>, <span class="m">62</span>, <span class="m">99</span><span class="o">)</span>
+</pre></div>
+
+
+<p>Given our cropped puppy image, the script outputs two CV2 windows. The first shows colored boxes for the top 5 dominant colors, listed most to least common left to right. If you move that window out of the way, you'll see a similar one showing those same colors arranged in HSV order (sorted lowest to highest by hue, saturation, then value).</p>
+<p><img src="../images/2018/puppy_5_colors_with_hsv.png" width="480" title="Top 5 colors of the puppy"/></p>
+<p>It might be surprising when seen as RGB boxes on your screen, but the dominant colors are fairly close in hue, even in saturation. In fact, hue values range between 12 and 15. (Sidenote: OpenCV represents hue ranges from 0-180, not 0-360 as graphics apps typically do.)</p>
+<p>This gives us just what we need to isolate objects in an image or video stream. In a future article, I'll show how to isolate objects based on their color. My plan is to then go on to show how to discern info about the object, such as its actual size, position in the real world, and so forth. But, let's not get ahead of ourselves!</p>
+<h2>In summary</h2>
+<p>In this article, I showed how to find an average color of an image. While I didn't go on to prove it with an object isolation script, average colors are typically the best way to represent a target object. Instead, I showed a more powerful technique, the k-means cluster. I showed how to determine the five most common colors. The script I provided output convenient RGB and HSV values that you can use for object isolation.</p>
+<p>Source materials and further explorations:</p>
+<ul>
+<li><a href="https://www.timpoulsen.com/2018/handling-mouse-events-in-opencv.html">Selecting a region of interest</a> within an image/video (from this site)</li>
+<li><a href="https://www.pyimagesearch.com/2014/05/26/opencv-python-k-means-color-clustering/" target="_blank">PyImageSearch: OpenCV k-means color clustering</a></li>
+<li><a href="https://stackoverflow.com/questions/43111029/how-to-find-the-average-colour-of-an-image-in-python-with-opencv" target="_blank">StackOverflow: How to find the average colour of an image in python</a></li>
+<li><a href="https://adamspannbauer.github.io/2018/03/02/app-icon-dominant-colors/" target="_blank">Adam Spannbauer: Dominant colors in app icons</a></li>
+</ul>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="../tag/opencv.html">opencv</a>
+      <a href="../tag/python.html">python</a>
+    </p>
+  </div>
+
+
+
+
+</article>
+
+    <footer>
+<p>
+  &copy; Tim Poulsen 2020 - This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>
+</p>
+<p>    Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a>
+</p><p>
+  <a rel="license"
+     href="http://creativecommons.org/licenses/by-sa/4.0/"
+     target="_blank">
+    <img alt="Creative Commons License"
+         title="Creative Commons License"
+         style="border-width:0"
+         src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png"
+         width="80"
+         height="15"/>
+  </a>
+</p>    </footer>
+  </main>
+
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Tim Poulsen ",
+  "url" : "..",
+  "image": "/images/tim_poulsen.jpg",
+  "description": "Tim Poulsen's blog of software, hardware, and life"
+}
+</script>
+</body>
+</html>

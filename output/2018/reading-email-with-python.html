@@ -1,0 +1,529 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,400italic' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" type="text/css" href="../theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="../theme/pygments/github.min.css">
+  <link rel="stylesheet" type="text/css" href="../theme/css/main.css">
+  <link rel="stylesheet" type="text/css" href="../theme/font-awesome/css/fontawesome.css">
+
+
+    <link href="https://www.timpoulsen.com/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Tim Poulsen Atom">
+
+
+  <link rel="apple-touch-icon" sizes="57x57" href="/images/favicons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/images/favicons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/images/favicons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/images/favicons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/images/favicons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/images/favicons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/images/favicons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/images/favicons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/images/favicons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/images/favicons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicons/favicon-16x16.png">
+  <link rel="manifest" href="/images/favicons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/images/favicons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="index, follow" />
+
+    <!-- Chrome, Firefox OS and Opera -->
+    <meta name="theme-color" content="#143742">
+    <!-- Windows Phone -->
+    <meta name="msapplication-navbutton-color" content="#143742">
+    <!-- iOS Safari -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+<meta name="author" content="Tim Poulsen" />
+<meta name="description" content="For a recent project at work, I needed to read and parse email messages with a python script. I found the documentation confusing, and most of the samples on various blogs and StackOverflow posts to be old and not fully compatible with python 3.x. So, here is an adaptation …" />
+<meta name="keywords" content="python">
+<meta property="og:site_name" content="Tim Poulsen"/>
+<meta property="og:title" content="Reading email with Python"/>
+<meta property="og:description" content="For a recent project at work, I needed to read and parse email messages with a python script. I found the documentation confusing, and most of the samples on various blogs and StackOverflow posts to be old and not fully compatible with python 3.x. So, here is an adaptation …"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="../2018/reading-email-with-python.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2018-05-10 00:00:00-04:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="../author/tim-poulsen.html">
+<meta property="article:section" content="Python"/>
+<meta property="article:tag" content="python"/>
+<meta property="og:image" content="/images/tim_poulsen.jpg">
+
+  <title>Tim Poulsen &ndash; Reading email with Python</title>
+
+
+    <link href="/theme/css/main.css" rel="stylesheet">
+
+</head>
+<body>
+  <aside class="leftbar" style="background-color: #030E36;">
+    <div class="leftbar" style="background-color: #030E36;">
+      <a href="..">
+        <img src="/images/tim_poulsen.jpg" alt="Tim Poulsen" title="Tim Poulsen">
+      </a>
+      <h1><a href="..">Tim Poulsen</a></h1>
+
+<p class="subtitle">Explorations of software and hardware</p>
+      <ul class="social">
+        <li><a class="sc-twitter" href="https://twitter.com/skypanther" target="_blank"><i class="fa fa-twitter"></i></a></li>
+        <li><a class="sc-github" href="https://github.com/skypanther" target="_blank"><i class="fa fa-github"></i></a></li>
+        <li><a class="sc-linkedin" href="https://www.linkedin.com/in/timpoulsen" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+        <li><a class="sc-keybase" href="https://keybase.io/skypanther" target="_blank"><i class="fa fa-keybase"></i></a></li>
+        <li><a class="sc-rss" href="feeds/all.atom.xml" target="_blank"><i class="fa fa-rss"></i></a></li>
+      </ul>
+
+      <nav>
+        <ul class="list">
+          <li><a href="../pages/about.html#about">About</a></li>
+
+          <li><a href="/categories.html" target="_blank">Topics</a></li>
+          <li><a href="http://skypanther.com" target="_blank">Skypanther Studios</a></li>
+        </ul>
+      </nav>
+
+      <p class="subhead">Tags:</p>
+      <ul class="tagcloud">
+          <li class="tag-1">
+              <a href="../tag/python.html">
+              python
+              </a>
+          </li>
+          <li class="tag-1">
+              <a href="../tag/opencv.html">
+              opencv
+              </a>
+          </li>
+          <li class="tag-2">
+              <a href="../tag/raspberry-pi.html">
+              raspberry pi
+              </a>
+          </li>
+          <li class="tag-2">
+              <a href="../tag/making.html">
+              making
+              </a>
+          </li>
+          <li class="tag-3">
+              <a href="../tag/robotics.html">
+              robotics
+              </a>
+          </li>
+          <li class="tag-4">
+              <a href="../tag/htmlcss.html">
+              html/css
+              </a>
+          </li>
+          <li class="tag-4">
+              <a href="../tag/webdev.html">
+              webdev
+              </a>
+          </li>
+          <li class="tag-4">
+              <a href="../tag/arduino.html">
+              arduino
+              </a>
+          </li>
+          <li class="tag-4">
+              <a href="../tag/xmas.html">
+              xmas
+              </a>
+          </li>
+          <li class="tag-4">
+              <a href="../tag/ios.html">
+              iOS
+              </a>
+          </li>
+          <li class="tag-4">
+              <a href="../tag/swift.html">
+              Swift
+              </a>
+          </li>
+          <li class="tag-4">
+              <a href="../tag/anaconda.html">
+              anaconda
+              </a>
+          </li>
+      </ul>
+
+    </div>
+
+
+  </aside>
+  <main>
+
+    <nav>
+      <a href="..">    Home
+</a>
+
+      <a href="/categories.html">Topics</a>
+      <a href="/pages/about.html">About</a>
+      <a href="/tags.html">Tags</a>
+
+      <a href="https://www.timpoulsen.com/feeds/all.atom.xml">    Atom
+</a>
+
+    </nav>
+
+<article class="single">
+  <header>
+    <h1 id="reading-email-with-python">Reading email with Python</h1>
+    <p>
+          Posted on Thu 10 May 2018 in <a href="../category/python.html">Python</a>
+
+
+    </p>
+  </header>
+
+
+  <div>
+    <p>For a recent project at work, I needed to read and parse email messages with a python script. I found the documentation confusing, and most of the samples on various blogs and StackOverflow posts to be old and not fully compatible with python 3.x. So, here is an adaptation of my solution.</p>
+<p>Further below in this post is my actual class for interacting with an IMAP email account, logging in and out, accessing the messages in a folder, and even deleting messages. But let's start with a simple script that uses the class.</p>
+<h2>Using the class</h2>
+<p>As I'm sure you know, it's a bad idea to code passwords into a file. Instead, you should load them at runtime, either from a command line argument (e.g. with the <code>argparse</code> library) or from the system environment. The script I wrote for work was going to be part of a Django project deployed in a Docker container, so for my needs an environment variable was the best choice. </p>
+<p>Before you can use the script below, you'll have to add a <code>mailpwd</code> environment variable (or modify the code to use argparse). On Linux/OS X, use <code>export mailpwd=password</code> and on Windows, er, sorry, I don't know.</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">.ImapClient</span> <span class="kn">import</span> <span class="n">ImapClient</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    You will need to store your email password in your environment, e.g.</span>
+<span class="sd">    export mailpwd=password</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">imap</span> <span class="o">=</span> <span class="n">ImapClient</span><span class="p">(</span><span class="n">recipient</span><span class="o">=</span><span class="s1">&#39;you@gmail.com&#39;</span><span class="p">)</span>
+    <span class="n">imap</span><span class="o">.</span><span class="n">login</span><span class="p">()</span>
+    <span class="c1"># retrieve messages from a given sender</span>
+    <span class="n">messages</span> <span class="o">=</span> <span class="n">imap</span><span class="o">.</span><span class="n">get_messages</span><span class="p">(</span><span class="n">sender</span><span class="o">=</span><span class="s1">&#39;a_friend@another_isp.com&#39;</span><span class="p">)</span>
+    <span class="c1"># Do something with the messages</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Messages in my inbox:&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">msg</span> <span class="ow">in</span> <span class="n">messages</span><span class="p">:</span>
+        <span class="c1"># msg is a dict of {&#39;num&#39;: num, &#39;body&#39;: body}</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">msg</span><span class="p">[</span><span class="s1">&#39;body&#39;</span><span class="p">])</span>
+        <span class="c1"># you could delete them after viewing</span>
+        <span class="c1"># imap.delete_message(msg[&#39;num&#39;])</span>
+    <span class="c1"># when done, you should log out</span>
+    <span class="n">imap</span><span class="o">.</span><span class="n">logout</span><span class="p">()</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</pre></div>
+</td></tr></table>
+
+<h2>Some peculiarities of the class</h2>
+<p>For my work needs, I needed to access a GSuite (Gmail for business) email account. So, the class is a bit specific to Gmail. While it will work with other providers, you may need to tweak the <code>delete_message</code> method since it is specific to Gmail's trash-vs-deleted folder locations.</p>
+<p>Another specific need I had was to monitor emails from a specific sender. Thus, as shown on line 12 above, you must pass in a sender's email address when calling <code>get_message()</code>. The script would need some rewriting to accommodate other needs. But hopefully what's below will get you started.</p>
+<h2>The class</h2>
+<p>The class itself is considerably longer and more involved than the script that uses it. The following should be in a file named ImapClient.py in the same directory as the script that uses it. Look the code over. I'll explain some its points after the code.</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>  1
+  2
+  3
+  4
+  5
+  6
+  7
+  8
+  9
+ 10
+ 11
+ 12
+ 13
+ 14
+ 15
+ 16
+ 17
+ 18
+ 19
+ 20
+ 21
+ 22
+ 23
+ 24
+ 25
+ 26
+ 27
+ 28
+ 29
+ 30
+ 31
+ 32
+ 33
+ 34
+ 35
+ 36
+ 37
+ 38
+ 39
+ 40
+ 41
+ 42
+ 43
+ 44
+ 45
+ 46
+ 47
+ 48
+ 49
+ 50
+ 51
+ 52
+ 53
+ 54
+ 55
+ 56
+ 57
+ 58
+ 59
+ 60
+ 61
+ 62
+ 63
+ 64
+ 65
+ 66
+ 67
+ 68
+ 69
+ 70
+ 71
+ 72
+ 73
+ 74
+ 75
+ 76
+ 77
+ 78
+ 79
+ 80
+ 81
+ 82
+ 83
+ 84
+ 85
+ 86
+ 87
+ 88
+ 89
+ 90
+ 91
+ 92
+ 93
+ 94
+ 95
+ 96
+ 97
+ 98
+ 99
+100
+101
+102
+103
+104
+105
+106</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">email</span>
+<span class="kn">import</span> <span class="nn">email.header</span>
+<span class="kn">import</span> <span class="nn">imaplib</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+
+
+<span class="k">class</span> <span class="nc">ImapClient</span><span class="p">:</span>
+    <span class="n">imap</span> <span class="o">=</span> <span class="bp">None</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                 <span class="n">recipient</span><span class="p">,</span>
+                 <span class="n">server</span><span class="o">=</span><span class="s1">&#39;imap.gmail.com&#39;</span><span class="p">,</span>
+                 <span class="n">use_ssl</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+                 <span class="n">move_to_trash</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+        <span class="c1"># check for required param</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">recipient</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;You must provide a recipient email address&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">recipient</span> <span class="o">=</span> <span class="n">recipient</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">use_ssl</span> <span class="o">=</span> <span class="n">use_ssl</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">move_to_trash</span> <span class="o">=</span> <span class="n">move_to_trash</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">recipient_folder</span> <span class="o">=</span> <span class="s1">&#39;INBOX&#39;</span>
+        <span class="c1"># instantiate our IMAP client object</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">use_ssl</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">imap</span> <span class="o">=</span> <span class="n">imaplib</span><span class="o">.</span><span class="n">IMAP4_SSL</span><span class="p">(</span><span class="n">server</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">imap</span> <span class="o">=</span> <span class="n">imaplib</span><span class="o">.</span><span class="n">IMAP4</span><span class="p">(</span><span class="n">server</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">login</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">rv</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">imap</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">recipient</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">&#39;mailpwd&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">))</span>
+        <span class="k">except</span> <span class="p">(</span><span class="n">imaplib</span><span class="o">.</span><span class="n">IMAP4_SSL</span><span class="o">.</span><span class="n">error</span><span class="p">,</span> <span class="n">imaplib</span><span class="o">.</span><span class="n">IMAP4</span><span class="o">.</span><span class="n">error</span><span class="p">)</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="s1">&#39;LOGIN FAILED!&#39;</span><span class="p">)</span>
+            <span class="k">print</span><span class="p">(</span><span class="n">err</span><span class="p">)</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">logout</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">imap</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">imap</span><span class="o">.</span><span class="n">logout</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">select_folder</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">folder</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Select the IMAP folder to read messages from. By default</span>
+<span class="sd">        the class will read from the INBOX folder</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">recipient_folder</span> <span class="o">=</span> <span class="n">folder</span>
+
+    <span class="k">def</span> <span class="nf">get_messages</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sender</span><span class="p">,</span> <span class="n">subject</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Scans for email messages from the given sender and optionally</span>
+<span class="sd">        with the given subject</span>
+
+<span class="sd">        :param sender Email address of sender of messages you&#39;re searching for</span>
+<span class="sd">        :param subject (Partial) subject line to scan for</span>
+<span class="sd">        :return List of dicts of {&#39;num&#39;: num, &#39;body&#39;: body}</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">sender</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;You must provide a sender email address&#39;</span><span class="p">)</span>
+
+        <span class="c1"># select the folder, by default INBOX</span>
+        <span class="n">resp</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">imap</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">recipient_folder</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">resp</span> <span class="o">!=</span> <span class="s1">&#39;OK&#39;</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;ERROR: Unable to open the {self.recipient_folder} folder&quot;</span><span class="p">)</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="n">messages</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="n">mbox_response</span><span class="p">,</span> <span class="n">msgnums</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">imap</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="s1">&#39;FROM&#39;</span><span class="p">,</span> <span class="n">sender</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">mbox_response</span> <span class="o">==</span> <span class="s1">&#39;OK&#39;</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="n">msgnums</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">():</span>
+                <span class="n">retval</span><span class="p">,</span> <span class="n">rawmsg</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">imap</span><span class="o">.</span><span class="n">fetch</span><span class="p">(</span><span class="n">num</span><span class="p">,</span> <span class="s1">&#39;(RFC822)&#39;</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">retval</span> <span class="o">!=</span> <span class="s1">&#39;OK&#39;</span><span class="p">:</span>
+                    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;ERROR getting message&#39;</span><span class="p">,</span> <span class="n">num</span><span class="p">)</span>
+                    <span class="k">continue</span>
+                <span class="n">msg</span> <span class="o">=</span> <span class="n">email</span><span class="o">.</span><span class="n">message_from_bytes</span><span class="p">(</span><span class="n">rawmsg</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
+                <span class="n">msg_subject</span> <span class="o">=</span> <span class="n">msg</span><span class="p">[</span><span class="s2">&quot;Subject&quot;</span><span class="p">]</span>
+                <span class="k">if</span> <span class="n">subject</span> <span class="ow">in</span> <span class="n">msg_subject</span><span class="p">:</span>
+                    <span class="n">body</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+                    <span class="k">if</span> <span class="n">msg</span><span class="o">.</span><span class="n">is_multipart</span><span class="p">():</span>
+                        <span class="k">for</span> <span class="n">part</span> <span class="ow">in</span> <span class="n">msg</span><span class="o">.</span><span class="n">walk</span><span class="p">():</span>
+                            <span class="nb">type</span> <span class="o">=</span> <span class="n">part</span><span class="o">.</span><span class="n">get_content_type</span><span class="p">()</span>
+                            <span class="n">disp</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">part</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;Content-Disposition&#39;</span><span class="p">))</span>
+                            <span class="c1"># look for plain text parts, but skip attachments</span>
+                            <span class="k">if</span> <span class="nb">type</span> <span class="o">==</span> <span class="s1">&#39;text/plain&#39;</span> <span class="ow">and</span> <span class="s1">&#39;attachment&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">disp</span><span class="p">:</span>
+                                <span class="n">charset</span> <span class="o">=</span> <span class="n">part</span><span class="o">.</span><span class="n">get_content_charset</span><span class="p">()</span>
+                                <span class="c1"># decode the base64 unicode bytestring into plain text</span>
+                                <span class="n">body</span> <span class="o">=</span> <span class="n">part</span><span class="o">.</span><span class="n">get_payload</span><span class="p">(</span><span class="n">decode</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">encoding</span><span class="o">=</span><span class="n">charset</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
+                                <span class="c1"># if we&#39;ve found the plain/text part, stop looping thru the parts</span>
+                                <span class="k">break</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="c1"># not multipart - i.e. plain text, no attachments</span>
+                        <span class="n">charset</span> <span class="o">=</span> <span class="n">msg</span><span class="o">.</span><span class="n">get_content_charset</span><span class="p">()</span>
+                        <span class="n">body</span> <span class="o">=</span> <span class="n">msg</span><span class="o">.</span><span class="n">get_payload</span><span class="p">(</span><span class="n">decode</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">encoding</span><span class="o">=</span><span class="n">charset</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
+                    <span class="n">messages</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s1">&#39;num&#39;</span><span class="p">:</span> <span class="n">num</span><span class="p">,</span> <span class="s1">&#39;body&#39;</span><span class="p">:</span> <span class="n">body</span><span class="p">})</span>
+        <span class="k">return</span> <span class="n">messages</span>
+
+    <span class="k">def</span> <span class="nf">delete_message</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg_id</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">msg_id</span><span class="p">:</span>
+            <span class="k">return</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">move_to_trash</span><span class="p">:</span>
+            <span class="c1"># move to Trash folder</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">imap</span><span class="o">.</span><span class="n">store</span><span class="p">(</span><span class="n">msg_id</span><span class="p">,</span> <span class="s1">&#39;+X-GM-LABELS&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\\</span><span class="s1">Trash&#39;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">imap</span><span class="o">.</span><span class="n">expunge</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">imap</span><span class="o">.</span><span class="n">store</span><span class="p">(</span><span class="n">msg_id</span><span class="p">,</span> <span class="s1">&#39;+FLAGS&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\\</span><span class="s1">Deleted&#39;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">imap</span><span class="o">.</span><span class="n">expunge</span><span class="p">()</span>
+</pre></div>
+</td></tr></table>
+
+<h2>Class details</h2>
+<p>The <code>login()</code> and <code>logout()</code> methods should be fairly self-explanatory. The <code>select_folder()</code> method is optional. By default, the class will read from the INBOX folder but you could change that with this method.</p>
+<p>As you can see in the <code>__init__</code> method, you must specify a recipient address. This is the email account you're logging into. You can override other defaults, such as the server to log into, whether to connect over SSL, and so forth.</p>
+<p>Let's dig into the <code>get_messages()</code> method since it's the meat of what the class is offering. After checking params, it attempts to select the folder to search. Of the two values returned, we care only about the first one <code>resp</code> which will be the string 'OK' if we succeed. Next we search for messages from the sender (line 68). Again, two values are returned, but this time we want to use both.</p>
+<p>As before, the first value, <code>mbox_response</code> is an OK/not okay string. The second value is a list, the first member of which is the list of message numbers that match our search criteria. Every IMAP message in the folder is identified by an integer ID. To fetch the actual message, we'll use the <code>imap.fetch()</code> method, passing to it the message ID number, and the portion of the content we want to retrieve. If you've looked at other IMAP examples, you'll see folks using many other content selectors. Here, we're using <code>'(RFC822)'</code> to basically grab the entire message.</p>
+<p>Assuming that was retrieved from the server successfully, on line 75 we convert the raw representation of the message into a mail object we can further inspect. Then, we grab the subject on line 76. My original needs called for looking for messages with a given subject. It's optional; if you don't pass in a subject param to the function you'll retrieve all the messages from the sender.</p>
+<p>Starting on line 78, we extract the text from the message. The full IMAP specification (RFC 822) is quite complex. But for our needs now, we can ignore many of those details. Messages can be single or multipart. A single part message would be a very simple plain text email message, the type generated by email clients of the days before pretty formatted emails. (Such messages are still sent, though more typically these days by scripts/generators rather than by users with some mail app.) Multipart messages represent their contents in multiple formats, such as plain text and HTML formatted. The typical Gmail, Outlook, webmail generated email message would be a multipart message containing probably both a plain text and HTML formatted part.</p>
+<p>On line 79, we determine the message type and on line 80, we begin walking the parts looking for the plain text part. We do so in two ways. First, with <code>part.get_content_type()</code> we determine whether it is plain/text or not. But, a text attachment to a message would have that content type too. So, on line 84 we check for that by looking at the content disposition, which will include the string <code>'attachment'</code> if this part is an attachment. </p>
+<p>Finally (and we do this for both the multipart and single part sections) we need to convert the raw byte representation of the part into plain text. We determine its original character set (e.g. ISO-8859-1, UTF-8, etc.) using <code>part.get_content_charset()</code> and then convert to that representation on line 87 (or 92). </p>
+<p>Each message that makes it through this filtering and converting is added as a dict to the <code>messages</code> list. We return both the message ID and its text. And then finally we return that list to the caller.</p>
+<h2>Deleting messages</h2>
+<p>Deleting a message from an IMAP server involves two steps: copying it to the trash folder and calling <code>expunge()</code> to remove it from its original folder. With Gmail, there are two "deleted" folders: Trash and Deleted. The first of these is like the Recycle Bin / Trash folder on your computer. Messages in Trash are easily recoverable. Depending on your mail provider, messages moved to Deleted could be fully removed. Google never deletes anything, even when you empty the trash. You can always do a search to find messages in the Deleted folder (but you'll need to know a subject or sender or some other criterion to find it).</p>
+<p>The <code>delete_message()</code> method requires a message ID and will then move that message to the Trash (default behavior) or delete the message based on the value of <code>move_to_trash</code> parameter you supplied when instantiating the ImapClient object.</p>
+<h2>Summary</h2>
+<p>While the class is a bit involved, it really only scratches the surface of IMAP message complexity. Still, this class makes for a fairly simple means to grab messages from an email inbox and read their plaintext representations. I hope it helps clarify how IMAP works and gives you a good starting point for your email needs.</p>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="../tag/python.html">python</a>
+    </p>
+  </div>
+
+
+
+
+</article>
+
+    <footer>
+<p>
+  &copy; Tim Poulsen 2020 - This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>
+</p>
+<p>    Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a>
+</p><p>
+  <a rel="license"
+     href="http://creativecommons.org/licenses/by-sa/4.0/"
+     target="_blank">
+    <img alt="Creative Commons License"
+         title="Creative Commons License"
+         style="border-width:0"
+         src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png"
+         width="80"
+         height="15"/>
+  </a>
+</p>    </footer>
+  </main>
+
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Tim Poulsen ",
+  "url" : "..",
+  "image": "/images/tim_poulsen.jpg",
+  "description": "Tim Poulsen's blog of software, hardware, and life"
+}
+</script>
+</body>
+</html>
