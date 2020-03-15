@@ -30,7 +30,7 @@ If your job typically involves face-to-face interactions (meetings, one-on-ones,
 
 **Document and share** &mdash; Document all decisions and take & share meeting minutes. It's harder to maintain focus and keep track of everything that goes on in a virtual meeting than an in-person meeting.
 
-**Start meetings on time** Whether you’re onsite or remote, show up on time. Attending meetings remotely is confusing enough already without the mess of random start times and late joiners.
+**Start meetings on time** &mdash; Whether you’re onsite or remote, show up on time. Attending meetings remotely is confusing enough already without the mess of random start times and late joiners.
 
 ## When life returns to normal
 
