@@ -1,0 +1,292 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,400italic' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" type="text/css" href="../theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="../theme/pygments/github.min.css">
+  <link rel="stylesheet" type="text/css" href="../theme/css/main.css">
+  <link rel="stylesheet" type="text/css" href="../theme/font-awesome/css/fontawesome.css">
+
+
+    <link href="https://www.timpoulsen.com/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Tim Poulsen Atom">
+
+
+  <link rel="apple-touch-icon" sizes="57x57" href="/images/favicons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/images/favicons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/images/favicons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/images/favicons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/images/favicons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/images/favicons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/images/favicons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/images/favicons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/images/favicons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/images/favicons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicons/favicon-16x16.png">
+  <link rel="manifest" href="/images/favicons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/images/favicons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="index, follow" />
+
+    <!-- Chrome, Firefox OS and Opera -->
+    <meta name="theme-color" content="#143742">
+    <!-- Windows Phone -->
+    <meta name="msapplication-navbutton-color" content="#143742">
+    <!-- iOS Safari -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+<meta name="author" content="Tim Poulsen" />
+<meta name="description" content="I had many troubles this year with my Christmas light electronics. Solder connections went bad multiple times. Wires got snagged and tangled during setup. It was tough re-soldering connections while sitting in a snowbank with the circuit hanging by its wires from a yard decoration. I decided I could fix …" />
+<meta name="keywords" content="electronics, pcb">
+<meta property="og:site_name" content="Tim Poulsen"/>
+<meta property="og:title" content="My first custom PCB"/>
+<meta property="og:description" content="I had many troubles this year with my Christmas light electronics. Solder connections went bad multiple times. Wires got snagged and tangled during setup. It was tough re-soldering connections while sitting in a snowbank with the circuit hanging by its wires from a yard decoration. I decided I could fix …"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="../2020/my-first-custom-pcb.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2020-03-25 00:00:00-04:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="../author/tim-poulsen.html">
+<meta property="article:section" content="Making"/>
+<meta property="article:tag" content="electronics"/>
+<meta property="article:tag" content="pcb"/>
+<meta property="og:image" content="/images/tim_poulsen.jpg">
+
+  <title>Tim Poulsen &ndash; My first custom PCB</title>
+
+
+    <link href="/theme/css/main.css" rel="stylesheet">
+
+</head>
+<body>
+  <aside class="leftbar" style="background-color: #030E36;">
+    <div class="leftbar" style="background-color: #030E36;">
+      <a href="..">
+        <img src="/images/tim_poulsen.jpg" alt="Tim Poulsen" title="Tim Poulsen">
+      </a>
+      <h1><a href="..">Tim Poulsen</a></h1>
+
+<p class="subtitle">Explorations of software and hardware</p>
+      <ul class="social">
+        <li><a class="sc-twitter" href="https://twitter.com/skypanther" target="_blank"><i class="fa fa-twitter"></i></a></li>
+        <li><a class="sc-github" href="https://github.com/skypanther" target="_blank"><i class="fa fa-github"></i></a></li>
+        <li><a class="sc-linkedin" href="https://www.linkedin.com/in/timpoulsen" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+        <li><a class="sc-keybase" href="https://keybase.io/skypanther" target="_blank"><i class="fa fa-keybase"></i></a></li>
+        <li><a class="sc-rss" href="feeds/all.atom.xml" target="_blank"><i class="fa fa-rss"></i></a></li>
+      </ul>
+
+      <nav>
+        <ul class="list">
+          <li><a href="../pages/about.html#about">About</a></li>
+
+          <li><a href="/categories.html" target="_blank">Topics</a></li>
+          <li><a href="http://skypanther.com" target="_blank">Skypanther Studios</a></li>
+        </ul>
+      </nav>
+
+      <p class="subhead">Tags:</p>
+      <ul class="tagcloud">
+          <li class="tag-1">
+              <a href="../tag/python.html">
+              python
+              </a>
+          </li>
+          <li class="tag-1">
+              <a href="../tag/opencv.html">
+              opencv
+              </a>
+          </li>
+          <li class="tag-2">
+              <a href="../tag/raspberry-pi.html">
+              raspberry pi
+              </a>
+          </li>
+          <li class="tag-2">
+              <a href="../tag/making.html">
+              making
+              </a>
+          </li>
+          <li class="tag-3">
+              <a href="../tag/robotics.html">
+              robotics
+              </a>
+          </li>
+          <li class="tag-4">
+              <a href="../tag/electronics.html">
+              electronics
+              </a>
+          </li>
+          <li class="tag-4">
+              <a href="../tag/pcb.html">
+              pcb
+              </a>
+          </li>
+          <li class="tag-4">
+              <a href="../tag/engineering.html">
+              engineering
+              </a>
+          </li>
+          <li class="tag-4">
+              <a href="../tag/htmlcss.html">
+              html/css
+              </a>
+          </li>
+          <li class="tag-4">
+              <a href="../tag/webdev.html">
+              webdev
+              </a>
+          </li>
+          <li class="tag-4">
+              <a href="../tag/arduino.html">
+              arduino
+              </a>
+          </li>
+          <li class="tag-4">
+              <a href="../tag/xmas.html">
+              xmas
+              </a>
+          </li>
+          <li class="tag-4">
+              <a href="../tag/ios.html">
+              iOS
+              </a>
+          </li>
+          <li class="tag-4">
+              <a href="../tag/swift.html">
+              Swift
+              </a>
+          </li>
+          <li class="tag-4">
+              <a href="../tag/anaconda.html">
+              anaconda
+              </a>
+          </li>
+      </ul>
+
+    </div>
+
+
+  </aside>
+  <main>
+
+    <nav>
+      <a href="..">    Home
+</a>
+
+      <a href="/categories.html">Topics</a>
+      <a href="/pages/about.html">About</a>
+      <a href="/tags.html">Tags</a>
+
+      <a href="https://www.timpoulsen.com/feeds/all.atom.xml">    Atom
+</a>
+
+    </nav>
+
+<article class="single">
+  <header>
+    <h1 id="my-first-custom-pcb">My first custom PCB</h1>
+    <p>
+          Posted on Wed 25 March 2020 in <a href="../category/making.html">Making</a>
+
+
+    </p>
+  </header>
+
+
+  <div>
+    <p>I had many troubles this year with my Christmas light electronics. Solder connections went bad multiple times. Wires got snagged and tangled during setup. It was tough re-soldering connections while sitting in a snowbank with the circuit hanging by its wires from a yard decoration.</p>
+<p>I decided I could fix these problems by using a custom printed circuit board. With a custom PCB, components would be securely soldered to the board; there would be no wires to snag or pull free; and the final product would be easier to package in a waterproof container. Of course, I've never created a PCB before.</p>
+<p><img src="../images/2020/custom_pcb_assembled.jpg" width="600" title="Assembled custom PCB"/><br/><span class="imgcaption">My custom PCB with components mounted</span></p>
+<p>There are quite a few PCB design apps, many of them free or free for personal use. After checking out <a href="http://pcb.geda-project.org/">gEDA</a>, <a href="https://kicad-pcb.org/">KiCAD</a>, and a few others, I settled on <a href="https://easyeda.com/">EasyEDA</a>. It seemed to be fairly simple to use. Conveniently, they are affiliated with a PCB prototyping company. So, right from EasyEDA, you can upload your finished file to place an order (more on that later).</p>
+<p>I'm not qualified to teach how to design PCBs or even use EasyEDA. So, I'll point you to the tutorials that got me started.</p>
+<ul>
+<li>The <a href="https://www.youtube.com/watch?v=MdcnkaAoDTE">Beginners guide to PCB design with EasyEda Part 1</a> (and parts 2 and 3) YouTube videos were probably the most helpful.</li>
+<li>EasyEDA has some videos on their site. They vary in quality. Check them out on the <a href="https://www.youtube.com/channel/UCRoMhHNzl7tMW8pFsdJGUIA/videos">EasyEDA YouTube channel</a></li>
+<li>EasyEDA also has many <a href="https://docs.easyeda.com/en/Introduction/Introduction-to-EasyEDA/index.html">written tutorials</a> that explain a lot of the terminology and back-details that you'll probably need to know. I read through many of these as the need arose.</li>
+</ul>
+<h2>Prototype first</h2>
+<p>It really helps to know what circuit you're going to create before you start designing your PCB. I'm sure expert circuit designers could start from scratch. But, I suggest you use a breadboard and jumpers to make sure your circuit design will work as intended before you try to turn it into a PCB. In my case, I had working prototypes of my circuit.</p>
+<p><img src="../images/2020/pixel_node.jpg" width="600" title="My pixel controller prototype"/><br/><span class="imgcaption">My pixel controller prototype</span></p>
+<h2>EasyEDA</h2>
+<p>This software is available as either a download or a web app. Either way, you need to create a free account on their site because all the data is stored on their systems. The bright side of this is that you can switch back and forth between the installed app and the web app without issues.</p>
+<p>Working from your prototype, you draw your circuit using tools fairly similar to a normal drawing program. To start, you place components that you find in their library of items onto a schematic view (shown below). At this stage, you don't need to worry about arranging components as you would want them on the final PCB. Instead, you put them wherever and connect them via "net ports." These are like labeled flags specifying which parts will be electrically connected. For example, you would tag anything connected to ground with the GND net port.</p>
+<p><img src="../images/2020/easy_eda_schematic.png" width="600" title="Schematic view of EasyEDA"/><br/><span class="imgcaption">Schematic view of EasyEDA</span></p>
+<p>Once you have all the components on the schematic, and all your net ports defined, EasyEDA creates the PCB view. This is the stage where you arrange components in a functional manner. You want to make sure "traces" (the electrical connections) can be neatly and logically drawn. You can't have traces cross, though you can draw traces on different layers to make connections where otherwise they'd have to cross. (Traces connect from one layer to another with a "via" basically a wire between layers.)</p>
+<p><img src="../images/2020/easy_eda_pcb.png" width="600" title="PCB designer view of EasyEDA"/><br/><span class="imgcaption">PCB designer view of EasyEDA</span></p>
+<p>The basic PCB purchase includes a two layer board. To save money, you'll want to stick to just two layers if you can. I spent a bunch of time moving components around so that my traces wouldn't need more than two layers.</p>
+<p>There are actually more layers that come with all boards. These include the top and bottom silk layers, which is where you can add labels and drawn features that are silk screened onto your PCB. There are others too, that are part of the PCB manufacturing process and which you probably don't need to worry about, such as the top and bottom paste layers. You can see all of these in the EasyEDA PCB view.</p>
+<p>The other cost constraint is that the cheapest board prices are for a 100mm by 100mm PCB. Conveniently, you can actually fit multiple PCBs in that space in what's called a "panelized layout." In my case, I fit all the components and traces in a roughly 50mm by 100mm area so I could get two PCBs in the allotted space. I paid for 10 PCBs, but since I got two boards in each, I ended up with 20 actual boards to play with. Note that you need to leave about 3mm dead space between the panels to allow space for the V-grooves (where the two PCBs snap apart.)</p>
+<p><img src="../images/2020/easy_eda_panelized_pcb.jpg" width="600" title="Panelized finished board"/><br/><span class="imgcaption">Panelized finished board</span></p>
+<h2>Check and check again</h2>
+<p>I spent a bunch of time checking and re-checking my layout. You can hide various layers to help focus on certain connections. For example, I'd hide all but the top-layer traces to be sure each connected the pins I needed connected. Then I'd turn on other layers and re-check. Once your PCB is fabricated, you can't change the traces. So if you get it wrong, you'll be adding jumper wires or scraping off traces to break unwanted connections.</p>
+<p>When you're ready to go, you click an upload button which shows a screen like the following.</p>
+<p><img src="../images/2020/easy_eda_upload_gerber.png" width="600" title="Export/Upload design to JLCPCB"/><br/><span class="imgcaption">Export/Upload design to JLCPCB</span></p>
+<p>They make the "Order at JLCPCB" button extra obvious, and it is convenient. But if you want to use a different fab house, click the inconspicuous Generate Gerber button. Gerber files are the standard that most fabricators will need to create your PCB.</p>
+<p>In my case, I clicked that big blue order button. This uploads your gerber file to the JLCPCB web site. At that site, you choose options like board color, number to order, trace and over-solder materials to be used, and so forth. They offer a pretty generous discount price on your first order. Frankly, for a hobbyist like me, their normal prices are also quite reasonable.</p>
+<h2>The Audit</h2>
+<p>Once you've submitted your order, JLCPCB will review your circuit. They're not going to do any sort of in-depth checking of your traces or whether the PCB will function (at all, let alone how you want it to). Their audit is simply looking to confirm your PCB can be produced. In my case, my original upload failed the audit. I had panelized by design but failed to leave the required minimum space between panels. In a day or so, I got the following note:</p>
+<p><img src="../images/2020/easy_eda_audit.png" width="600" title="JLCPCB's audit says I failed :("/><br/><span class="imgcaption">JLCPCB's audit says I failed :(</span></p>
+<p>If this happens to you, don't place a new order like I did. By doing so, you're no longer placing your "first order" and won't get that same discount. This time, instead of uploading from the EasyEDA app, export the gerber file. Then, go directly to the JLCPCB web site. There will be a "replace file" option under your failed order. Use it and re-submit. You should get the order at the original price using that method.</p>
+<p>Their shipping options aren't great. DHL is probably your best bet. It's not particularly cheap, or fast. Still, even during the early Coronavirus/Covid-19 disruption timeframe, my order showed up in roughly two weeks. </p>
+<h2>Looking ahead</h2>
+<p>I may refine this board in a future order. It works, and does exactly what I wanted it to do. Next time, I'll make the pin holes for the ESP8266 module larger (it was tough getting the pins through the holes) and those for the capacitor smaller (they're huuuge). I don't need nearly as much space for the capacitor or power connectors as the EasyEDA drawing components implied. </p>
+<p>I already have other boards in mind to create...relay boards, similar boards for other chips, like the ESP32, and more. This was fun and uber-geeky to have created my own PCB.</p>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="../tag/electronics.html">electronics</a>
+      <a href="../tag/pcb.html">pcb</a>
+    </p>
+  </div>
+
+
+
+
+</article>
+
+    <footer>
+<p>
+  &copy; Tim Poulsen 2020 - This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>
+</p>
+<p>    Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a>
+</p><p>
+  <a rel="license"
+     href="http://creativecommons.org/licenses/by-sa/4.0/"
+     target="_blank">
+    <img alt="Creative Commons License"
+         title="Creative Commons License"
+         style="border-width:0"
+         src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png"
+         width="80"
+         height="15"/>
+  </a>
+</p>    </footer>
+  </main>
+
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Tim Poulsen ",
+  "url" : "..",
+  "image": "/images/tim_poulsen.jpg",
+  "description": "Tim Poulsen's blog of software, hardware, and life"
+}
+</script>
+</body>
+</html>
