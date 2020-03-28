@@ -11,9 +11,9 @@ I decided I could fix these problems by using a custom printed circuit board. Wi
 
 There are quite a few PCB design apps, many of them free or free for personal use. After checking out [gEDA](http://pcb.geda-project.org/), [KiCAD](https://kicad-pcb.org/), and a few others, I settled on [EasyEDA](https://easyeda.com/). It seemed to be fairly simple to use. Conveniently, they are affiliated with a PCB prototyping company. So, right from EasyEDA, you can upload your finished file to place an order (more on that later).
 
-I'm not qualified to teach how to design PCBs or even use EasyEDA. So, I'll point you to the tutorials that got me started.
+Since this was my first PCB, I'm not the best person to teach how to design PCBs or even use EasyEDA. So, I'll point you to the tutorials that got me started.
 
-* The [Beginners guide to PCB design with EasyEda Part 1](https://www.youtube.com/watch?v=MdcnkaAoDTE) (and parts 2 and 3) YouTube videos were probably the most helpful.
+* The [Beginners guide to PCB design with EasyEDA Part 1](https://www.youtube.com/watch?v=MdcnkaAoDTE) (and parts 2 and 3) YouTube videos were probably the most helpful.
 * EasyEDA has some videos on their site. They vary in quality. Check them out on the [EasyEDA YouTube channel](https://www.youtube.com/channel/UCRoMhHNzl7tMW8pFsdJGUIA/videos)
 * EasyEDA also has many [written tutorials](https://docs.easyeda.com/en/Introduction/Introduction-to-EasyEDA/index.html) that explain a lot of the terminology and back-details that you'll probably need to know. I read through many of these as the need arose.
 
@@ -65,8 +65,15 @@ If this happens to you, don't place a new order like I did. By doing so, you're 
 
 Their shipping options aren't great. DHL is probably your best bet. It's not particularly cheap, or fast. Still, even during the early Coronavirus/Covid-19 disruption timeframe, my order showed up in roughly two weeks. 
 
+## It's Alive!
+
+The most important thing, of course, is that the board worked as intended (well, almost). I soldered on the components &mdash; in my case, that was the NodeMCU Lolin board, a level shifter, capacitor, resistor, and three header connectors. I wired it to some NeoPixels and powered it up ... nothing. Turns out that there's nothing wrong with the board other than the resister in-line with the data out connection. I threw that in at the last minute after reading a resistor was necessary to prevent damage to the pixels. I've never used one before, and I don't think I will in the future. I soldered a shunt (wire) across the resister and it works just fine.
+
+<img src="../images/2020/easy_eda_in_use.gif" width="480" title="In use -- it works!"/><br/><span class="imgcaption">In use &mdash; it works!</span>
+
+
 ## Looking ahead
 
-I may refine this board in a future order. It works, and does exactly what I wanted it to do. Next time, I'll make the pin holes for the ESP8266 module larger (it was tough getting the pins through the holes) and those for the capacitor smaller (they're huuuge). I don't need nearly as much space for the capacitor or power connectors as the EasyEDA drawing components implied. 
+My custom PCB does exactly what I wanted it to do. Still, I may refine this board in a future order. Next time, I won't include the resistor in the design. I'll make the pin holes for the ESP8266 module larger (it was tough getting the pins through the holes) and those for the capacitor smaller (they're huuuge). 
 
-I already have other boards in mind to create...relay boards, similar boards for other chips, like the ESP32, and more. This was fun and uber-geeky to have created my own PCB.
+I already have other boards in mind to create &mdash; relay boards, similar boards for other chips, like the ESP32, and more. This was fun and uber-geeky to have created my own PCB.
