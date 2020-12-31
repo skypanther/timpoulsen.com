@@ -206,7 +206,7 @@
   <div>
     <p>If you know one programming language, it's natural to look for parallels as you learn a new language. In my case, I've coded in JavaScript for many years while Python is much more recent for me. I regularly find myself thinking "in JavaScript, I'd do ..."</p>
 <p>Take object handling. I really like JavaScript's dynamic handling of objects. With JS, there's no need to create a class template (though you can). Just create an ad-hoc object and start assigning it properties and methods. For example:</p>
-<div class="highlight"><pre><span></span><span class="c1">// JavaScript example</span>
+<div class="highlight"><pre><span></span><code><span class="c1">// JavaScript example</span>
 <span class="kd">var</span> <span class="nx">js_obj</span> <span class="o">=</span> <span class="p">{};</span>
 
 <span class="c1">// dynamically add a property</span>
@@ -221,11 +221,10 @@
 <span class="p">}</span>
 <span class="c1">// and use them</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">js_obj</span><span class="p">.</span><span class="nx">sum</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">));</span> <span class="c1">// 7</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>What wasn't obvious to me at first was that I could do similar things in Python. I saw the <code>class ClassName()</code> syntax and was fooled into thinking that I had to predefine my class with all its attributes and methods before I could instantiate objects from it. Not perfectly parallel, but in Python, we can do this:</p>
-<div class="highlight"><pre><span></span><span class="c1"># Python example</span>
+<div class="highlight"><pre><span></span><code><span class="c1"># Python example</span>
 <span class="k">class</span> <span class="nc">Object</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="k">pass</span>
 
@@ -233,12 +232,12 @@
 <span class="n">py_obj</span> <span class="o">=</span> <span class="n">Object</span><span class="p">()</span>
 <span class="n">py_obj</span><span class="o">.</span><span class="n">bar</span> <span class="o">=</span> <span class="s1">&#39;baz&#39;</span>
 
-<span class="k">print</span><span class="p">(</span><span class="n">py_obj</span><span class="o">.</span><span class="n">bar</span><span class="p">)</span>  <span class="c1"># baz</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">py_obj</span><span class="o">.</span><span class="n">bar</span><span class="p">)</span>  <span class="c1"># baz</span>
 
 <span class="c1"># we can dynamically assign methods with lambdas</span>
 <span class="n">py_obj</span><span class="o">.</span><span class="n">sum</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
 
-<span class="k">print</span><span class="p">(</span><span class="n">py_obj</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>  <span class="c1"># 7</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">py_obj</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>  <span class="c1"># 7</span>
 
 
 <span class="c1"># or even full functions</span>
@@ -248,25 +247,23 @@
     <span class="n">exp</span> <span class="o">=</span> <span class="n">num</span>
     <span class="n">start</span> <span class="o">=</span> <span class="n">num</span> <span class="o">-</span> <span class="mi">1</span>
     <span class="k">for</span> <span class="n">step_down</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
-        <span class="k">print</span><span class="p">(</span><span class="n">step_down</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">step_down</span><span class="p">)</span>
         <span class="n">exp</span> <span class="o">=</span> <span class="n">exp</span> <span class="o">*</span> <span class="n">step_down</span>
     <span class="k">return</span> <span class="n">exp</span>
 
 
 <span class="n">py_obj</span><span class="o">.</span><span class="n">exp</span> <span class="o">=</span> <span class="n">exponential</span>
 
-<span class="k">print</span><span class="p">(</span><span class="n">py_obj</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>  <span class="c1"># 120</span>
-</pre></div>
-
+<span class="nb">print</span><span class="p">(</span><span class="n">py_obj</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>  <span class="c1"># 120</span>
+</code></pre></div>
 
 <p>That's great. But a leg-up that JS has is that objects are "associative arrays" meaning that in addition to the dot-notation, we can use array notation (e.g. Python's dict notation) to access properties of JS objects:</p>
-<div class="highlight"><pre><span></span><span class="o">//</span> <span class="n">this</span> <span class="n">works</span> <span class="k">in</span> <span class="n">JS</span><span class="p">:</span>
+<div class="highlight"><pre><span></span><code><span class="o">//</span> <span class="n">this</span> <span class="n">works</span> <span class="k">in</span> <span class="n">JS</span><span class="p">:</span>
 <span class="n">js_obj</span><span class="p">[</span><span class="s1">&#39;foo&#39;</span><span class="p">]</span>
 
 <span class="o">#</span> <span class="n">but</span> <span class="k">in</span> <span class="n">Python</span><span class="p">,</span> <span class="n">this</span> <span class="n">wouldn</span><span class="s1">&#39;t work</span>
 <span class="s1">py_obj[&#39;</span><span class="n">bar</span><span class="err">&#39;</span><span class="p">]</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>Why would that matter you ask? If you need to dynamically access properties of an object, say by looping through a list of keys returned by an API, the associative array notation comes in very handy. </p>
 <p>Here I present a simple class that gives similar functionality in Python. The Object class will create an object that you can access with either dot or dict notation. It offers support for iteration via <code>items()</code> and could be used by methods expecting a <code>__getitem__</code> accessor. </p>
@@ -297,7 +294,7 @@
 25
 26
 27
-28</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Object</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+28</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Object</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Creates an object for simple key/value storage; enables access via</span>
 <span class="sd">    object or dictionary syntax (i.e. obj.foo or obj[&#39;foo&#39;]).</span>
@@ -317,7 +314,7 @@
         <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        String-representation as newline-separated string useful in print()</span>
 <span class="sd">        &#39;&#39;&#39;</span>
-        <span class="n">state</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span><span class="s1">&#39;{attr}: {val}&#39;</span> <span class="k">for</span> <span class="p">(</span><span class="n">attr</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">items</span><span class="p">()]</span>
+        <span class="n">state</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">attr</span><span class="si">}</span><span class="s1">: </span><span class="si">{</span><span class="n">val</span><span class="si">}</span><span class="s1">&#39;</span> <span class="k">for</span> <span class="p">(</span><span class="n">attr</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">items</span><span class="p">()]</span>
         <span class="k">return</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">items</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -325,27 +322,25 @@
 <span class="sd">        Enables enumeration via foo.items()</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
-</pre></div>
+</code></pre></div>
 </td></tr></table>
-
 <p>To use it:</p>
-<div class="highlight"><pre><span></span><span class="n">generic_object</span> <span class="o">=</span> <span class="n">Object</span><span class="p">(</span><span class="n">foo</span><span class="o">=</span><span class="s1">&#39;bar&#39;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">generic_object</span> <span class="o">=</span> <span class="n">Object</span><span class="p">(</span><span class="n">foo</span><span class="o">=</span><span class="s1">&#39;bar&#39;</span><span class="p">)</span>
 
-<span class="k">print</span><span class="p">(</span><span class="n">generic_object</span><span class="o">.</span><span class="n">foo</span><span class="p">)</span>  <span class="c1"># bar</span>
-<span class="k">print</span><span class="p">(</span><span class="n">generic_object</span><span class="p">[</span><span class="s1">&#39;foo&#39;</span><span class="p">])</span>  <span class="c1"># bar</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">generic_object</span><span class="o">.</span><span class="n">foo</span><span class="p">)</span>  <span class="c1"># bar</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">generic_object</span><span class="p">[</span><span class="s1">&#39;foo&#39;</span><span class="p">])</span>  <span class="c1"># bar</span>
 
 <span class="o">//</span> <span class="n">add</span> <span class="n">attributes</span> <span class="n">dynamically</span>
 <span class="n">generic_object</span><span class="o">.</span><span class="n">baz</span> <span class="o">=</span> <span class="mi">123</span>
-<span class="k">print</span><span class="p">(</span><span class="n">generic_object</span><span class="o">.</span><span class="n">baz</span><span class="p">)</span>  <span class="c1"># 123</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">generic_object</span><span class="o">.</span><span class="n">baz</span><span class="p">)</span>  <span class="c1"># 123</span>
 
 <span class="c1"># iterate over its attributes</span>
 <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">generic_object</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
 
 <span class="c1"># even use its convenience string representation</span>
-<span class="k">print</span><span class="p">(</span><span class="n">generic_object</span><span class="p">)</span>  <span class="c1"># prints multi-line string of key/values</span>
-</pre></div>
-
+<span class="nb">print</span><span class="p">(</span><span class="n">generic_object</span><span class="p">)</span>  <span class="c1"># prints multi-line string of key/values</span>
+</code></pre></div>
 
 <p>This simple generic object class uses a couple of the <a href="https://docs.python.org/3/reference/datamodel.html#special-method-names" target="_blank">special attribute names</a> common to all Python objects. By overriding <code>__getitem__</code>, <code>__str__</code>, and <code>items</code> we give custom functionality to objects created from this class.</p>
 <p>Just because you can, doesn't mean you should. Many would argue that ad-hoc objects like this are not "Pythonic." There are other data structures in Python that can serve a similar purpose as generic containers of data:</p>

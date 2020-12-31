@@ -233,7 +233,7 @@
 22
 23
 24
-25</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">.ImapClient</span> <span class="kn">import</span> <span class="n">ImapClient</span>
+25</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">.ImapClient</span> <span class="kn">import</span> <span class="n">ImapClient</span>
 
 
 <span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
@@ -246,10 +246,10 @@
     <span class="c1"># retrieve messages from a given sender</span>
     <span class="n">messages</span> <span class="o">=</span> <span class="n">imap</span><span class="o">.</span><span class="n">get_messages</span><span class="p">(</span><span class="n">sender</span><span class="o">=</span><span class="s1">&#39;a_friend@another_isp.com&#39;</span><span class="p">)</span>
     <span class="c1"># Do something with the messages</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Messages in my inbox:&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Messages in my inbox:&quot;</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">msg</span> <span class="ow">in</span> <span class="n">messages</span><span class="p">:</span>
         <span class="c1"># msg is a dict of {&#39;num&#39;: num, &#39;body&#39;: body}</span>
-        <span class="k">print</span><span class="p">(</span><span class="n">msg</span><span class="p">[</span><span class="s1">&#39;body&#39;</span><span class="p">])</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">msg</span><span class="p">[</span><span class="s1">&#39;body&#39;</span><span class="p">])</span>
         <span class="c1"># you could delete them after viewing</span>
         <span class="c1"># imap.delete_message(msg[&#39;num&#39;])</span>
     <span class="c1"># when done, you should log out</span>
@@ -258,9 +258,8 @@
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
     <span class="n">main</span><span class="p">()</span>
-</pre></div>
+</code></pre></div>
 </td></tr></table>
-
 <h2>Some peculiarities of the class</h2>
 <p>For my work needs, I needed to access a GSuite (Gmail for business) email account. So, the class is a bit specific to Gmail. While it will work with other providers, you may need to tweak the <code>delete_message</code> method since it is specific to Gmail's trash-vs-deleted folder locations.</p>
 <p>Another specific need I had was to monitor emails from a specific sender. Thus, as shown on line 12 above, you must pass in a sender's email address when calling <code>get_message()</code>. The script would need some rewriting to accommodate other needs. But hopefully what's below will get you started.</p>
@@ -371,7 +370,7 @@
 103
 104
 105
-106</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">email</span>
+106</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">email</span>
 <span class="kn">import</span> <span class="nn">email.header</span>
 <span class="kn">import</span> <span class="nn">imaplib</span>
 <span class="kn">import</span> <span class="nn">os</span>
@@ -379,13 +378,13 @@
 
 
 <span class="k">class</span> <span class="nc">ImapClient</span><span class="p">:</span>
-    <span class="n">imap</span> <span class="o">=</span> <span class="bp">None</span>
+    <span class="n">imap</span> <span class="o">=</span> <span class="kc">None</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
                  <span class="n">recipient</span><span class="p">,</span>
                  <span class="n">server</span><span class="o">=</span><span class="s1">&#39;imap.gmail.com&#39;</span><span class="p">,</span>
-                 <span class="n">use_ssl</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
-                 <span class="n">move_to_trash</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+                 <span class="n">use_ssl</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                 <span class="n">move_to_trash</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="c1"># check for required param</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">recipient</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;You must provide a recipient email address&#39;</span><span class="p">)</span>
@@ -403,8 +402,8 @@
         <span class="k">try</span><span class="p">:</span>
             <span class="n">rv</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">imap</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">recipient</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">&#39;mailpwd&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">))</span>
         <span class="k">except</span> <span class="p">(</span><span class="n">imaplib</span><span class="o">.</span><span class="n">IMAP4_SSL</span><span class="o">.</span><span class="n">error</span><span class="p">,</span> <span class="n">imaplib</span><span class="o">.</span><span class="n">IMAP4</span><span class="o">.</span><span class="n">error</span><span class="p">)</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
-            <span class="k">print</span><span class="p">(</span><span class="s1">&#39;LOGIN FAILED!&#39;</span><span class="p">)</span>
-            <span class="k">print</span><span class="p">(</span><span class="n">err</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;LOGIN FAILED!&#39;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">err</span><span class="p">)</span>
             <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">logout</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -433,17 +432,17 @@
         <span class="c1"># select the folder, by default INBOX</span>
         <span class="n">resp</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">imap</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">recipient_folder</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">resp</span> <span class="o">!=</span> <span class="s1">&#39;OK&#39;</span><span class="p">:</span>
-            <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;ERROR: Unable to open the {self.recipient_folder} folder&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ERROR: Unable to open the </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">recipient_folder</span><span class="si">}</span><span class="s2"> folder&quot;</span><span class="p">)</span>
             <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 
         <span class="n">messages</span> <span class="o">=</span> <span class="p">[]</span>
 
-        <span class="n">mbox_response</span><span class="p">,</span> <span class="n">msgnums</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">imap</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="s1">&#39;FROM&#39;</span><span class="p">,</span> <span class="n">sender</span><span class="p">)</span>
+        <span class="n">mbox_response</span><span class="p">,</span> <span class="n">msgnums</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">imap</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;FROM&#39;</span><span class="p">,</span> <span class="n">sender</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">mbox_response</span> <span class="o">==</span> <span class="s1">&#39;OK&#39;</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="n">msgnums</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">():</span>
                 <span class="n">retval</span><span class="p">,</span> <span class="n">rawmsg</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">imap</span><span class="o">.</span><span class="n">fetch</span><span class="p">(</span><span class="n">num</span><span class="p">,</span> <span class="s1">&#39;(RFC822)&#39;</span><span class="p">)</span>
                 <span class="k">if</span> <span class="n">retval</span> <span class="o">!=</span> <span class="s1">&#39;OK&#39;</span><span class="p">:</span>
-                    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;ERROR getting message&#39;</span><span class="p">,</span> <span class="n">num</span><span class="p">)</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;ERROR getting message&#39;</span><span class="p">,</span> <span class="n">num</span><span class="p">)</span>
                     <span class="k">continue</span>
                 <span class="n">msg</span> <span class="o">=</span> <span class="n">email</span><span class="o">.</span><span class="n">message_from_bytes</span><span class="p">(</span><span class="n">rawmsg</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
                 <span class="n">msg_subject</span> <span class="o">=</span> <span class="n">msg</span><span class="p">[</span><span class="s2">&quot;Subject&quot;</span><span class="p">]</span>
@@ -457,13 +456,13 @@
                             <span class="k">if</span> <span class="nb">type</span> <span class="o">==</span> <span class="s1">&#39;text/plain&#39;</span> <span class="ow">and</span> <span class="s1">&#39;attachment&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">disp</span><span class="p">:</span>
                                 <span class="n">charset</span> <span class="o">=</span> <span class="n">part</span><span class="o">.</span><span class="n">get_content_charset</span><span class="p">()</span>
                                 <span class="c1"># decode the base64 unicode bytestring into plain text</span>
-                                <span class="n">body</span> <span class="o">=</span> <span class="n">part</span><span class="o">.</span><span class="n">get_payload</span><span class="p">(</span><span class="n">decode</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">encoding</span><span class="o">=</span><span class="n">charset</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
+                                <span class="n">body</span> <span class="o">=</span> <span class="n">part</span><span class="o">.</span><span class="n">get_payload</span><span class="p">(</span><span class="n">decode</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">encoding</span><span class="o">=</span><span class="n">charset</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
                                 <span class="c1"># if we&#39;ve found the plain/text part, stop looping thru the parts</span>
                                 <span class="k">break</span>
                     <span class="k">else</span><span class="p">:</span>
                         <span class="c1"># not multipart - i.e. plain text, no attachments</span>
                         <span class="n">charset</span> <span class="o">=</span> <span class="n">msg</span><span class="o">.</span><span class="n">get_content_charset</span><span class="p">()</span>
-                        <span class="n">body</span> <span class="o">=</span> <span class="n">msg</span><span class="o">.</span><span class="n">get_payload</span><span class="p">(</span><span class="n">decode</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">encoding</span><span class="o">=</span><span class="n">charset</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
+                        <span class="n">body</span> <span class="o">=</span> <span class="n">msg</span><span class="o">.</span><span class="n">get_payload</span><span class="p">(</span><span class="n">decode</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">encoding</span><span class="o">=</span><span class="n">charset</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
                     <span class="n">messages</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s1">&#39;num&#39;</span><span class="p">:</span> <span class="n">num</span><span class="p">,</span> <span class="s1">&#39;body&#39;</span><span class="p">:</span> <span class="n">body</span><span class="p">})</span>
         <span class="k">return</span> <span class="n">messages</span>
 
@@ -477,9 +476,8 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">imap</span><span class="o">.</span><span class="n">store</span><span class="p">(</span><span class="n">msg_id</span><span class="p">,</span> <span class="s1">&#39;+FLAGS&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\\</span><span class="s1">Deleted&#39;</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">imap</span><span class="o">.</span><span class="n">expunge</span><span class="p">()</span>
-</pre></div>
+</code></pre></div>
 </td></tr></table>
-
 <h2>Class details</h2>
 <p>The <code>login()</code> and <code>logout()</code> methods should be fairly self-explanatory. The <code>select_folder()</code> method is optional. By default, the class will read from the INBOX folder but you could change that with this method.</p>
 <p>As you can see in the <code>__init__</code> method, you must specify a recipient address. This is the email account you're logging into. You can override other defaults, such as the server to log into, whether to connect over SSL, and so forth.</p>

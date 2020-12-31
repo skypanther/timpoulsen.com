@@ -210,9 +210,8 @@
 <p><img alt="Integration diagram" src="../images/2019/ios_opencv.png"></p>
 <p>As shown in the diagram, you will continue to write most of your app in Swift as you normally would do. The OpenCV framework will be included in your app, inside a wrapper that you'll write. A bridging header will connect your Swift code to the Objective-C / C++ code of OpenCV. (You'll also add a prefix/precompile header to optimize build times.)</p>
 <p>Once you've set all that up, you'll be able to make use of OpenCV with Swift code like:</p>
-<div class="highlight"><pre><span></span><span class="kd">let</span> <span class="nv">edged</span><span class="p">:</span> <span class="bp">UIImage</span> <span class="p">=</span> <span class="n">OpenCVWrapper</span><span class="p">.</span><span class="n">detectEdges</span><span class="p">(</span><span class="n">inRGBImage</span><span class="p">:</span> <span class="n">your_image</span><span class="p">)</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="kd">let</span> <span class="nv">edged</span><span class="p">:</span> <span class="bp">UIImage</span> <span class="p">=</span> <span class="n">OpenCVWrapper</span><span class="p">.</span><span class="n">detectEdges</span><span class="p">(</span><span class="n">inRGBImage</span><span class="p">:</span> <span class="n">your_image</span><span class="p">)</span>
+</code></pre></div>
 
 <p>But we're jumping ahead. There are a few steps to go through to get this all setup. Let's get OpenCV integrated and then I'll go through some usage examples.</p>
 <h2>Integration overview</h2>
@@ -249,16 +248,14 @@
 <li>When prompted, click the <strong>Create Bridging Header</strong> button</li>
 </ol>
 <p>Open the <em>YourApp</em>-Bridging-Header.h file and add this line:</p>
-<div class="highlight"><pre><span></span><span class="c1">#import &quot;OpenCVWrapper.h&quot;</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="c1">#import &quot;OpenCVWrapper.h&quot;</span>
+</code></pre></div>
 
 <p>That's all you'll need to do inside your bridging header. With this simple file in place, you've created a <em>bridge</em> between Objective-C (where you'll write the actual OpenCV code) and Swift (where you'll use it).</p>
 <p>Next, we need to make a couple of changes to the OpenCVWrapper.m file. First, change the name of the OpenCVWrapper.m file to <strong>OpenCVWrapper.mm</strong>. Doing so informs Xcode to treat it as a C++ rather than C file. Then, inside that file, make sure the imports at the top are in this order. If you don't, you will get weird compile errors later.</p>
-<div class="highlight"><pre><span></span><span class="c1">#import &lt;opencv2/opencv.hpp&gt;</span>
+<div class="highlight"><pre><span></span><code><span class="c1">#import &lt;opencv2/opencv.hpp&gt;</span>
 <span class="c1">#import &quot;OpenCVWrapper.h&quot;</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>Finally, we need to set up the prefix header. Again, there's not much that you'll need to do with this file. It will simply tell Xcode to not recompile the already-compiled OpenCV framework to speed up your builds.</p>
 <ol>
@@ -268,11 +265,10 @@
 <li>Click Create</li>
 </ol>
 <p>Inside the prefix header, before the closing <code>#endif</code> statement, add:</p>
-<div class="highlight"><pre><span></span>#<span class="nv">ifdef</span> <span class="nv">__cplusplus</span>
-#<span class="k">include</span> <span class="o">&lt;</span><span class="nv">opencv2</span><span class="o">/</span><span class="nv">opencv</span>.<span class="nv">hpp</span><span class="o">&gt;</span>
-#<span class="k">endif</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="cp">#ifdef __cplusplus</span>
+<span class="cp">#include</span> <span class="cpf">&lt;opencv2/opencv.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#endif</span>
+</code></pre></div>
 
 <p>That is, you're done! Well, you can build the app now and OpenCV is integrated. Of course you've done nothing to implement OpenCV's functions yet. (By the way, you'll get many OpenCV-related build warnings which you can safely ignore. They mostly relate to inline documentation comments being in the wrong format and won't affect your app's execution in any way.)</p>
 <h2>Implementing an OpenCV function</h2>
@@ -283,7 +279,7 @@
 <li>Call that function in your Swift file</li>
 </ol>
 <p>For example, your .h header declares the function and its signature, which might look like this:</p>
-<div class="highlight"><pre><span></span><span class="cp">#import &lt;Foundation/Foundation.h&gt;</span>
+<div class="highlight"><pre><span></span><code><span class="cp">#import &lt;Foundation/Foundation.h&gt;</span>
 
 <span class="n">NS_ASSUME_NONNULL_BEGIN</span>
 
@@ -294,11 +290,10 @@
 <span class="err">@</span><span class="n">end</span>
 
 <span class="n">NS_ASSUME_NONNULL_END</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>Your .mm file would have the corresponding function implementation:</p>
-<div class="highlight"><pre><span></span><span class="cp">#import &lt;opencv2/opencv.hpp&gt;</span>
+<div class="highlight"><pre><span></span><code><span class="cp">#import &lt;opencv2/opencv.hpp&gt;</span>
 <span class="cp">#import &quot;OpenCVWrapper.h&quot;</span>
 
 <span class="err">@</span><span class="n">implementation</span> <span class="n">OpenCVWrapper</span>
@@ -308,17 +303,15 @@
 <span class="p">}</span>
 
 <span class="err">@</span><span class="n">end</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>Per Objective-C syntax, the <code>+</code> indicates a class method; use <code>-</code> to indicate an instance method. The difference is probably inconsequential since there will only ever be one instance of your OpenCVWrapper class. So, you can probably use <code>+</code> to prefix all of your functions as shown above.</p>
 <p>OK, so let's use this powerful new OpenCV capability. In your main ViewController.swift file, update <strong>viewDidLoad</strong> to call that new function:</p>
-<div class="highlight"><pre><span></span><span class="kr">override</span> <span class="kd">func</span> <span class="nf">viewDidLoad</span><span class="p">()</span> <span class="p">{</span>
+<div class="highlight"><pre><span></span><code><span class="kr">override</span> <span class="kd">func</span> <span class="nf">viewDidLoad</span><span class="p">()</span> <span class="p">{</span>
     <span class="kc">super</span><span class="p">.</span><span class="n">viewDidLoad</span><span class="p">()</span>
     <span class="bp">print</span><span class="p">(</span><span class="s">&quot;</span><span class="si">\(</span><span class="n">cv2</span><span class="p">.</span><span class="n">openVersionString</span><span class="si">())</span><span class="s">&quot;</span><span class="p">)</span>
 <span class="p">}</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>Build to a simulator and watch the Xcode debug console and you should see <code>OpenCV Version 3.4.4</code> there. Congratulations, you've integrated OpenCV into your iOS app.</p>
 <h2>A better example</h2>

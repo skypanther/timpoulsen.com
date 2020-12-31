@@ -238,9 +238,8 @@
 <h2>MQTT</h2>
 <p>I chose to use <a href="https://www.baldengineer.com/mqtt-introduction.html">MQTT</a> for message transport because there is very little overhead associated with the MQTT protocol. Messages are transmitted very quickly. Plus there are some great libraries for both Python and C/C++.</p>
 <p>In PiLit, messages are basically in the form <code>channel/payload</code> where <code>channel</code> is the name of the node that should act on the message and <code>payload</code> is a string describing what animation to play. For example, a leaping arch node subscribed to an <code>arch1</code> channel would listen for a message like this:</p>
-<div class="highlight"><pre><span></span><span class="n">arch1</span><span class="o">/</span><span class="n">red</span><span class="p">:</span><span class="n">bounce</span><span class="p">:</span><span class="mi">5</span><span class="p">:</span><span class="mi">50</span><span class="p">:</span><span class="k">true</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="err">arch1/red:bounce:5:50:true</span>
+</code></pre></div>
 
 <p>The message is a colon-delimited string that tells the arch what color to show, what animation sequence to play, and additional timing and control values. See the repo for details on the actual message payloads.</p>
 <p>Nodes can subscribe to multiple channels, so a leaping arch might join both the <code>arch1</code> channel and the <code>all_arches</code> channel. If all my leaping arches have joined <code>all_arches</code> then I can set them all to the same animation with a single MQTT message addressed to that channel.</p>

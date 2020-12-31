@@ -222,11 +222,10 @@
 <p>According to a closed issue on the pistreaming repo, I needed to modify the script's index.html file. That file includes a hard-coded LAN address for the stream's address. It needs to be modified to use your public IP, which is the one your ISP gives you. You can do a Google search for "what's my IP" to find that address.</p>
 <p>Then, update index.html, changing the <code>var client</code> line near the bottom like this:</p>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// change the var client line (at the bottom) to be:</span>
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="c1">// change the var client line (at the bottom) to be:</span>
 <span class="kd">var</span> <span class="nx">client</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">WebSocket</span><span class="p">(</span><span class="s1">&#39;ws://your_external_ip_address:${WS_PORT}/&#39;</span><span class="p">);</span>
-</pre></div>
+</code></pre></div>
 </td></tr></table>
-
 <p>Make sure you have the quotes right on that. There are few quotes in there to start and you end up with two single quotes around everything between the parentheses.</p>
 <h2>Streaming on startup</h2>
 <p>I wanted the streaming server to start up automatically when the Pi booted up. To do this, I modified /etc/rc.local to run the server.py script. Keep in mind that scripts run by system processes like this don't have access to the same environment as you would have at a terminal prompt. When auto-running scripts like this, you have to use full (absolute) paths to python and your script.</p>
@@ -249,7 +248,7 @@
  9
 10
 11
-12</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">StreamingHttpServer</span><span class="p">(</span><span class="n">HTTPServer</span><span class="p">):</span>
+12</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">StreamingHttpServer</span><span class="p">(</span><span class="n">HTTPServer</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">__init</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c1"># I added this line</span>
         <span class="n">cwd</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">realpath</span><span class="p">(</span><span class="vm">__file__</span><span class="p">))</span>
@@ -261,9 +260,8 @@
         <span class="c1"># this one too</span>
         <span class="k">with</span> <span class="n">io</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cwd</span><span class="p">,</span> <span class="s1">&#39;jsmpg.js&#39;</span><span class="p">),</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">jsmpg_content</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
-</pre></div>
+</code></pre></div>
 </td></tr></table>
-
 <p>And with that, I was done. A quick reboot of the Pi and a check and sure enough it was streaming away.</p>
 <h2>Lighting the way</h2>
 <p>The inside of a birdbox is pretty dark, even during the day. From what I could find in the literature, birds see wavelengths between roughly 300 to 700 nm. That would mean a 940 nm IR LED would be outside their vision range but it would be visible to my NOIR (no infrared filter) Pi camera.</p>
@@ -275,16 +273,15 @@
 4
 5
 6
-7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">RPi.GPIO</span> <span class="kn">as</span> <span class="nn">GPIO</span>
+7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">RPi.GPIO</span> <span class="k">as</span> <span class="nn">GPIO</span>
 
 <span class="n">ledPin</span> <span class="o">=</span> <span class="mi">18</span>  <span class="c1"># Pi pin 12 is Broadcom pin 18</span>
 
 <span class="n">GPIO</span><span class="o">.</span><span class="n">setmode</span><span class="p">(</span><span class="n">GPIO</span><span class="o">.</span><span class="n">BCM</span><span class="p">)</span> <span class="c1"># Use Broadcom pin-numbering mode</span>
 <span class="n">GPIO</span><span class="o">.</span><span class="n">setup</span><span class="p">(</span><span class="n">ledPin</span><span class="p">,</span> <span class="n">GPIO</span><span class="o">.</span><span class="n">OUT</span><span class="p">)</span> <span class="c1"># LED pin set as output</span>
 <span class="n">GPIO</span><span class="o">.</span><span class="n">output</span><span class="p">(</span><span class="n">ledPin</span><span class="p">,</span> <span class="n">GPIO</span><span class="o">.</span><span class="n">HIGH</span><span class="p">)</span>
-</pre></div>
+</code></pre></div>
 </td></tr></table>
-
 <p>I saved that as led.py in my home directory. I updated rc.local to also run this script after starting the streaming server.</p>
 <h2>Focusing the camera</h2>
 <p>Finally, I had to adjust the focus of the camera. A bluebird box is roughly 9 inches tall and the nests are usually a few inches of packed grass and sticks. By default, the Pi camera is not in focus that close. But, you can change that.</p>

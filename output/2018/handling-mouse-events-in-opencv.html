@@ -223,7 +223,7 @@
 <span class="kn">import</span> <span class="nn">cv2</span>
 
 <span class="n">coords</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="n">drawing</span> <span class="o">=</span> <span class="bp">False</span>
+<span class="n">drawing</span> <span class="o">=</span> <span class="kc">False</span>
 
 <span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
 
@@ -265,18 +265,18 @@
     <span class="n">image_source</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="s2">&quot;image&quot;</span><span class="p">]</span> <span class="k">if</span> <span class="n">args</span><span class="p">[</span><span class="s2">&quot;image&quot;</span><span class="p">]</span> <span class="k">else</span> <span class="mi">0</span>
     <span class="c1"># now get our image from either the file or built-in webcam</span>
     <span class="n">image</span> <span class="o">=</span> <span class="n">get_image</span><span class="p">(</span><span class="n">image_source</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">image</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">image</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="c1"># show the captured image in a window</span>
         <span class="n">cv2</span><span class="o">.</span><span class="n">namedWindow</span><span class="p">(</span><span class="s1">&#39;CapturedImage&#39;</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">WINDOW_NORMAL</span><span class="p">)</span>
         <span class="n">cv2</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="s1">&#39;CapturedImage&#39;</span><span class="p">,</span> <span class="n">image</span><span class="p">)</span>
         <span class="c1"># specify the callback function to be called when the user</span>
         <span class="c1"># clicks/drags in the &#39;CapturedImage&#39; window</span>
         <span class="n">cv2</span><span class="o">.</span><span class="n">setMouseCallback</span><span class="p">(</span><span class="s1">&#39;CapturedImage&#39;</span><span class="p">,</span> <span class="n">click_and_crop</span><span class="p">,</span> <span class="n">image</span><span class="p">)</span>
-        <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
             <span class="c1"># wait for Esc or q key and then exit</span>
             <span class="n">key</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">waitKey</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mh">0xFF</span>
             <span class="k">if</span> <span class="n">key</span> <span class="o">==</span> <span class="mi">27</span> <span class="ow">or</span> <span class="n">key</span> <span class="o">==</span> <span class="nb">ord</span><span class="p">(</span><span class="s2">&quot;q&quot;</span><span class="p">):</span>
-                <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Image cropped at coordinates: {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">coords</span><span class="p">))</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Image cropped at coordinates: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">coords</span><span class="p">))</span>
                 <span class="n">cv2</span><span class="o">.</span><span class="n">destroyAllWindows</span><span class="p">()</span>
                 <span class="k">break</span>
 </pre></div>
@@ -299,7 +299,7 @@
     <span class="n">cam</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>
     <span class="k">if</span> <span class="p">(</span><span class="n">image_captured</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">image</span>
-    <span class="k">return</span> <span class="bp">None</span>
+    <span class="k">return</span> <span class="kc">None</span>
 </pre></div>
 </td></tr></table><p>This function is pretty straightforward. We'll use <tt class="docutils literal">cv2.VideoCapture()</tt> to open whatever source it's passed (which will be either a filename or <tt class="docutils literal">0</tt> for the webcam). It will read a single frame, then return the captured image.</p>
 <p>The bigger function is <tt class="docutils literal">click_and_crop()</tt> which is our event handler. Let's see this one in stages.</p>
@@ -328,7 +328,7 @@
 50
 51</pre></div></td><td class="code"><div class="highlight"><pre><span></span>    <span class="k">if</span> <span class="n">event</span> <span class="o">==</span> <span class="n">cv2</span><span class="o">.</span><span class="n">EVENT_LBUTTONDOWN</span><span class="p">:</span>
         <span class="c1"># user has clicked the mouse&#39;s left button</span>
-        <span class="n">drawing</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="n">drawing</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="c1"># save those starting coordinates</span>
         <span class="n">coords</span> <span class="o">=</span> <span class="p">[(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)]</span>
 </pre></div>
@@ -342,7 +342,7 @@
 58
 59</pre></div></td><td class="code"><div class="highlight"><pre><span></span>    <span class="k">elif</span> <span class="n">event</span> <span class="o">==</span> <span class="n">cv2</span><span class="o">.</span><span class="n">EVENT_MOUSEMOVE</span><span class="p">:</span>
         <span class="c1"># user is moving the mouse within the window</span>
-        <span class="k">if</span> <span class="n">drawing</span> <span class="ow">is</span> <span class="bp">True</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">drawing</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
             <span class="c1"># if we&#39;re in drawing mode, we&#39;ll draw a green rectangle</span>
             <span class="c1"># from the starting x,y coords to our current coords</span>
             <span class="n">clone</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
@@ -369,7 +369,7 @@
 76</pre></div></td><td class="code"><div class="highlight"><pre><span></span>    <span class="k">elif</span> <span class="n">event</span> <span class="o">==</span> <span class="n">cv2</span><span class="o">.</span><span class="n">EVENT_LBUTTONUP</span><span class="p">:</span>
         <span class="c1"># user has released the mouse button, leave drawing mode</span>
         <span class="c1"># and crop the photo</span>
-        <span class="n">drawing</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="n">drawing</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="c1"># save our ending coordinates</span>
         <span class="n">coords</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">coords</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
@@ -477,7 +477,7 @@
 <span class="kn">import</span> <span class="nn">cv2</span>
 
 <span class="n">coords</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="n">drawing</span> <span class="o">=</span> <span class="bp">False</span>
+<span class="n">drawing</span> <span class="o">=</span> <span class="kc">False</span>
 
 <span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
     <span class="c1"># construct the argument parser and parse the arguments</span>
@@ -487,18 +487,18 @@
     <span class="n">image_source</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="s2">&quot;image&quot;</span><span class="p">]</span> <span class="k">if</span> <span class="n">args</span><span class="p">[</span><span class="s2">&quot;image&quot;</span><span class="p">]</span> <span class="k">else</span> <span class="mi">0</span>
     <span class="c1"># now get our image from either the file or built-in webcam</span>
     <span class="n">image</span> <span class="o">=</span> <span class="n">get_image</span><span class="p">(</span><span class="n">image_source</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">image</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">image</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="c1"># show the captured image in a window</span>
         <span class="n">cv2</span><span class="o">.</span><span class="n">namedWindow</span><span class="p">(</span><span class="s1">&#39;CapturedImage&#39;</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">WINDOW_NORMAL</span><span class="p">)</span>
         <span class="n">cv2</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="s1">&#39;CapturedImage&#39;</span><span class="p">,</span> <span class="n">image</span><span class="p">)</span>
         <span class="c1"># specify the callback function to be called when the user</span>
         <span class="c1"># clicks/drags in the &#39;CapturedImage&#39; window</span>
         <span class="n">cv2</span><span class="o">.</span><span class="n">setMouseCallback</span><span class="p">(</span><span class="s1">&#39;CapturedImage&#39;</span><span class="p">,</span> <span class="n">click_and_crop</span><span class="p">,</span> <span class="n">image</span><span class="p">)</span>
-        <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
             <span class="c1"># wait for Esc or q key and then exit</span>
             <span class="n">key</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">waitKey</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mh">0xFF</span>
             <span class="k">if</span> <span class="n">key</span> <span class="o">==</span> <span class="mi">27</span> <span class="ow">or</span> <span class="n">key</span> <span class="o">==</span> <span class="nb">ord</span><span class="p">(</span><span class="s2">&quot;q&quot;</span><span class="p">):</span>
-                <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Image cropped at coordinates: {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">coords</span><span class="p">))</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Image cropped at coordinates: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">coords</span><span class="p">))</span>
                 <span class="n">cv2</span><span class="o">.</span><span class="n">destroyAllWindows</span><span class="p">()</span>
                 <span class="k">break</span>
 
@@ -509,7 +509,7 @@
     <span class="n">cam</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>
     <span class="k">if</span> <span class="p">(</span><span class="n">image_captured</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">image</span>
-    <span class="k">return</span> <span class="bp">None</span>
+    <span class="k">return</span> <span class="kc">None</span>
 
 <span class="k">def</span> <span class="nf">click_and_crop</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">flag</span><span class="p">,</span> <span class="n">image</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
@@ -521,12 +521,12 @@
     <span class="k">global</span> <span class="n">coords</span><span class="p">,</span> <span class="n">drawing</span>
     <span class="k">if</span> <span class="n">event</span> <span class="o">==</span> <span class="n">cv2</span><span class="o">.</span><span class="n">EVENT_LBUTTONDOWN</span><span class="p">:</span>
         <span class="c1"># user has clicked the mouse&#39;s left button</span>
-        <span class="n">drawing</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="n">drawing</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="c1"># save those starting coordinates</span>
         <span class="n">coords</span> <span class="o">=</span> <span class="p">[(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)]</span>
     <span class="k">elif</span> <span class="n">event</span> <span class="o">==</span> <span class="n">cv2</span><span class="o">.</span><span class="n">EVENT_MOUSEMOVE</span><span class="p">:</span>
         <span class="c1"># user is moving the mouse within the window</span>
-        <span class="k">if</span> <span class="n">drawing</span> <span class="ow">is</span> <span class="bp">True</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">drawing</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
             <span class="c1"># if we&#39;re in drawing mode, we&#39;ll draw a green rectangle</span>
             <span class="c1"># from the starting x,y coords to our current coords</span>
             <span class="n">clone</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
@@ -535,7 +535,7 @@
     <span class="k">elif</span> <span class="n">event</span> <span class="o">==</span> <span class="n">cv2</span><span class="o">.</span><span class="n">EVENT_LBUTTONUP</span><span class="p">:</span>
         <span class="c1"># user has released the mouse button, leave drawing mode</span>
         <span class="c1"># and crop the photo</span>
-        <span class="n">drawing</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="n">drawing</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="c1"># save our ending coordinates</span>
         <span class="n">coords</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">coords</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>

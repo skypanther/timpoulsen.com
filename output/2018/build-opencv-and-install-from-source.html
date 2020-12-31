@@ -216,24 +216,22 @@
 <li>Homebrew</li>
 </ul>
 <p>Once you have those installed, you’re ready to start. You’ll need to install some pre-requisite packages. Each of the following is a separate command:</p>
-<div class="highlight"><pre><span></span><span class="n">brew</span> <span class="n">install</span> <span class="n">cmake</span> <span class="n">pkg</span><span class="o">-</span><span class="n">config</span>
-<span class="n">brew</span> <span class="n">install</span> <span class="n">jpeg</span> <span class="n">libpng</span> <span class="n">libtiff</span> <span class="n">openexr</span>
-<span class="n">brew</span> <span class="n">install</span> <span class="n">eigen</span> <span class="n">tbb</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="err">brew install cmake pkg-config</span>
+<span class="err">brew install jpeg libpng libtiff openexr</span>
+<span class="err">brew install eigen tbb</span>
+</code></pre></div>
 
 <p>Next, you’ll need the OpenCV source code. Clone OpenCV and OpenCV_contrib:</p>
-<div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">~</span>
-<span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="p">.</span><span class="n">com</span><span class="o">/</span><span class="n">opencv</span><span class="o">/</span><span class="n">opencv</span>
-<span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="p">.</span><span class="n">com</span><span class="o">/</span><span class="n">opencv</span><span class="o">/</span><span class="n">opencv_contrib</span>
-<span class="n">cd</span> <span class="o">~/</span><span class="n">opencv</span>
-<span class="n">mkdir</span> <span class="n">build</span>
-<span class="n">cd</span> <span class="n">build</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="err">cd ~</span>
+<span class="err">git clone https://github.com/opencv/opencv</span>
+<span class="err">git clone https://github.com/opencv/opencv_contrib</span>
+<span class="err">cd ~/opencv</span>
+<span class="err">mkdir build</span>
+<span class="err">cd build</span>
+</code></pre></div>
 
 <p>Next you’ll configure <code>make</code> with the following command. All of this is one big command, split over multiple lines, and yes it does end with two periods. You can just copy it all and paste in your terminal.</p>
-<div class="highlight"><pre><span></span><span class="n">cmake</span> <span class="o">-</span><span class="n">D</span> <span class="n">CMAKE_BUILD_TYPE</span><span class="o">=</span><span class="n">RELEASE</span> \
+<div class="highlight"><pre><span></span><code><span class="n">cmake</span> <span class="o">-</span><span class="n">D</span> <span class="n">CMAKE_BUILD_TYPE</span><span class="o">=</span><span class="n">RELEASE</span> \
     <span class="o">-</span><span class="n">D</span> <span class="n">CMAKE_INSTALL_PREFIX</span><span class="o">=</span><span class="err">$</span><span class="p">(</span><span class="n">python3</span> <span class="o">-</span><span class="n">c</span> <span class="s2">&quot;import sys; print(sys.prefix)&quot;</span><span class="p">)</span> \
     <span class="o">-</span><span class="n">D</span> <span class="n">OPENCV_EXTRA_MODULES_PATH</span><span class="o">=~/</span><span class="n">opencv_contrib</span><span class="o">/</span><span class="n">modules</span> \
     <span class="o">-</span><span class="n">D</span> <span class="n">PYTHON3_INCLUDE_DIR</span><span class="o">=</span><span class="err">$</span><span class="p">(</span><span class="n">python3</span> <span class="o">-</span><span class="n">c</span> <span class="s2">&quot;from distutils.sysconfig import get_python_inc; print(get_python_inc())&quot;</span><span class="p">)</span> \
@@ -249,28 +247,24 @@
     <span class="o">-</span><span class="n">D</span> <span class="n">WITH_FFMPEG</span><span class="o">=</span><span class="n">ON</span> \
     <span class="o">-</span><span class="n">D</span> <span class="n">ENABLE_PRECOMPILED_HEADERS</span><span class="o">=</span><span class="n">OFF</span> \
     <span class="o">-</span><span class="n">D</span> <span class="n">BUILD_EXAMPLES</span><span class="o">=</span><span class="n">OFF</span> <span class="o">..</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>That command will take a while...after which you can do the actual build:</p>
-<div class="highlight"><pre><span></span><span class="n">make</span> <span class="o">-</span><span class="n">j4</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="err">make -j4</span>
+</code></pre></div>
 
 <p>That will take even longer; depending on the speed of your system it could take an hour or longer. Once it’s all done, you’re ready to actually install the compiled project:</p>
-<div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">make</span> <span class="n">install</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="err">sudo make install</span>
+</code></pre></div>
 
 <p>That will copy all the files to the right spot on your system. At this point, you’re pretty much done. I found a few guides that suggested that you need to rename (or copy or link) one of the .so files that was copied to your python lib folder.</p>
 <p>Rather than digging for the location of that folder, what the first command below does is ask python to find that folder for you and pass it to the <code>cd</code> command:</p>
-<div class="highlight"><pre><span></span><span class="n">cd</span> <span class="err">$</span><span class="p">(</span><span class="n">python3</span> <span class="o">-</span><span class="n">c</span> <span class="s2">&quot;from distutils.sysconfig import get_python_lib; print(get_python_lib())&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">cd</span> <span class="err">$</span><span class="p">(</span><span class="n">python3</span> <span class="o">-</span><span class="n">c</span> <span class="s2">&quot;from distutils.sysconfig import get_python_lib; print(get_python_lib())&quot;</span><span class="p">)</span>
 <span class="n">cp</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cpython</span><span class="o">-</span><span class="mi">36</span><span class="n">m</span><span class="o">-</span><span class="n">darwin</span><span class="o">.</span><span class="n">so</span> <span class="n">cv2</span><span class="o">.</span><span class="n">so</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>Finally, you’re done and ready test your work:</p>
-<div class="highlight"><pre><span></span><span class="err">$</span> <span class="n">python</span>
+<div class="highlight"><pre><span></span><code><span class="err">$</span> <span class="n">python</span>
 
 <span class="n">Python</span> <span class="mf">3.6</span><span class="o">.</span><span class="mi">3</span> <span class="o">|</span><span class="n">Anaconda</span><span class="p">,</span> <span class="n">Inc</span><span class="o">.|</span> <span class="p">(</span><span class="n">default</span><span class="p">,</span> <span class="n">Oct</span>  <span class="mi">6</span> <span class="mi">2017</span><span class="p">,</span> <span class="mi">12</span><span class="p">:</span><span class="mo">04</span><span class="p">:</span><span class="mi">38</span><span class="p">)</span> 
 <span class="p">[</span><span class="n">GCC</span> <span class="mf">4.2</span><span class="o">.</span><span class="mi">1</span> <span class="n">Compatible</span> <span class="n">Clang</span> <span class="mf">4.0</span><span class="o">.</span><span class="mi">1</span> <span class="p">(</span><span class="n">tags</span><span class="o">/</span><span class="n">RELEASE_401</span><span class="o">/</span><span class="n">final</span><span class="p">)]</span> <span class="n">on</span> <span class="n">darwin</span>
@@ -278,8 +272,7 @@
 <span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">cv2</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">cv2</span><span class="o">.</span><span class="n">__version__</span>
 <span class="s1">&#39;3.4.1-dev&#39;</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>That’s it, OpenCV is installed!</p>
   </div>

@@ -250,7 +250,7 @@
 6
 7
 8
-9</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">cv2</span>
+9</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">cv2</span>
 <span class="kn">from</span> <span class="nn">multicam</span> <span class="kn">import</span> <span class="n">Multicam</span>
 
 <span class="n">mcam</span> <span class="o">=</span> <span class="n">Multicam</span><span class="p">()</span>
@@ -259,9 +259,8 @@
 <span class="n">cv2</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="s1">&#39;Cam A&#39;</span><span class="p">,</span> <span class="n">img</span><span class="p">)</span>
 <span class="n">cv2</span><span class="o">.</span><span class="n">waitKey</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 <span class="n">mcam</span><span class="o">.</span><span class="n">cleanup</span><span class="p">()</span>
-</pre></div>
+</code></pre></div>
 </td></tr></table>
-
 <p>Or, with Matplotlib, you just need to specify the <code>rgb</code> image format:</p>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
@@ -272,7 +271,7 @@
  7
  8
  9
-10</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+10</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
 <span class="kn">from</span> <span class="nn">multicam</span> <span class="kn">import</span> <span class="n">Multicam</span>
 
 <span class="n">mcam</span> <span class="o">=</span> <span class="n">Multicam</span><span class="p">()</span>
@@ -282,9 +281,8 @@
 <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 <span class="n">mcam</span><span class="o">.</span><span class="n">cleanup</span><span class="p">()</span>
-</pre></div>
+</code></pre></div>
 </td></tr></table>
-
 <p>Of course, you could do the above with a single camera. Where this library shines is of course accessing the other cameras:</p>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
@@ -296,7 +294,7 @@
  8
  9
 10
-11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">cv2</span>
+11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">cv2</span>
 <span class="kn">from</span> <span class="nn">multicam</span> <span class="kn">import</span> <span class="n">Multicam</span>
 
 <span class="n">mcam</span> <span class="o">=</span> <span class="n">Multicam</span><span class="p">()</span>
@@ -307,9 +305,8 @@
 <span class="n">cv2</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="s1">&#39;Cam D&#39;</span><span class="p">,</span> <span class="n">mcam</span><span class="o">.</span><span class="n">capture</span><span class="p">(</span><span class="n">cam</span><span class="o">=</span><span class="s1">&#39;d&#39;</span><span class="p">))</span>
 <span class="n">cv2</span><span class="o">.</span><span class="n">waitKey</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 <span class="n">mcam</span><span class="o">.</span><span class="n">cleanup</span><span class="p">()</span>
-</pre></div>
+</code></pre></div>
 </td></tr></table>
-
 <p>There's no need to worry about setting GPIO pins, selecting channels, etc. The library does all that for you. If you have multiple adapters stacked, you can keep going (up to camera 16, or "p")</p>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
@@ -321,7 +318,7 @@
  8
  9
 10
-11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">cv2</span>
+11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">cv2</span>
 <span class="kn">from</span> <span class="nn">multicam</span> <span class="kn">import</span> <span class="n">Multicam</span>
 
 <span class="n">mcam</span> <span class="o">=</span> <span class="n">Multicam</span><span class="p">()</span>
@@ -332,21 +329,19 @@
 <span class="n">cv2</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="s1">&#39;Cam P&#39;</span><span class="p">,</span> <span class="n">mcam</span><span class="o">.</span><span class="n">capture</span><span class="p">(</span><span class="n">cam</span><span class="o">=</span><span class="s1">&#39;p&#39;</span><span class="p">))</span>
 <span class="n">cv2</span><span class="o">.</span><span class="n">waitKey</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 <span class="n">mcam</span><span class="o">.</span><span class="n">cleanup</span><span class="p">()</span>
-</pre></div>
+</code></pre></div>
 </td></tr></table>
-
 <h3>Notes and miscellaneous</h3>
 <p>Each of the above examples ends with a call to <code>cleanup</code>. This releases the GPIO ports. You should always call this function at the end of your script to avoid errors if you re-run the script (without restarting the Pi).</p>
 <p>By default, my library uses "board" port assignments. This means GPIO ports are accessed according to their physical pin number. This use matches the examples on the Arducam site.</p>
 <p>However, some libraries, like <a href="https://gpiozero.readthedocs.io/en/stable/index.html">gpiozero</a>, are limited to using the Broadcom numbering scheme. If you're using such a library, you can tell the multicam library to use "bcm" numbering during initialization:</p>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
-3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">multicam</span> <span class="kn">import</span> <span class="n">Multicam</span>
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">multicam</span> <span class="kn">import</span> <span class="n">Multicam</span>
 
 <span class="n">mcam</span> <span class="o">=</span> <span class="n">Multicam</span><span class="p">(</span><span class="n">gpio_mode</span><span class="o">=</span><span class="s1">&#39;bcm&#39;</span><span class="p">)</span>
-</pre></div>
+</code></pre></div>
 </td></tr></table>
-
 <h2>Conclusion</h2>
 <p>If you buy one of these boards, grab a copy of <a href="https://gist.github.com/skypanther/04b44eaa455f358eb70e59336c068312">my multicam library</a> to ease working with the cameras. Please comment on that Gist if you find issues. It's MIT licensed so free to use in any of your projects.</p>
   </div>

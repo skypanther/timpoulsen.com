@@ -223,14 +223,12 @@
 <h2>Installing OpenCV</h2>
 <p>For Python environments, installing OpenCV is pretty simple. You'll need to choose between installing just OpenCV or the contributed modules as well. The "contrib" modules are extra functions provided by the community. Popular and well-written contrib modules sometimes get pulled into the core OpenCV distribution. However, not all of them are error free or fully optimized. </p>
 <p>To install the core OpenCV Python version:</p>
-<div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">opencv</span><span class="o">-</span><span class="n">python</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="err">pip install opencv-python</span>
+</code></pre></div>
 
 <p>To install the version containing the contrib modules:</p>
-<div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">opencv</span><span class="o">-</span><span class="n">contrib</span><span class="o">-</span><span class="n">python</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="err">pip install opencv-contrib-python</span>
+</code></pre></div>
 
 <p>(The above commands will work just fine if you're using the Anaconda Python distribution, which I recommend you use.)</p>
 <p>Mac users can also install OpenCV using <a href="http://brew.sh/" target="_blank">Homebrew</a> and Linux users can sometimes use their package manager (e.g. apt-get). You can even <a href="/compiling-opencv.html" target="_blank">compile OpenCV from its source code version</a>. You would do this to get the newest version or to get a version tailored to your specific computer.</p>

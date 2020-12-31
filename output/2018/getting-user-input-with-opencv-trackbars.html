@@ -294,16 +294,16 @@
 28
 29
 30
-31</pre></div></td><td class="code"><div class="highlight"><pre><span></span>   <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+31</pre></div></td><td class="code"><div class="highlight"><pre><span></span>   <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
        <span class="n">min_val</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">cv2</span><span class="o">.</span><span class="n">getTrackbarPos</span><span class="p">(</span><span class="s1">&#39;Min&#39;</span><span class="p">,</span> <span class="s1">&#39;Original&#39;</span><span class="p">))</span>
        <span class="n">max_val</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">cv2</span><span class="o">.</span><span class="n">getTrackbarPos</span><span class="p">(</span><span class="s1">&#39;Max&#39;</span><span class="p">,</span> <span class="s1">&#39;Original&#39;</span><span class="p">))</span>
-       <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Min: {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">min_val</span><span class="p">))</span>
-       <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Max: {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">max_val</span><span class="p">))</span>
+       <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Min: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">min_val</span><span class="p">))</span>
+       <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Max: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">max_val</span><span class="p">))</span>
        <span class="n">edges</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">Canny</span><span class="p">(</span><span class="n">gray</span><span class="p">,</span> <span class="n">min_val</span><span class="p">,</span> <span class="n">max_val</span><span class="p">,</span> <span class="n">aperture_size</span><span class="p">)</span>
        <span class="n">cv2</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="s1">&#39;Edges&#39;</span><span class="p">,</span> <span class="n">imutils</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="n">edges</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">480</span><span class="p">))</span>
        <span class="k">if</span> <span class="n">cv2</span><span class="o">.</span><span class="n">waitKey</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mh">0xFF</span> <span class="o">==</span> <span class="nb">ord</span><span class="p">(</span><span class="s2">&quot;q&quot;</span><span class="p">):</span>
            <span class="n">cv2</span><span class="o">.</span><span class="n">destroyAllWindows</span><span class="p">()</span>
-           <span class="nb">exit</span><span class="p">()</span>
+           <span class="n">exit</span><span class="p">()</span>
 </pre></div>
 </td></tr></table><p>There are a few things going on in that loop! First, we use <tt class="docutils literal">getTrackbarPos</tt> to get the trackbar position. This function takes two parameters: the label of the trackbar we're reading from and the name of the window it's attached to. For our example script, we need the value as an integer, so we convert it with <tt class="docutils literal">int()</tt>.</p>
 <p>Here's also where we perform the edge detection. We call the <tt class="docutils literal">cv2.Canny</tt> method passing in the image, min and max values, and the aperture size. This returns the edge-detected version which we show in a new cv2 window.</p>
@@ -385,7 +385,7 @@
     <span class="s1">&#39;max_val&#39;</span><span class="p">:</span> <span class="mi">300</span><span class="p">,</span>
     <span class="s1">&#39;aperture_size&#39;</span><span class="p">:</span> <span class="mi">3</span>
 <span class="p">}</span>
-<span class="n">gray</span> <span class="o">=</span> <span class="bp">None</span>
+<span class="n">gray</span> <span class="o">=</span> <span class="kc">None</span>
 
 <span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
     <span class="k">global</span> <span class="n">edge_params</span><span class="p">,</span> <span class="n">gray</span>
@@ -394,9 +394,9 @@
                     <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Image to use for edge detection&#39;</span><span class="p">)</span>
     <span class="n">args</span> <span class="o">=</span> <span class="nb">vars</span><span class="p">(</span><span class="n">ap</span><span class="o">.</span><span class="n">parse_args</span><span class="p">())</span>
     <span class="n">file_name</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="s1">&#39;image&#39;</span><span class="p">]</span>
-    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">file_name</span><span class="p">)</span> <span class="ow">is</span> <span class="bp">False</span><span class="p">:</span>
-        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Cannot open image, quitting...&#39;</span><span class="p">)</span>
-        <span class="nb">exit</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">file_name</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Cannot open image, quitting...&#39;</span><span class="p">)</span>
+        <span class="n">exit</span><span class="p">()</span>
     <span class="n">image</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">file_name</span><span class="p">)</span>
     <span class="n">image</span> <span class="o">=</span> <span class="n">imutils</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">480</span><span class="p">)</span>
     <span class="n">gray</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_BGR2GRAY</span><span class="p">)</span>
@@ -407,10 +407,10 @@
     <span class="n">cv2</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="s1">&#39;Original&#39;</span><span class="p">,</span> <span class="n">image</span><span class="p">)</span>
     <span class="n">redraw_edges</span><span class="p">()</span>
 
-    <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">cv2</span><span class="o">.</span><span class="n">waitKey</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mh">0xFF</span> <span class="o">==</span> <span class="nb">ord</span><span class="p">(</span><span class="s2">&quot;q&quot;</span><span class="p">):</span>
             <span class="n">cv2</span><span class="o">.</span><span class="n">destroyAllWindows</span><span class="p">()</span>
-            <span class="nb">exit</span><span class="p">()</span>
+            <span class="n">exit</span><span class="p">()</span>
 
 <span class="k">def</span> <span class="nf">min_change</span><span class="p">(</span><span class="n">new_val</span><span class="p">):</span>
     <span class="n">change_params</span><span class="p">(</span><span class="s1">&#39;min_val&#39;</span><span class="p">,</span> <span class="n">new_val</span><span class="p">)</span>
@@ -421,7 +421,7 @@
 <span class="k">def</span> <span class="nf">change_params</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
     <span class="k">global</span> <span class="n">edge_params</span>
     <span class="n">edge_params</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">edge_params</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">edge_params</span><span class="p">)</span>
     <span class="n">redraw_edges</span><span class="p">()</span>
 
 <span class="k">def</span> <span class="nf">redraw_edges</span><span class="p">():</span>
