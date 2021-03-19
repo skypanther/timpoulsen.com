@@ -5,7 +5,7 @@ fontawesome-markdown==0.2.6
 html5lib==0.999999999
 imageio==2.2.0
 imagesize==0.7.1
-Jinja2==2.10.1
+Jinja2==2.11.3
 jsonschema==2.6.0
 Markdown==2.6.11
 MarkupSafe==1.0
