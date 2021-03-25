@@ -15,7 +15,7 @@ Pygments==2.2.0
 pylint==1.7.4
 python-dateutil==2.6.1
 pytz==2017.2
-PyYAML==3.12
+PyYAML==5.4
 singledispatch==3.4.0.3
 unicodecsv==0.14.1
 Unidecode==1.0.22
