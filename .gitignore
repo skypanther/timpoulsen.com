@@ -1,2 +1,4 @@
 __pycache__/*
 .DS_Store
+plugins/tag_cloud/__pycache__/
+venv/
