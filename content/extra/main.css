@@ -49,15 +49,16 @@
         --nav-link-fg: rgba(239, 131, 84, 1);
         --nav-link-fg-hover: rgba(252, 163, 17, 1);
 
-        --code-bg: rgba(24, 31, 50, .9);
+        --code-bg: rgba(24, 31, 50, 1);
         --code-bold: rgba(255, 255, 255, 1);
-        --code-bright: rgba(191, 192, 192, 1);
+        --code-bright: rgb(223, 224, 224);
         --code-faded: rgba(191, 192, 192, 0.85);
         --code-highlight: rgba(239, 131, 84, 1);
-        --code-constants: rgb(211, 95, 46);
+        --code-constants: rgb(235, 223, 56);
         --code-border: rgba(24, 31, 50, 1);
-        --code-comment: rgba(128, 128, 128, 0.85);
+        --code-comment: rgba(141, 188, 138, 0.75);
         --code-blockcomment: rgba(191, 192, 192, .75);
+        --code-nd: rgba(95, 167, 248, 0.878);
         
     }
 }
@@ -192,18 +193,33 @@ main article table td, main article table th {
 .highlight, code {
     background-color: var(--code-bg);
 }
-code, .k, .kc, .kd, .kn, .kr, .nc, .o, .ow, .se {color: var(--code-bright);}
+code, .k, .kc, .kd, .kn, .kr, .nc, .o, .ow, .se, .n {color: var(--code-bright);}
 .err, .nb, .nf, .nl, .nt, .s1, .s2, .si {color: var(--code-highlight);}
 .m, .mh, .mi, .nv, .s { color: var(--code-constants);}
-.nn, .sd {color: var(--code-blockcomment);}
+.sd {color: var(--code-blockcomment);}
+.nn, .nd { color: var(--code-nd);}
 .bp { color: var(--code-faded); }
-.c1 { color: var(--code-comment); }
+.c1, .cp { color: var(--code-comment); }
 
-main article code, main article pre {
+main article code {
     background-color: var(--code-bg);
     color: var(--code-bright);
     border-color: var(--code-border);
+    border: none;
+    white-space: pre;
 }
+
+main article pre code {
+    background-color: var(--code-bg);
+    color: var(--code-bright);
+    border-color: var(--code-border);
+    border: none;
+    white-space: pre;
+    font-size: 100%;
+    line-height: 1.65em;
+}
+
+/* code { white-space: pre } */
 
 .err {
     background-color: transparent;
@@ -215,6 +231,10 @@ main article code, main article pre {
 .linenos {
     width: 2.0em;
     padding: 8px 0 8px 0;
+}
+.linenodiv span.normal {
+    font-size: 100%;
+    line-height: 1.65em;
 }
 .linenodiv, .highlight {
     padding: 0;

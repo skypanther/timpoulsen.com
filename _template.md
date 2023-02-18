@@ -1,8 +1,12 @@
-Title: 
-Date: 
-Category: 
-Tags: 
+Title: aim_for_70_characters
+Description: for_SEO_aim_for_150_characters
+Date:
+Category:
+Tags:
 Status: draft
+Slug:
+
+# FOR_SEO_ALWAYS_HAVE_AN_H1_TITLE
 
 first paragraph
 
