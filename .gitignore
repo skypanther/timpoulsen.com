@@ -1,4 +1,6 @@
 __pycache__/*
 .DS_Store
-plugins/tag_cloud/__pycache__/
 venv/
+output/
+seo_report.html
+plugins/tag_cloud/__pycache__/

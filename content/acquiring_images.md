@@ -12,10 +12,10 @@ We'll start with the simple case of still images. This is probably best illustra
 
     #!python
     import cv2
-    
+
     # read an image from the current folder
     image = cv2.imread('cat.jpg')
-    
+
     # or from another folder
     image = cv2.imread('images/cat.jpg')
 
@@ -32,7 +32,7 @@ The `imread` method does not raise a proper exception in the case the file doesn
 
     #!python
     from os import path
-    
+
     if path.isfile('cat.jpg'):
         image = cv2.imread('cat.jpg')
         ...
@@ -54,11 +54,11 @@ Strictly speaking, you use the `cv2.VideoCapture.open()` method to get a referen
 
     VideoCapture(source[, options])
 
-Where *source* is one of:
+Where _source_ is one of:
 
-* an integer, representing which locally attached webcam to read from. A value of `0` represents your built-in webcam if available. 
-* a string, representing a path to a local video file
-* a string, representing the URL to a streaming network camera, such as an IP camera
+- an integer, representing which locally attached webcam to read from. A value of `0` represents your built-in webcam if available.
+- a string, representing a path to a local video file
+- a string, representing the URL to a streaming network camera, such as an IP camera
 
 Typically, you don't need to provide any options for the method. These flags would be used to specify the format of the data stream and other specifics. As with still images, OpenCV can typically figure out the video parameters automatically by examining the input data.
 
@@ -73,7 +73,7 @@ Here is a very typical loop used to read frames from a video source. In this sim
             # a frame was successfully read
             # we'll just show it in a window
             cv2.imshow("Live Video", frame)
-            
+
             # if the 'q' key is pressed, stop the loop
             if cv2.waitKey(1) & 0xFF == ord("q"):
                 camera.release()
@@ -103,4 +103,4 @@ If you end up in this state, you may have to restart your computer to recover. O
 
 ## Summary
 
-There you have it, the ins-and-outs of aquiring image data to use with OpenCV. 
+There you have it, the ins-and-outs of aquiring image data to use with OpenCV.

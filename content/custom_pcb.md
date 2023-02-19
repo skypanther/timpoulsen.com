@@ -2,6 +2,7 @@ Title: My first custom PCB
 Date: March 25, 2020
 Category: Making
 Tags: electronics, pcb
+Description: Making a simple custom PCB is not hard given services like JLCPCB and software like KiCAD and EasyEDA. Of course, having made just one, what do I know?!
 
 I had many troubles this year with my Christmas light electronics. Solder connections went bad multiple times. Wires got snagged and tangled during setup. It was tough re-soldering connections while sitting in a snowbank with the circuit hanging by its wires from a yard decoration.
 
@@ -13,9 +14,9 @@ There are quite a few PCB design apps, many of them free or free for personal us
 
 Since this was my first PCB, I'm not the best person to teach how to design PCBs or even use EasyEDA. So, I'll point you to the tutorials that got me started.
 
-* The [Beginners guide to PCB design with EasyEDA Part 1](https://www.youtube.com/watch?v=MdcnkaAoDTE) (and parts 2 and 3) YouTube videos were probably the most helpful.
-* EasyEDA has some videos on their site. They vary in quality. Check them out on the [EasyEDA YouTube channel](https://www.youtube.com/channel/UCRoMhHNzl7tMW8pFsdJGUIA/videos)
-* EasyEDA also has many [written tutorials](https://docs.easyeda.com/en/Introduction/Introduction-to-EasyEDA/index.html) that explain a lot of the terminology and back-details that you'll probably need to know. I read through many of these as the need arose.
+- The [Beginners guide to PCB design with EasyEDA Part 1](https://www.youtube.com/watch?v=MdcnkaAoDTE) (and parts 2 and 3) YouTube videos were probably the most helpful.
+- EasyEDA has some videos on their site. They vary in quality. Check them out on the [EasyEDA YouTube channel](https://www.youtube.com/channel/UCRoMhHNzl7tMW8pFsdJGUIA/videos)
+- EasyEDA also has many [written tutorials](https://docs.easyeda.com/en/Introduction/Introduction-to-EasyEDA/index.html) that explain a lot of the terminology and back-details that you'll probably need to know. I read through many of these as the need arose.
 
 ## Prototype first
 
@@ -63,7 +64,7 @@ Once you've submitted your order, JLCPCB will review your circuit. They're not g
 
 If this happens to you, don't place a new order like I did. By doing so, you're no longer placing your "first order" and won't get that same discount. This time, instead of uploading from the EasyEDA app, export the gerber file. Then, go directly to the JLCPCB web site. There will be a "replace file" option under your failed order. Use it and re-submit. You should get the order at the original price using that method.
 
-Their shipping options aren't great. DHL is probably your best bet. It's not particularly cheap, or fast. Still, even during the early Coronavirus/Covid-19 disruption timeframe, my order showed up in roughly two weeks. 
+Their shipping options aren't great. DHL is probably your best bet. It's not particularly cheap, or fast. Still, even during the early Coronavirus/Covid-19 disruption timeframe, my order showed up in roughly two weeks.
 
 ## It's Alive!
 
@@ -71,9 +72,8 @@ The most important thing, of course, is that the board worked as intended (well,
 
 <img src="../images/2020/easy_eda_in_use.gif" width="480" title="In use -- it works!"/><br/><span class="imgcaption">In use &mdash; it works!</span>
 
-
 ## Looking ahead
 
-My custom PCB does exactly what I wanted it to do. Still, I may refine this board in a future order. Next time, I won't include the resistor in the design. I'll make the pin holes for the ESP8266 module larger (it was tough getting the pins through the holes) and those for the capacitor smaller (they're huuuge). 
+My custom PCB does exactly what I wanted it to do. Still, I may refine this board in a future order. Next time, I won't include the resistor in the design. I'll make the pin holes for the ESP8266 module larger (it was tough getting the pins through the holes) and those for the capacitor smaller (they're huuuge).
 
 I already have other boards in mind to create &mdash; relay boards, similar boards for other chips, like the ESP32, and more. This was fun and uber-geeky to have created my own PCB.
