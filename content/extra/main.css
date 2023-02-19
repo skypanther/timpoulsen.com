@@ -28,6 +28,23 @@
         --code-border: rgba(24, 31, 50, 1);
         --code-comment: rgba(48, 48, 48, 0.65);
         --code-blockcomment: rgba(24, 31, 50, 0.75);
+
+        --sc-email-bg-color: #578AD6;
+        --sc-facebook-bg-color: #3e5b98;
+        --sc-github-bg-color: #111010;
+        --sc-google-bg-color: #d93e2d;
+        --sc-linkedin-bg-color: #3371b7;
+        --sc-pinterest-bg-color: #c92619;
+        --sc-reddit-bg-color: #ff4500;
+        --sc-rss-bg-color: #da5807;
+        --sc-square-rss-bg-color: #da5807;
+        --sc-soundcloud-bg-color: #ff5500;
+        --sc-stack-overflow-bg-color: #ff9900;
+        --sc-twitter-bg-color: #4da7de;
+        --sc-youtube-bg-color: #e02a20;
+        --sc-mastodon-bg-color: #595aff;
+        --sc-keybase-bg-color: #b31e00;
+
     }
 }
 @media (prefers-color-scheme: dark) {
@@ -59,7 +76,23 @@
         --code-comment: rgba(141, 188, 138, 0.75);
         --code-blockcomment: rgba(191, 192, 192, .75);
         --code-nd: rgba(95, 167, 248, 0.878);
-        
+
+        --sc-email-bg-color: #578AD6;
+        --sc-facebook-bg-color: #3e5b98;
+        --sc-github-bg-color: #111010;
+        --sc-google-bg-color: #d93e2d;
+        --sc-linkedin-bg-color: #3371b7;
+        --sc-pinterest-bg-color: #c92619;
+        --sc-reddit-bg-color: #ff4500;
+        --sc-rss-bg-color: #da5807;
+        --sc-square-rss-bg-color: #da5807;
+        --sc-soundcloud-bg-color: #ff5500;
+        --sc-stack-overflow-bg-color: #ff9900;
+        --sc-twitter-bg-color: #4da7de;
+        --sc-youtube-bg-color: #e02a20;
+        --sc-mastodon-bg-color: #595aff;
+        --sc-keybase-bg-color: #b31e00;
+
     }
 }
 
@@ -169,23 +202,46 @@ main nav a:hover {
 }
 
 /* Social icons in left bar */
+aside div ul.social, ul.social {
+    padding-top: none !important;
+}
 ul.social a {
     display: inline-grid;
     height: 28px;
     width: 28px;
     line-height: 28px;
     vertical-align: middle;
-    font-size: 72%
-}
+    font-size: 76%;
+    }
 ul.social a i {
     height: 28px;
     width: 28px;
     line-height: 28px;
-    font-size: 72%
+    font-size: 76%;
 }
-ul.social a.sc-github, ul.social a.sc-keybase {
-    background-color: var(--tagcloud-bg);
+.svg-inline--fa path {
+    position: relative;
+    left: 0.4rem;
+    top: 0.3rem;
+
 }
+ul.social .sc-mastodon {
+    background-color: var(--sc-mastodon-bg-color);
+}
+ul.social .sc-github {
+    background-color: var(--sc-github-bg-color);
+}
+ul.social .sc-linkedin {
+    background-color: var(--sc-linkedin-bg-color);
+}
+ul.social .sc-keybase {
+    background-color: var(--sc-keybase-bg-color);
+}
+ul.social .sc-square-rss, ul.social .sc-rss {
+    background-color: var(--sc-rss-bg-color);
+}
+
+
 /* code formatting */
 main article table td, main article table th {
     border: none;

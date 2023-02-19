@@ -61,11 +61,11 @@ LINKS = (("Topics", "/categories.html"),)
 
 # Social widget
 SOCIAL = (
-    ("mastodon", "https://fosstodon.org/@skypanther"),
-    ("github", "https://github.com/skypanther"),
-    ("linkedin", "https://www.linkedin.com/in/timpoulsen"),
-    ("keybase", "https://keybase.io/skypanther"),
-    ("rss", "feeds/all.atom.xml"),
+    ("fa-brands", "mastodon", "https://fosstodon.org/@skypanther", "Mastodon"),
+    ("fa-brands", "github", "https://github.com/skypanther", "GitHub"),
+    ("fa-brands", "linkedin", "https://www.linkedin.com/in/timpoulsen", "LinkedIn"),
+    ("fa-brands", "keybase", "https://keybase.io/skypanther", "Keybase"),
+    ("fa-solid", "square-rss", "feeds/all.atom.xml", "RSS Feed"),
 )
 
 MENUITEMS = (
