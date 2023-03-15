@@ -6,7 +6,7 @@ AUTHOR = "Tim Poulsen"
 SITENAME = "Tim Poulsen"
 SITEURL = "https://www.timpoulsen.com"
 SITETITLE = "Tim Poulsen"
-SITESUBTITLE = "Explorations of software and hardware"
+SITESUBTITLE = "Me geeking out about random things"
 SITEDESCRIPTION = "Tim Poulsen's blog of software, hardware, and life"
 SITELOGO = "/images/tim_poulsen.jpg"
 
@@ -74,7 +74,11 @@ MENUITEMS = (
     ("Tags", "/tags.html"),
 )
 
-DEFAULT_PAGINATION = False
+DEFAULT_PAGINATION = 10
+# PAGINATION_PATTERNS = (
+#     (1, "{url}", "{save_as}"),
+#     (2, "{base_name}/page/{number}/", "{base_name}/page/{number}/index.html"),
+# )
 
 TAG_CLOUD_SORTING = "size"
 TAG_CLOUD_BADGE = False

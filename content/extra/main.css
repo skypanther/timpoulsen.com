@@ -313,3 +313,7 @@ article ul li {
 article th {
     text-align: left;
 }
+
+.rotate180 {
+    transform: rotate(180deg);
+}
