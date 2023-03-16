@@ -122,6 +122,12 @@ a.btn {
     text-decoration: none;
 }
 
+/* header is where the title and meta info about each post is placed */
+header h1, header h2 { font-size: 2.0em; font-variant: inherit; font-weight: bold; }
+header h2 a { text-decoration: none; }
+header p { margin-top: 0.5em; }
+
+
 article a {
     color: var(--article-link);
     text-decoration: underline;
@@ -144,14 +150,24 @@ article a[target="_blank"]:after {
     content: "\f08e";
 }
 
+article:not(.single) div {
+    margin-left: 1.5em;
+}
+article:not(.single) div a.btn {
+    margin-left: -1.5em;
+}
+
+article h1 { font-size: 1.75em;}
 h2 { font-size: 1.75em; font-variant: small-caps; }
 h3 { font-size: 1.55em; font-variant: small-caps; }
 h4 { font-size: 1.45em; font-variant: small-caps; }
 h5 { font-size: 1.35em; font-variant: small-caps; }
 
-header h2 { font-size: 2.0em; font-variant: inherit; }
-header h2 a { text-decoration: none; }
-
+article hr {
+    border-top: 1px dashed var(--article-fg);
+    border-top-width: 0.1em;
+    background-color: transparent;
+}
 aside a {
     text-transform: none;
     font-size: 80%;
@@ -160,6 +176,8 @@ aside a {
 main nav {
     text-align: left;
     padding-left: 2.0em;
+    border-bottom-color: var(--article-fg);
+    border-bottom-width: 0.01em;
 }
 main nav a {
     color: var(--nav-link-fg);
