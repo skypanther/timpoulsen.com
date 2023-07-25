@@ -80,7 +80,7 @@ DEFAULT_PAGINATION = 10
 #     (2, "{base_name}/page/{number}/", "{base_name}/page/{number}/index.html"),
 # )
 
-TAG_CLOUD_SORTING = "size"
+TAG_CLOUD_SORTING = "alphabetically"
 TAG_CLOUD_BADGE = False
 
 # Uncomment following line if you want document-relative URLs when developing
