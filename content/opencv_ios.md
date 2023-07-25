@@ -1,15 +1,13 @@
 Title: Using OpenCV in an iOS app
 Date: February 1, 2019
 Category: OpenCV
-Tags: OpenCV, iOS, Swift
-
+Tags: OpenCV, iOS, swift
 
 Computer vision is cool tech ... computer vision in an iOS app is even better! In this post, I'll describe how you can integrate and use OpenCV in your Swift-based iOS app. Before we dig in to the process, let's take a look at how the finished integration will work.
 
 ![Integration diagram](../images/2019/ios_opencv.png)
 
 As shown in the diagram, you will continue to write most of your app in Swift as you normally would do. The OpenCV framework will be included in your app, inside a wrapper that you'll write. A bridging header will connect your Swift code to the Objective-C / C++ code of OpenCV. (You'll also add a prefix/precompile header to optimize build times.)
-
 
 Once you've set all that up, you'll be able to make use of OpenCV with Swift code like:
 
@@ -42,22 +40,21 @@ First, download and unzip the OpenCV pack:
 
 Next, either create or open your Xcode project. You'll want to arrange Xcode and Finder side-by-side and then drag the **opencv2.framework** bundle (special folder) into the Xcode project tree, at the top level, to add it to your project. Note:
 
-* Make sure **Copy items if needed** is checked
-* Make sure **Create folder references** is checked
-* Make sure **Add to targets: _your\_project_** is checked
+- Make sure **Copy items if needed** is checked
+- Make sure **Create folder references** is checked
+- Make sure **Add to targets: _your_project_** is checked
 
 ![OpenCV framework file in the Xcode file tree](../images/2019/opencv_framework.png)
 
 You can close Finder at this point. We'll work in Xcode for the rest of this. Next, we need to create the wrapper around OpenCV. In doing so, we'll also create the bridging header.
 
 1. Choose File > New > File
-2. Create a **Cocoa Touch Class** file, naming it *OpenCVWrapper* (or another name if you prefer)
+2. Create a **Cocoa Touch Class** file, naming it _OpenCVWrapper_ (or another name if you prefer)
 3. It should subclass **NSOBject**
 4. It should be an **Objective-C** file
 5. When prompted, click the **Create Bridging Header** button
 
 Open the _YourApp_-Bridging-Header.h file and add this line:
-
 
 ```
 #import "OpenCVWrapper.h"
@@ -139,15 +136,14 @@ Build to a simulator and watch the Xcode debug console and you should see `OpenC
 
 ## A better example
 
-I've created a simple project so that you can explore something a little more meaningful. This app lets you take a picture (so you'll need to run it on a device) and then apply some OpenCV manipulations. 
+I've created a simple project so that you can explore something a little more meaningful. This app lets you take a picture (so you'll need to run it on a device) and then apply some OpenCV manipulations.
 
-1. [Download the OpenCVTest Xcode project](../images/2019/OpenCVTest.zip). 
+1. [Download the OpenCVTest Xcode project](../images/2019/OpenCVTest.zip).
 2. Update the project properties with your organization / app-signing profile.
 3. Download and drag the **opencv2.framework** bundle into the Xcode project tree (it's too big to include in my zip file). I used OpenCV 3.4.4 and any of the 3.x version should work. But I haven't tested with 4.x, so YMMV.
 4. Build the app to a device. The app should be fairly self-explantory.
 
 Make sure to explore the `.h` and `.mm` files, as well as the `ProcessImageController.swift` file in this project. Also check out the UIImage extension. Together, these should give you a good start on writing your own OpenCV functionality.
-
 
 ## Closing thoughts
 

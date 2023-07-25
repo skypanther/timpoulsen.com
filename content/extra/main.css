@@ -213,6 +213,24 @@ main nav a:hover {
     color: var(--tagcloud-link-hover);
 }
 
+li.tag-1 {
+    font-size: 200%;
+}
+
+li.tag-2 {
+    font-size: 175%;
+}
+
+li.tag-3 {
+    font-size: 150%;
+}
+li.tag-4 {
+    font-size: 125%;
+}
+li.tag-5 {
+    font-size: 100%;
+}
+
 .imgcaption {
     font-size: 80%;
     font-style: italic;

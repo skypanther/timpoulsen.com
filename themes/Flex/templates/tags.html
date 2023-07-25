@@ -1,15 +1,19 @@
-{% extends "base.html" %}
-{% block title %} &ndash; {{ _('Tags') }}{% endblock %}
-
-{% block content %}
+{% extends "base.html" %} {% block title %} &ndash; {{ _('Tags') }}{% endblock
+%} {% block content %}
 <article class="single">
   <header>
     <h1>{{ _('Tags') }}</h1>
   </header>
   <div>
-    <ul class="list">
-      {%- for tag, articles in tags|sort %}
-          <li><a href="{{ SITEURL }}/{{ tag.url }}">{{ tag }}</a> ({{ articles|count }})</li>
+    <ul class="tagcloud">
+      {% for tag in tag_cloud %}
+      <li class="tag-{{ tag.1 }}">
+        <a href="{{ SITEURL }}/{{ tag.0.url }}">
+          {{ tag.0 }} {% if TAG_CLOUD_BADGE %}
+          <span class="badge">{{ tag.2 }}</span>
+          {% endif %}
+        </a>
+      </li>
       {% endfor %}
     </ul>
   </div>
