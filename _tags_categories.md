@@ -1,12 +1,28 @@
 Categories
 
-* Python
-* OpenCV
-* Making
-* WebDev
-* Software Engineering
-* 
+- Python
+- OpenCV
+- Making
+- WebDev
+- Software Engineering
+-
 
 Tags
 
-python, opencv, robotics, raspberry pi, anaconda, xmas, html/css, webdev, engineering, electronics, pcb
+anaconda,
+arduino,
+cars,
+electronics,
+engineering,
+html/css,
+leds,
+iOS,
+making,
+opencv,
+pcb,
+python,
+raspberry pi,
+robotics,
+swift,
+webdev,
+xmas
