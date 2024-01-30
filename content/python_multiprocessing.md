@@ -2,16 +2,15 @@ Title: Multiprocessing in Python
 Date: April 15, 2019
 Category: Python
 Tags: python
-Status: draft
 
 Modern CPUs typically feature multiple cores, which in some sense is like having multiple computers at your disposal. By default, your Python code will run on one core. But when performance is critical, you can use multiple cores to run operations simultaneously. In this article, I'll walk through how we used multiprocessing in our FIRST Robotics code to run our scripts across all four cores of our Jetson TX2 board.
 
 Python supports both multithreading and multiprocessing. Judging by the number of StackOverflow posts on the topic, there's a ton of confusion surrounding these terms. There are many <a href="https://realpython.com/python-concurrency/" target="_blank">articles</a> explaining the differences and nuances of multithreading and multiprocessing. Here's my take:
 
-* Multithreading &mdash; run portions of your code **asynchronously** so that your script doesn't have to wait for **I/O bound operations**; but all your code runs on the same CPU core, and **shares the same memory and variable space.**
-* Multiprocessing &mdash; run portions of your code **simultaneously** across multiple cores so that you script doesn't have to wait for **CPU bound operations**; because your code runs across multiple cores, each process has its own **separate memory and variable space.**
+- Multithreading &mdash; run portions of your code **asynchronously** so that your script doesn't have to wait for **I/O bound operations**; but all your code runs on the same CPU core, and **shares the same memory and variable space.**
+- Multiprocessing &mdash; run portions of your code **simultaneously** across multiple cores so that you script doesn't have to wait for **CPU bound operations**; because your code runs across multiple cores, each process has its own **separate memory and variable space.**
 
-Use multithreading if your script needs to access data across the network, read a lot of data from disk, or do other I/O bound operations. Multithreading isn't really running code simultaneously. It's just not stopping everything while waiting for the I/O operation to finish. 
+Use multithreading if your script needs to access data across the network, read a lot of data from disk, or do other I/O bound operations. Multithreading isn't really running code simultaneously. It's just not stopping everything while waiting for the I/O operation to finish.
 
 Use multiprocessing if your script does a lot of computation, such as processing image frames from a webcam stream. You might employ multithreading to do the camera I/O. But multiprocessing would let you do the processing simultaneously with other code your script might perform. Sharing information between processes is more difficult since processes don't share memory or variables.
 
@@ -19,15 +18,13 @@ Use multiprocessing if your script does a lot of computation, such as processing
 
 While we used both on our 2019 FRC bot, I'm going to focus on multiprocessing. Here are the tasks we programmed our Jetson to do:
 
-* One process captured frames from an IP camera, did target identification and field orientation calculations, then wrote the results to NetworkTables so that the data was available to the robot and driver computers.
-* Another process captured frames from a pair of web cams, received data via a queue, and used that data to create custom overlays atop the video feeds. Then it streamed those processed feeds across the network to the driver computer.
-* And we had a third process that instantiated and managed those processes.
-
+- One process captured frames from an IP camera, did target identification and field orientation calculations, then wrote the results to NetworkTables so that the data was available to the robot and driver computers.
+- Another process captured frames from a pair of web cams, received data via a queue, and used that data to create custom overlays atop the video feeds. Then it streamed those processed feeds across the network to the driver computer.
+- And we had a third process that instantiated and managed those processes.
 
 ## Starting multi-process scripts
 
 Let's start by seeing how we can start our multiple processes. (You might not want to actually run code like this till I cover how to stop the processes a bit later in this article.) In <a href="https://github.com/Raider-Robotics-Team-1518/Jetson/blob/master/parallelized/main.py" target="_blank">the main.py file</a>, we import the two custom classes of our bot program, and then call their `start()` methods:
-
 
     #!python
     # import our bot-specific classes
@@ -41,7 +38,7 @@ Let's start by seeing how we can start our multiple processes. (You might not wa
         camstreamer_process.start()
         target_process.start()
 
-That part looks pretty standard. The magic that enables multiprocessing is actually put in those custom classes. Let's take a look at the (simplified) code of the <a href="https://github.com/Raider-Robotics-Team-1518/Jetson/blob/master/parallelized/targeting.py" target="_blank">targeting.py script</a>: 
+That part looks pretty standard. The magic that enables multiprocessing is actually put in those custom classes. Let's take a look at the (simplified) code of the <a href="https://github.com/Raider-Robotics-Team-1518/Jetson/blob/master/parallelized/targeting.py" target="_blank">targeting.py script</a>:
 
     #!python
     from multiprocessing import Process
@@ -74,7 +71,6 @@ In <a href="https://github.com/Raider-Robotics-Team-1518/Jetson/blob/master/para
         camstreamer_process = Camstreamer(targeting_queue=targeting_queue ...)
         target_process = Targeting(targeting_queue=targeting_queue ...)
 
-
 To write data to the queue, the <a href="https://github.com/Raider-Robotics-Team-1518/Jetson/blob/master/parallelized/targeting.py" target="_blank">targeting.py script</a> just needed to call `put()` on the queue reference passed to the class, like this:
 
     #!python
@@ -100,7 +96,6 @@ Once a script is launched as a separate process, it will run till stopped (or yo
 Classes that inherit from Process have a `terminate()` method. When called, it will abruptly halt the process. If you need to close connections or otherwise gracefully stop your script, you'll want to signal it that it's about to be terminated. Once the process finishes its cleanup, then you call terminate().
 
 In our bot program, we implemented this signalling using Pipes. In main.py, we listened for the Escape or "q" key to be pressed. When that happened, we sent a message across each child process's pipe that a shutdown was imminent. The child scripts would then stop their actions and clean up. After a brief delay, main.py would terminate the processes.
-
 
 Looking again at main.py:
 
@@ -129,7 +124,7 @@ Looking again at main.py:
                 time.sleep(2)
                 camstreamer_process.terminate()
                 target_process.terminate()
-                exit()            
+                exit()
 
 When instantiating a pipe, you get back a tuple whose values represent the read and write ends of the pipe. As shown in the snippet above, we created those pipe instances and passed the read ends to our child processes. In main.py's while loop, we use the write ends of the pipes (which were stored in a list) to put the string "stop" onto the pipe when the user signaled to quit.
 
