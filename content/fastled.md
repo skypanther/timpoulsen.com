@@ -3,7 +3,6 @@ Description: Third in the series, this post discusses using the FastLED library 
 Date: 2024-01-30
 Category: Making
 Tags: leds, electronics
-Status: draft
 
 In the first post in this series, I introduced RGB pixels, discussed the various types, and compared analog and true RGB pixels. In the second part, I covered wiring and shared my tips for reliably connecting to your microcontroller. In this third part, I will discuss the FastLED library, one of the most popular libraries for programming pixels.
 
