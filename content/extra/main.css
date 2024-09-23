@@ -104,7 +104,9 @@ article p {
     line-height: 1.55em;
 }
 aside.leftbar, div.leftbar {
+    /* Transparent texture from https://www.transparenttextures.com/ */
     background-color: var(--sidebar-bg) !important;
+    background-image: url("/images/basketball.png") !important;
 }
 aside.leftbar a {
     color: var(--sidebar-link);
