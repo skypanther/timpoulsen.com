@@ -8,7 +8,7 @@ fontawesome==5.10.1.post1
 fontawesome-markdown==0.2.6
 Jinja2==3.1.2
 Markdown==3.4.1
-markdown-it-py==2.1.0
+markdown-it-py==2.2.0
 MarkupSafe==2.1.2
 mdurl==0.1.2
 mypy-extensions==1.0.0
